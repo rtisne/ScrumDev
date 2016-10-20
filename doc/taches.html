@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>liste des tâches</title>
+</head>
+<body>
+<h2>Liste des tâches :</h2>
+
+<ul>
+    <li>
+        <b>1) Création de la base de données :</b><br>
+        - Créer les tables User Story, Sprint, Tâche, DépendanceTaches, Utilisateur,Projet, TestE2E (voir annexe)<br>
+        - Créer les relations entre les tables<br>
+    </li>
+    <br>
+    <li>
+        <b>2) Codage des requêtes de gestion des comptes utilisateur :</b><br>
+        - Créer la requête permettant d’ajouter un utilisateur dans la base<br>
+        - Créer la requête permettant de récupérer la liste de tous les utilisateurs<br>
+        - Créer une requête de suppression d’un utilisateur.<br>
+        - Créer une requête de mise à jour des données d’un utilisateur<br>
+        - Créer la requête permettant de vérifier qu’un utilisateur est dans la base<br>
+        - Créer la requête permettant d’afficher toute les données d’un utilisateur<br>
+        - Créer la requête permettant de récupérer un utilisateur selon son nom ou son email
+    </li>
+    <br>
+    <li>
+        <b>3) Codage des requêtes permettant la gestion des projet</b><br>
+        - Créer la requête permettant d’afficher la liste de tous les projets d’un utilisateur donné<br>
+        - Créer la requête permettant d’ajouter un nouveau projet dans la base<br>
+        - Créer la requête permettant de récupérer la liste des User Story d’un projet en particulier<br>
+        - Créer la requête permettant d'ajouter une User Story<br>
+        - Créer la requête permettant de faire la liste des sprints d’un projet en particulier<br>
+        - Créer la requête permettant d’ajouter une tâche pour un projet<br>
+        - Créer la requête permettant de faire la liste des tâches d’un projet<br>
+    </li>
+    <br>
+    <li>
+        <b>4) Création d’une structure pour les pages de connexion (Template) :</b><br>
+        - Création d’une page basique avec avec une entête et un titre (voir page Inscription)<br>
+        - Création d’un bouton “Inscription” permettant d’aller sur la page d'inscription<br>
+        - Création d’un bouton “Connexion” permettant d’aller sur la page de connexion<br>
+    </li>
+    <br>
+    <li>
+        <b>5) Création de la page d'inscription</b><br>
+        - Utilisation du template de la tâche 3<br>
+        - Création d’un formulaire comprenant 4 champs “Nom, prénom,email et password”<br>
+        - Création d’un bouton permettant de valider l'inscription utilise les données du formulaire et la requête d’ajout d’un utilisateur dans la base<br>
+    </li>
+    <br>
+    <li>
+        <b>6) Création de la page de connexion</b><br>
+        - Création d’un formulaire avec deux champs “email,password”<br>
+        - Création d’un bouton permettant de valider la connexion<br>
+        - Utilisation de la requête permettant de vérifier qu’un utilisateur est dans la base<br>
+    </li>
+    <br>
+    <li>
+        <b>7) Création de la page de la page “monCompte”</b><br>
+        - Création d’un formulaire avec 4 champs “Nom,prénom,email,et password”<br>
+        - Affichage des données de l’utilisateur dans le formulaire avec la requête d’affichage des données<br>
+        - Création d’un bouton “modifier” permettant de valider la modification en utilisant les données du formulaires et la requête de mise à jour des données d’un utilisateur<br>
+    </li>
+    <br>
+    <li>
+        <b>8) Création de la page “ListeDesProjets”</b><br>
+        	-  Récupération de la liste des projets d’un utilisateur à l’aide de la requête associés<br>
+        	- Affichage des données dans une liste au centre de la page<br>
+        	- Création d’un bouton permettant d’aller sur la page de création d’un projet<br>
+        	- Ajout d’un bouton permettant de modifier les données d’un projet dans la liste si l’utilisateur est le créateur du projet<br>
+        	- Permettre qu’un projet de la liste soit cliquable afin d’amener vers la page “home” du projet en question<br>
+    </li>
+    <br>
+    <li>
+        <b>9) Création de la page “creerProjet”</b><br>
+        - Création d’un champs texte “nom” pour le nom du projet<br>
+        - Création d’une zone de texte pour la description du projet<br>
+        - Création d’une date sélectionnable pour la date de livrable du projet<br>
+        - Création d’une liste des membres participant au projet<br>
+        - Création d’un bouton “ajouter” permettant d’ajouter un membre à la liste (l’utilisateur doit être dans la base de données, utilisation de la requête permettant de récupérer un utilisateur selon son nom ou son email)<br>
+        - Création d’un champ texte “Product Owner”<br>
+        - Création d’un bouton “créer” permettant de créer le projet avec les informations du formulaire (utilisation de la requête de création d’un projet”<br>
+
+    </li>
+    <br>
+    <li>
+        <b>10) Création d’une structure pour les pages de gestion d’un projet (Template) :</b><br>
+        - Création d’un header avec plusieurs onglets “Home,Backlog,Sprints,Graphs et Configuration”<br>
+        - Affichage du titre du projet en haut à gauche de la page<br>
+        - Utilisation du bouton permettant de revenir au informations relative à un compte utilisateur<br>
+    </li>
+    <br>
+    <li>
+        <b>11) Création de la page “Home” pour un projet donné</b><br>
+        - Affichage de la description du projet<br>
+        - Affichage du sprint en cours de réalisation<br>
+        - Affichage du graphique Burn-Down-Chart<br>
+    </li>
+    <br>
+    <li>
+        <b>12) Création de la page “Backlog” pour un projet donné</b><br>
+        - Création d’un tableau permettant d’afficher les User Story relative à un projet<br>
+        - Utilisation de la requête permettant de récupérer la liste des User Story<br>
+        - Création d’un bouton permettant de créer une User Story en allant vers la popup de création d’une User Story<br>
+    </li>
+    <br>
+    <li>
+        <b>12) Création de la page “Backlog” pour un projet donné</b><br>
+        - Création d’un tableau permettant d’afficher les User Story relative à un projet<br>
+        - Utilisation de la requête permettant de récupérer la liste des User Story<br>
+        - Création d’un bouton permettant de créer une User Story en allant vers la popup de création d’une User Story<br>
+    </li>
+    <br>
+    <li>
+        <b>13) Création de la pop-up de création d’une User Story</b><br>
+        - Création d’un champs texte “Titre” pour le titre de la User Story<br>
+        - Création d’une zone de texte “Description” pour la description de la User Story<br>
+        - Création d’un champs pour le coût<br>
+        - Création d’un bouton “valider” permettant d’ajouter la user story dans la base  ( utilisation de la requête d’ajout d’une user story)<br>
+
+    </li>
+    <br>
+    <li>
+        <b>14) Création de la page “Sprint” pour un projet donné</b><br>
+        - Création d’une liste permettant d’afficher tous les sprints relatifs à un projet<br>
+        - Utilisation de la requête permettant de récupérer la liste des sprints<br>
+        - Pour chaque sprint, affichage du nombre de User Story réalisées et du début et de la fin du sprint<br>
+        - Chaque sprint de la liste doit pouvoir être cliquable afin d’aller sur la page de son kanban respectif<br>
+    </li>
+    <br>
+    <li>
+        <b>15) Création de la page “KanBan” pour un sprint en particulier d’un projet</b><br>
+        - Création d’un bouton permettant de créer une tâche en allant vers la popup de création d’une tâche<br>
+    </li>
+    <br>
+    <li>
+        <b>16) Création de la pop-up de création d’une tâche</b><br>
+        - Création d’un champs “nom” pour le nom de la tâche<br>
+        - Création d’une zone de texte pour la description de la tâche<br>
+        - Création d’une liste déroulante avec la liste des membre du projet<br>
+        - Utilisation de la requête permettant de récupérer la liste des membre du projet<br>
+        - Création d’une liste déroulante avec la liste des tâches du projet<br>
+        - Permettre d’ajouter une tâche de la liste dans une liste de tâche dépendante<br>
+    </li>
+    <br>
+    <li>
+        <b>17) Création de la page “Graphs” pour un projet donné</b><br>
+        - Affichage d’un BurnDown Chart généré<br>
+    </li>
+    <br>
+    <li>
+        <b>18) Création de la page de “Configuration” pour un projet donné</b><br>
+        - Reprise du template de création de projet et le pré-remplir<br>
+    </li>
+    <br>
+    <li>
+        <b>19) Création de la popup permettant de rentrer un numéro de commit une fois une tâche finie.</b><br>
+        Création d’un champs “numéro de commit”<br>
+    </li>
+</ul>
+</p>
+</body>
+</html>
