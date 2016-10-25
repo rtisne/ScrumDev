@@ -1,0 +1,24 @@
+Requêtes de gestion des projets :
+
+
+Afficher la liste de tous les projets d’un utilisateur donné :
+
+SELECT title 
+FROM `project`
+JOIN `member_relations`
+ON `project`.`id` = `member_relations`.`id`
+JOIN `user`
+ON `member_relations`.`id` = `user`.`id`
+WHERE `user`.`id` = 1
+ORDER BY `project`.`title` ASC
+
+
+
+
+
+
+
+
+
+
+
