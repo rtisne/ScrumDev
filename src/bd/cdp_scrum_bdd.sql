@@ -103,7 +103,7 @@ ALTER TABLE cdp_scrum_bdd.sprint
 --
 ALTER TABLE cdp_scrum_bdd.task
   ADD PRIMARY KEY (`id`),
-  ADD KEY `implementer` (`implementer`);
+  ADD KEY `implementer` (`implementer`),
   ADD KEY `num_us` (`num_us`);
 
 --
@@ -125,7 +125,7 @@ ALTER TABLE cdp_scrum_bdd.user
 -- Index pour la table `user story`
 --
 ALTER TABLE cdp_scrum_bdd.user_story
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
   ADD KEY `num_sprint` (`num_sprint`);
 
 
@@ -151,8 +151,8 @@ ALTER TABLE cdp_scrum_bdd.project
 -- Contraintes pour la table `task`
 --
 ALTER TABLE cdp_scrum_bdd.task
-  ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`implementer`) REFERENCES cdp_scrum_bdd.user (`id`);
-  ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`num_us`) REFERENCES `user story` (`id`);
+  ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`implementer`) REFERENCES cdp_scrum_bdd.user (`id`),
+  ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`num_us`) REFERENCES cdp_scrum_bdd.user_story (`id`);
 
 --
 -- Contraintes pour la table `task_dependency`
@@ -165,5 +165,5 @@ ALTER TABLE cdp_scrum_bdd.task_dependency
 --
 -- Contraintes pour la table `user story`
 --
-ALTER TABLE `cdp_scrum_bdd.user_story`
-  ADD CONSTRAINT `user story_ibfk_1` FOREIGN KEY (`num_sprint`) REFERENCES `sprint` (`id`);
+ALTER TABLE cdp_scrum_bdd.user_story
+  ADD CONSTRAINT `user story_ibfk_1` FOREIGN KEY (`num_sprint`) REFERENCES cdp_scrum_bdd.sprint (`id`);
