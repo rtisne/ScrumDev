@@ -14,7 +14,7 @@ INSERT INTO cdp_scrum_bdd.member_relations (`id`, `project`, `member`) VALUES
 
 CREATE TABLE cdp_scrum_bdd.project (
   `id` int(11) NOT NULL,
-  `title` char(0) NOT NULL,
+  `title` text NOT NULL,
   `description` text NOT NULL,
   `date_added` date NOT NULL,
   `date_available` date NOT NULL,
@@ -52,10 +52,10 @@ CREATE TABLE cdp_scrum_bdd.task_dependency (
 
 CREATE TABLE cdp_scrum_bdd.user (
   `id` int(11) NOT NULL,
-  `name` char(0) NOT NULL,
-  `first_name` char(0) NOT NULL,
-  `email` char(0) NOT NULL,
-  `password` char(0) NOT NULL
+  `name` text NOT NULL,
+  `first_name` text NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO cdp_scrum_bdd.user (`id`, `name`, `first_name`, `email`, `password`) VALUES
