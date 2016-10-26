@@ -1,7 +1,7 @@
 CREATE DATABASE cdp_scrum_bdd;
 
 CREATE TABLE cdp_scrum_bdd.member_relations (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `project` int(11) NOT NULL,
   `member` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -13,7 +13,7 @@ INSERT INTO cdp_scrum_bdd.member_relations (`id`, `project`, `member`) VALUES
 (4, 2, 1);
 
 CREATE TABLE cdp_scrum_bdd.project (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` text NOT NULL,
   `description` text NOT NULL,
   `date_added` date NOT NULL,
@@ -27,13 +27,13 @@ INSERT INTO cdp_scrum_bdd.project (`id`, `title`, `description`, `date_added`, `
 (2, 'TestProjet2', 'Un deuxieme projet', '2016-09-01', '2016-10-29', 1, 2);
 
 CREATE TABLE cdp_scrum_bdd.sprint (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `duration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE cdp_scrum_bdd.task (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` text NOT NULL,
   `description` text NOT NULL,
   `state` int(11) NOT NULL,
@@ -44,18 +44,18 @@ CREATE TABLE cdp_scrum_bdd.task (
 
 
 CREATE TABLE cdp_scrum_bdd.task_dependency (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `task_first` int(11) NOT NULL,
   `task_second` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE cdp_scrum_bdd.user (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `first_name` text NOT NULL,
-  `email` text NOT NULL,
-  `password` text NOT NULL
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(250) NOT NULL,
+  `first_name` VARCHAR(250) NOT NULL,
+  `email` VARCHAR(250) NOT NULL,
+  `password` VARCHAR(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO cdp_scrum_bdd.user (`id`, `name`, `first_name`, `email`, `password`) VALUES
@@ -66,7 +66,7 @@ INSERT INTO cdp_scrum_bdd.user (`id`, `name`, `first_name`, `email`, `password`)
 
 
 CREATE TABLE cdp_scrum_bdd.user_story (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` text NOT NULL,
   `description` text NOT NULL,
   `cost` int(11) NOT NULL,
@@ -80,7 +80,6 @@ CREATE TABLE cdp_scrum_bdd.user_story (
 
 
 ALTER TABLE cdp_scrum_bdd.member_relations
-  ADD PRIMARY KEY (`id`),
   ADD KEY `project` (`project`),
   ADD KEY `member` (`member`);
 
@@ -88,21 +87,19 @@ ALTER TABLE cdp_scrum_bdd.member_relations
 -- Index pour la table `project`
 --
 ALTER TABLE cdp_scrum_bdd.project
-  ADD PRIMARY KEY (`id`),
   ADD KEY `creator` (`creator`),
   ADD KEY `product_owner` (`product_owner`);
 
 --
 -- Index pour la table `sprint`
 --
-ALTER TABLE cdp_scrum_bdd.sprint
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE cdp_scrum_bdd.sprint
+--   ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `task`
 --
 ALTER TABLE cdp_scrum_bdd.task
-  ADD PRIMARY KEY (`id`),
   ADD KEY `implementer` (`implementer`),
   ADD KEY `num_us` (`num_us`);
 
@@ -110,7 +107,6 @@ ALTER TABLE cdp_scrum_bdd.task
 -- Index pour la table `task_dependency`
 --
 ALTER TABLE cdp_scrum_bdd.task_dependency
-  ADD PRIMARY KEY (`id`),
   ADD KEY `task_first` (`task_first`),
   ADD KEY `task_second` (`task_second`);
 
@@ -118,14 +114,13 @@ ALTER TABLE cdp_scrum_bdd.task_dependency
 --
 -- Index pour la table `user`
 --
-ALTER TABLE cdp_scrum_bdd.user
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE cdp_scrum_bdd.user
+--   ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `user story`
 --
 ALTER TABLE cdp_scrum_bdd.user_story
-  ADD PRIMARY KEY (`id`),
   ADD KEY `num_sprint` (`num_sprint`);
 
 

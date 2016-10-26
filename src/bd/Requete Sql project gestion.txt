@@ -6,11 +6,12 @@ Afficher la liste de tous les projets d’un utilisateur donné :
 SELECT title 
 FROM `project`
 JOIN `member_relations`
-ON `project`.`id` = `member_relations`.`id`
+ON `project`.`id` = `member_relations`.`project`
 JOIN `user`
-ON `member_relations`.`id` = `user`.`id`
+ON `member_relations`.`member` = `user`.`id`
 WHERE `user`.`id` = 1
 ORDER BY `project`.`title` ASC
+
 
 
 
