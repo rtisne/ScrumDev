@@ -54,7 +54,7 @@ function get_user_by_username($email){
 
 
 include('templates/header.template.php');
-include('templates/signup.template.php');
+include('templates/signin.template.php');
 include('templates/footer.template.php');
 
 

@@ -44,7 +44,7 @@ function add_user_in_db($values){
 }
 
 include('templates/header.template.php');
-include('templates/signin.template.php');
+include('templates/signup.template.php');
 include('templates/footer.template.php');
 
 

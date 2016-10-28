@@ -5,8 +5,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../signup.php">Connexion</a></li>
-            <li><a href="../signin.php">Inscription</a></li>
+            <li><a href="../signin.php">Connexion</a></li>
+            <li><a href="../signup.php">Inscription</a></li>
           </ul>
         </div>
     </div>
