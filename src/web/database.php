@@ -228,6 +228,26 @@ function create_insert_sql($table_name, $columns = null, $insert_sql = null){
     return $insert_sql;
 }
 
+function create_update_sql($table_name, $columns = null){
+    if(empty($table_name))
+        $table_name = get_table_name();
+
+    if (empty($columns)) {
+        $insert_sql = create_insert_sql_identity();
+        return $insert_sql;
+    }
+
+    $values = array();
+    $columns = array_unique($columns);
+    foreach ($columns as $column) {
+        $values[] = $column . "=?";
+    }
+
+    $values = implode(', ', $values);
+    $insert_sql = sprintf('UPDATE %s SET %s WHERE id = ?', $table_name, $values);
+    return $insert_sql;
+}
+
 
 
 

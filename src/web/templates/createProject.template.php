@@ -1,15 +1,16 @@
-<h2 class="text-center">Creer un nouveau projet</h2>
+
+<h2 class="text-center"><?=$page_title?></h2>
 <form class="form-horizontal" method="post">
     <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Nom</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="name" placeholder="Nom du projet" required="required">
+            <input type="text" class="form-control" name="name" placeholder="Nom du projet" required="required" value="<?=(isset($project_name))?$project_name:""?>">
         </div>
     </div>
     <div class="form-group">
         <label for="description" class="col-sm-2 control-label">Description</label>
         <div class="col-sm-10">
-            <textarea class="form-control" rows="5" name="description" placeholder="Description du projet" required="required"></textarea>
+            <textarea class="form-control" rows="5" name="description" placeholder="Description du projet" required="required"><?=(isset($project_desc))?$project_desc:""?></textarea>
         </div>
     </div>
     <div class="form-group">
@@ -25,7 +26,15 @@
                         </ul>
                     </div>
                 </li>
-                <li class="list-group-item" data-id="<?= $_SESSION['id'] ?>"><?= $_SESSION['first_name'] . " " . $_SESSION['name']?></li>
+                <?php
+                echo "<li class=\"list-group-item\" data-id=\"".$project_owner["id"]."\">".$project_owner['first_name']." ".$project_owner['name']."</li>";
+                if(isset($project_members)){
+                    foreach ($project_members as $member) {
+                        echo "<li class=\"list-group-item\" data-id=\"".$member["id"]."\">".$member['first_name']." ".$member['name']." <a  class=\"pull-right remove_user\"><span class=\"glyphicon glyphicon-remove\"></span></a></li>";
+                        echo "<input type=\"hidden\" name=\"member[]\" value=\"". $member["id"] ."\" />";
+                    }
+                }
+                ?>
             </ul>
         </div>
     </div>
@@ -33,13 +42,23 @@
         <label for="inputPassword3" class="col-sm-2 control-label">Product Owner</label>
         <div class="col-sm-10">
             <select class="form-control" name="product_owner">
-                <option value="<?= $_SESSION['id'] ?>"><?= $_SESSION['first_name'] . " " . $_SESSION['name']?></option>
+
+                <option value="<?=$project_owner["id"]?>" <?=($project_owner['id'] == $product_owner_id)? 'selected="selected"':'';?>><?=$project_owner["first_name"]?> <?=$project_owner["name"]?></option>
+                <?php
+                if(isset($project_members)){
+                    foreach ($project_members as $member) {
+                        ?>
+                        <option value="<?=$member["id"]?>" <?=($member['id'] == $product_owner_id)? 'selected="selected"':'';?>><?=$member["first_name"]?> <?=$member["name"]?></option>
+                        <?php
+                    }
+                }
+                ?>
             </select>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" name="submit" class="btn btn-default">Creer</button>
+            <button type="submit" name="submit" class="btn btn-default">Valider</button>
         </div>
     </div>
 </form>
