@@ -1,4 +1,40 @@
 <?php
+include("config.php");
+
+if(isset($_POST['submit']))
+    createProject();
+
+function createProject() {
+    extract($_POST);
+    if (!empty($name) && !empty($description)) {
+        $safe_values = array("title" => $name , "description"=>$description, "creator"=>$_SESSION['id'], "product_owner" =>$product_owner);
+        $project_id = add_project_in_db($safe_values);
+        if(isset($_POST['member'])){
+            foreach( $_POST['member'] as $m ) {
+                $values = array("project" => $project_id , "member"=>$m);
+                add_member_to_project($values);
+            }
+        }
+        header("Location: " . get_base_url() . "/listProjects.php");
+    }
+}
+
+/**
+ * @param array $values
+ */
+function add_project_in_db($values){
+    $project_columns =  array_keys($values);
+    $project_values = array_values($values);
+    return execute_query(create_insert_sql("project",$project_columns),$project_values);
+
+}
+
+function add_member_to_project($values){
+    $link_columns =  array_keys($values);
+    $link_values = array_values($values);
+    return execute_query(create_insert_sql("member_relations",$link_columns),$link_values);
+}
+
 include('templates/header.template.php');
 include('templates/createProject.template.php');
 include('templates/footer.template.php');

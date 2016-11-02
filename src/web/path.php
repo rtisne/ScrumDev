@@ -28,7 +28,6 @@ function get_base_url(){
 function absolute_path(){
     $abs_path=substr(__FILE__,0,strrpos(__FILE__,'/'));
     $doc_root=substr($_SERVER['DOCUMENT_ROOT'], strrpos($_SERVER['DOCUMENT_ROOT'], $_SERVER['PHP_SELF']));
-    var_dump($doc_root);
     $current_dir=substr($abs_path,strlen($doc_root));
     return "/" . $current_dir;
 }

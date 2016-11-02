@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $GLOBALS['base'] = dirname(__FILE__);
 
 // Load database variables

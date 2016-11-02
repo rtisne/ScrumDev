@@ -16,7 +16,13 @@ function signin(){
         // Check for security TODO
         $credentials =  array("email" => $email, "password" => $password);
         if(!empty($user = login_check($credentials)))
+        {
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['email'] = $user['email'];
             header("Location: " . get_base_url() . "/listProjects.php");
+        }
         else
             header("Location: " . get_base_url() . "/index.php");
 

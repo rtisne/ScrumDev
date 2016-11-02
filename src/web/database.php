@@ -121,7 +121,6 @@ function perform_query($sql_query ,$db = null, $silent_if_error = false, $sql_fi
                         $query_values = @$db->query($sql_query);
 
                     } else {
-                        echo $db->get_client_info();
                         $query_values = $db->query($sql_query);
                     }
                 } else {
@@ -178,7 +177,6 @@ function execute_query($sql_query, $values = array()){
         else if (is_integer($v)) $types .= 'i';
         else $types .= 'd';
     }
-    echo $types;
     if (strnatcmp(phpversion(),'5.3') >= 0) //Reference is required for PHP 5.3+
     {
         $ref_values = array();
@@ -188,10 +186,10 @@ function execute_query($sql_query, $values = array()){
     }
     $func_arr = array_merge( array($stmt,$types), $ref_values );
     call_user_func_array('mysqli_stmt_bind_param',$func_arr);
-    $status = mysqli_stmt_execute($stmt);
+    mysqli_stmt_execute($stmt);
+    $status = mysqli_insert_id($db);
     return $status;
 }
-
 
 /**
  * @param $table_name
@@ -229,6 +227,10 @@ function create_insert_sql($table_name, $columns = null, $insert_sql = null){
     $insert_sql = sprintf('INSERT INTO %s (%s) VALUES (%s)', $table_name, $columns, $values);
     return $insert_sql;
 }
+
+
+
+
 
 /**
  * @return string
@@ -289,4 +291,16 @@ function fetch_first($sql_query){
 
 }
 
+function query_to_json($sql_query){
+    if (empty($db)) {
+        $db = &$GLOBALS['database'];
+    }
+    if ($result = $db->query($sql_query)) {
+        $myArray = null;
+        while($row = $result->fetch_array()) {
+                $myArray[] = $row;
+        }
+        return json_encode($myArray);
+    }
+}
 ?>
