@@ -44,6 +44,15 @@ function get_all_project($id){
 	{
     	$rows[] = $row;
 	}
+    
+    $sql_query = "SELECT * FROM project WHERE creator=$id ORDER BY project.title ASC";
+    $arr = perform_query($sql_query);
+
+    while($row = mysqli_fetch_array($arr))
+	{
+    	$rows[] = $row;
+	}
+
     return $rows;
 }
 
