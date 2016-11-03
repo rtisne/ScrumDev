@@ -1,6 +1,9 @@
 <?php
 include('config.php');
 
+if(!isset($_SESSION['id']))
+    header("Location: " . get_base_url() . "/index.php");
+
 if(isset($_POST['submit']))
     updateProject();
 
@@ -45,6 +48,9 @@ function remove_members(){
 $project_infos = getProjectInfos(intval($_GET['project_id']));
 if($project_infos == NULL)
     header("Location: " . get_base_url() . "/listProjects.php");
+if($project_infos['creator'] != $_SESSION['id'])
+        header("Location: " . get_base_url() . "/index.php");
+
 $project_members_request = getProjectMembers(intval($_GET['project_id']));
 $project_members = array();
 while($row = $project_members_request->fetch_array())

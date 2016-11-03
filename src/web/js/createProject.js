@@ -13,7 +13,7 @@ function username_search(){
             $('#dropdown_proposal').empty();
             $('.dropdown').addClass('open');
             if(!data) {
-                var li = "<li>"+$('#add_member_input').val()+" is not a member</li>"
+                var li = "<li>"+$('#add_member_input').val()+" is not a user</li>"
                 $('#dropdown_proposal').append(li);
             }else{
                 data.forEach(function(element) {
