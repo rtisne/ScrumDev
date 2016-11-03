@@ -26,7 +26,7 @@ function ListProject() {
     	}
     	else
     	{
-   			$res_f[$i] = array("link" => "google.com","title" => $r[1],'isEditable' => false ,"description" => $r[2]);
+   			$res_f[$i] = array("link" => "","title" => $r[1],'isEditable' => false ,"description" => $r[2]);
    		}
 
    		$i = $i +1;
