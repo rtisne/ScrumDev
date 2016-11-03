@@ -7,7 +7,7 @@ $(document).ready(function(){
 
 function username_search(){
     if($('#add_member_input').val().length >= 3) {
-        $.getJSON('../ajax/getUserNames.php', {
+        $.getJSON(get_absolute_path().concat('/ajax/getUserNames.php'), {
             name: $('#add_member_input').val()
         } ,function(data) {
             $('#dropdown_proposal').empty();
