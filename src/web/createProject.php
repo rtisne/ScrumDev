@@ -1,5 +1,7 @@
 <?php
 include("config.php");
+if(!isset($_SESSION['id']))
+    header("Location: " . get_base_url() . "/index.php");
 
 if(isset($_POST['submit']))
     createProject();
@@ -7,7 +9,7 @@ if(isset($_POST['submit']))
 function createProject() {
     extract($_POST);
     if (!empty($name) && !empty($description)) {
-        $safe_values = array("title" => $name , "description"=>$description, "creator"=>$_SESSION['id'], "product_owner" =>$product_owner);
+        $safe_values = array("title" => $name , "description"=>$description, "creator"=>$_SESSION['id'], "product_owner" =>$product_owner, "date_added" =>'0000-00-00',"date_available" =>'0000-00-00');
         $project_id = add_project_in_db($safe_values);
         if(isset($_POST['member'])){
             foreach( $_POST['member'] as $m ) {
