@@ -27,7 +27,8 @@ function signup(){
 
         $safe_values = array("name" => $last_name , "first_name"=>$first_name, "email"=>$email, "password" =>$password);
         add_user_in_db($safe_values);
-        $_SESSION['id'] = get_user_by_username($email);
+        $user = get_user_by_username($email);
+        $_SESSION['id'] = intval($user["id"]);
         $_SESSION['name'] = $last_name;
         $_SESSION['first_name'] = $first_name;
         $_SESSION['email'] = $email;
