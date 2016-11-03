@@ -20,13 +20,13 @@ function ListProject() {
    	$i = 0;
    foreach ($res as $r) {
     	
-    	if( $r[2] == $id_user)
+    	if( $r[6] == $id_user)
     	{
-    		$res_f[$i] = array("link" => "google.com","title" => $r[0],'isEditable' => true ,"description" => $r[1]);	
+    		$res_f[$i] = array("link" => "updateProject.php?project_id=".$r[0],"title" => $r[1],'isEditable' => true ,"description" => $r[2]);	
     	}
     	else
     	{
-   			$res_f[$i] = array("link" => "google.com","title" => $r[0],'isEditable' => false ,"description" => $r[1]);
+   			$res_f[$i] = array("link" => "google.com","title" => $r[1],'isEditable' => false ,"description" => $r[2]);
    		}
 
    		$i = $i +1;
@@ -36,7 +36,7 @@ function ListProject() {
 
 
 function get_all_project($id){
-    $sql_query = "SELECT title,description,creator FROM project JOIN member_relations ON project.id = member_relations.project
+    $sql_query = "SELECT * FROM project JOIN member_relations ON project.id = member_relations.project
     				JOIN user ON member_relations.member = user.id WHERE user.id=$id ORDER BY project.title ASC";
     $arr = perform_query($sql_query);
 	$rows = [];
