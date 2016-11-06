@@ -6,6 +6,8 @@ require($GLOBALS['base'] . "/databaseConfig.php");
 require($GLOBALS['base'] . "/database.php");
 require($GLOBALS['base'] . "/helpers/session_manager.php");
 require($GLOBALS['base'] . "/helpers/user_manager.php");
+require($GLOBALS['base'] . "/helpers/crypto_manager.php");
+
 require($GLOBALS['base'] . "/path.php");
 
 db_connect($GLOBALS['database'], false);
