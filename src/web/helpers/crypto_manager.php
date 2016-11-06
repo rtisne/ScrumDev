@@ -38,6 +38,9 @@ define('MAXIMUM_TRIES',100);
         }
     }
 
+    function secure_random_int($min, $max){
+        return (version_compare(PHP_VERSION,'7.0.0', '<') ) ? mt_rand($min,$max) : random_int($min,$max);
+    }
 /**
  * @param $length
  * @param string $alphabet
@@ -63,7 +66,7 @@ define('MAXIMUM_TRIES',100);
             }
 
             for ($i = 1; $i < $length; $i++) {
-                $random_number = random_int(0, $maxCharIndex);
+                $random_number = secure_random_int(0, $maxCharIndex);
                 $random_string .= $alphabet[$random_number];
             }
             $attempt++;
