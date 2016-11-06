@@ -2,7 +2,8 @@
 $GLOBALS['base'] = dirname(__FILE__);
 
 // Load database variables
-require($GLOBALS['base'] . "/databaseConfig.php");
+require($GLOBALS['base'] . "/database_config.php");
+require($GLOBALS['base'] . "/security_config.php");
 require($GLOBALS['base'] . "/database.php");
 require($GLOBALS['base'] . "/helpers/session_manager.php");
 require($GLOBALS['base'] . "/helpers/user_manager.php");

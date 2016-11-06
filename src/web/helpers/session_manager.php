@@ -13,19 +13,15 @@ define("CACHE", "_memcached");
 
 /**
  * register session variables
- * @param string $vars session variables are represented by comma-separated string
+ * @param string $vars session variables are represented by associative array
  */
-function set_session_vars($vars) {
-    $vars = explode(",",$vars);
-    reset($vars);
-    while ( list(,$var) = each($vars) ) {
-        $thing=trim($var);
-        if ( $thing ) {
-            $_SESSION[$thing] = $thing;
-        }
+
+
+function set_session_vars($vars){
+    foreach ($vars as $key => $value){
+        set_session_var($key,$value);
     }
 }
-
 
 /**
  * @param string $key session variable name

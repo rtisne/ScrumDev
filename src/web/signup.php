@@ -27,11 +27,8 @@ function signup(){
 
         $safe_values = array("name" => $last_name , "first_name"=>$first_name, "email"=>$email, "password" =>$password);
         add_user_in_db($safe_values);
-        $user = get_user_by_username($email);
-        $_SESSION['id'] = intval($user["id"]);
-        $_SESSION['name'] = $last_name;
-        $_SESSION['first_name'] = $first_name;
-        $_SESSION['email'] = $email;
+        $user = user_data_by_email($email);
+        set_session_vars($user);
         header("Location: " . get_base_url() . "/listProjects.php");
     }
 }
@@ -46,11 +43,6 @@ function add_user_in_db($values){
 
 }
 
-function get_user_by_username($email){
-    $sql_query = 'SELECT id FROM '. "user"." WHERE email='$email'";
-    $arr = fetch_first($sql_query);
-    return $arr;
-}
 
 include('templates/header.template.php');
 include('templates/signup.template.php');
