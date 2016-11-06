@@ -11,7 +11,7 @@ function username_search(){
             name: $('#add_member_input').val()
         } ,function(data) {
             $('#dropdown_proposal').empty();
-            $('.dropdown').addClass('open');
+            $('.dropdown-input').addClass('open');
             if(!data) {
                 var li = "<li>"+$('#add_member_input').val()+" is not a user</li>"
                 $('#dropdown_proposal').append(li);
@@ -24,7 +24,7 @@ function username_search(){
          });
     }
     else {
-        $('.dropdown').removeClass('open');
+        $('.dropdown-input').removeClass('open');
     }
 }
 function user_selected(){
@@ -36,7 +36,7 @@ function user_selected(){
     $(".list_member").append(html);
 
     html = "<option value=\""+ id_selected +"\">" +first_name_selected +" " + name_selected +"</option>";
-    $('.form-control').append(html);
+    $('.select_po').append(html);
 
     var input = "<input type=\"hidden\" name=\"member[]\" value=\""+ id_selected +"\" />";
     $('.form-horizontal').append(input);

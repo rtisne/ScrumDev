@@ -18,7 +18,7 @@
         <div class="col-sm-10">
             <ul class="list-group list_member">
                 <li class="list-group-item">
-                    <div class="dropdown">
+                    <div class="dropdown dropdown-input">
                         <input type="text" id="add_member_input" class="form-control" placeholder="Nom Prenom" aria-describedby="basic-addon2">
 
 
@@ -41,7 +41,7 @@
     <div class="form-group">
         <label for="inputPassword3" class="col-sm-2 control-label">Product Owner</label>
         <div class="col-sm-10">
-            <select class="form-control" name="product_owner">
+            <select class="form-control select_po" name="product_owner">
 
                 <option value="<?=$project_owner["id"]?>" <?=($project_owner['id'] == $product_owner_id)? 'selected="selected"':'';?>><?=$project_owner["first_name"]?> <?=$project_owner["name"]?></option>
                 <?php

@@ -2,7 +2,7 @@
 include('config.php');
 
 if(!isset($_SESSION['id']))
-    header("Location: " . get_base_url() . "/index.php");
+    header("Location: " . get_base_url() . "index.php");
 
 
 include("templates/header.template.php");
@@ -13,16 +13,16 @@ include("templates/footer.template.php");
 function ListProject() {
 
 	$id_user = $_SESSION['id'];
-    
+
     $res = get_all_project($id_user);
 
    	$res_f = [];
    	$i = 0;
    foreach ($res as $r) {
-    	
+
     	if( $r[6] == $id_user)
     	{
-    		$res_f[$i] = array("link" => "updateProject.php?project_id=".$r[0],"title" => $r[1],'isEditable' => true ,"description" => $r[2]);	
+    		$res_f[$i] = array("link" => "updateProject.php?project_id=".$r[0],"title" => $r[1],'isEditable' => true ,"description" => $r[2]);
     	}
     	else
     	{
@@ -31,7 +31,7 @@ function ListProject() {
 
    		$i = $i +1;
 	}
-    return $res_f; 
+    return $res_f;
 }
 
 
@@ -44,7 +44,7 @@ function get_all_project($id){
 	{
     	$rows[] = $row;
 	}
-    
+
     $sql_query = "SELECT * FROM project WHERE creator=$id ORDER BY project.title ASC";
     $arr = perform_query($sql_query);
 

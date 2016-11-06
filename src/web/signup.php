@@ -29,7 +29,7 @@ function signup(){
         add_user_in_db($safe_values);
         $user = user_data_by_email($email);
         set_session_vars($user);
-        header("Location: " . get_base_url() . "/listProjects.php");
+        header("Location: " . get_base_url() . "listProjects.php");
     }
 }
 

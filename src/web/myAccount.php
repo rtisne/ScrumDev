@@ -3,7 +3,7 @@ include('config.php');
 
 
 if(!isset($_SESSION['id']))
-    header("Location: " . get_base_url() . "/index.php");
+    header("Location: " . get_base_url() . "index.php");
 
 if(isset($_POST['submit']))
     ModifAccount();
@@ -19,11 +19,11 @@ function ModifAccount()
 
 	    $_SESSION['name'] = $_POST['last_name'];
 	    $_SESSION['first_name'] = $_POST['first_name'];
-	 
+
 		$passwordH = password_hash(trim($_POST['password']),PASSWORD_DEFAULT);
 	    $safe_values = array("name" => $_POST['last_name'], "first_name"=>$_POST['first_name'], "email"=>$_POST['email'], "password" =>$passwordH);
         update_user_in_db($safe_values);
-        header("Location: " . get_base_url() . "/listProjects.php");
+        header("Location: " . get_base_url() . "listProjects.php");
 
 }
 
@@ -60,5 +60,3 @@ function getUserInfos($user_id){
 
 
 ?>
-
-

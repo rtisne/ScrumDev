@@ -1,7 +1,7 @@
 <?php
 include("config.php");
 if(!isset($_SESSION['id']))
-    header("Location: " . get_base_url() . "/index.php");
+    header("Location: " . get_base_url() . "index.php");
 
 if(isset($_POST['submit']))
     createProject();
@@ -17,7 +17,7 @@ function createProject() {
                 add_member_to_project($values);
             }
         }
-        header("Location: " . get_base_url() . "/listProjects.php");
+        header("Location: " . get_base_url() . "listProjects.php");
     }
 }
 

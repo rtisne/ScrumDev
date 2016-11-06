@@ -52,8 +52,6 @@ function is_token_valid($token){
     if (!has_session_var($token["id"])) {
         return false;
     }else{
-        var_dump(get_session_var($token["id"]));
-
         return comparison_between_hash(get_session_var($token["id"]),$token["value"]);
     }
 }

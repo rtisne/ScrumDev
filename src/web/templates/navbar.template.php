@@ -14,8 +14,7 @@
                     <ul class="dropdown-menu">
                         <li><a href= <?php echo get_base_url(). '/myAccount.php'?>>Paramètre du compte</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a id="logout_link">Déconnexion</a></li>
-                        <li role="separator" class="divider"></li>
+                        <li><a id="logout_link" href="<?php echo get_base_url(). '/logout.php'?>">Déconnexion</a></li>
 
                     </ul>
                 </li>

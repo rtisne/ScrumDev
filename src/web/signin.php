@@ -45,10 +45,10 @@ function user_login(){
         {
 
             set_session_vars($user);
-            header("Location: " . get_base_url() . "/listProjects.php");
+            header("Location: " . get_base_url() . "listProjects.php");
         }
         else
-            header("Location: " . get_base_url() . "/index.php");
+            header("Location: " . get_base_url() . "index.php");
 
     }
 }
