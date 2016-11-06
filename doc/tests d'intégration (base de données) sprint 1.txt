@@ -1,0 +1,79 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Gestion du processus d\'92authentification\
+\
+Execution de la requ\'eate d\'92insertion d\'92un utilisateur \
+INSERT INTO `user`(`id`, `name`, `first_name`, `email`, `password`) VALUES (1,"Labrousse","Thomas","thomaslab@lol.fr","1234")\
+\
+V\'e9rifier que l\'92utilisateur \'e0 bien \'e9t\'e9 ins\'e9r\'e9 dans la table en ex\'e9cutant la requ\'eate suivante:\
+SELECT * FROM `user` WHERE name = \'93user_name\'94 and first_name = \'93user_firs_name\'94 and email=\'93user_email\'94 and password=\'93user_password\'94\
+\
+Execution de la requ\'eate d\'92extraction d\'92un utilisateur \
+\
+SELECT * FROM `user`\
+Verifier que toutes les colonnes de la table user sont renvoy\'e9es.\
+Verifier si les donn\'e9es des diff\'e9rentes colonnes de la table user (nom, pr\'e9nom, email,\'85) \
+sont obtenus \
+Verifier le nombre d\'92\'e9l\'e9ments obtenues permet de v\'e9rifier que toutes les donn\'e9es sont renvoy\'e9es \
+\
+Execution plus fine \
+SELECT nom_de_colonne FROM `user`\
+A partir d\'92une liste de colonnes effectu\'e9 pour chaque valeur de la liste (nom_de_colonne) \
+V\'e9rifier si la donn\'e9e de la colonne sp\'e9cifi\'e9e de la table user est obtenu \
+\
+V\'e9rifier que les donn\'e9es sont au pr\'e9alable pr\'e9sents dans la base avant l\'92ex\'e9cution de requ\'eate de type UPDATE\
+\
+Ex\'e9cution de la requ\'eate\
+UPDATE `user` SET `id`=2,`name`="Tisne",`first_name`="Romain",`email`="romainistne@mdr.fr",`password`="4567" WHERE id = 1\
+\
+Verifier dans la base que les colonnes sp\'e9cifi\'e9es ont \'e9t\'e9 modifi\'e9es \
+\
+\
+Gestion de la cr\'e9ation d\'92un projet \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 Execution des requ\'eates\
+INSERT INTO cdp_scrum_bdd.project (`id`, `project`, `member`) VALUES\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 INSERT INTO cdp_scrum_bdd.member_relations (`id`, `project`, `member`) VALUES\
+\
+Puis v\'e9rifier que l\'92insertion \'e0 \'e9t\'e9 effectu\'e9 avec succ\'e8s en r\'e9p\'e9tant le liste des projects au travers la requ\'eate ci-dessous.\
+\
+Execution de la requ\'eate \
+\
+SELECT * \
+FROM `project`\
+JOIN `member_relations`\
+ON `project`.`id` = `member_relations`.`project`\
+JOIN `user`\
+ON `member_relations`.`member` = `user`.`id`\
+WHERE `user`.`id` = 1\
+ORDER BY `project`.`title` ASC\
+\
+V\'e9rifier le fait que le base de donn\'e9es r\'e9ponde favorablement \'e0 notre requ\'eate permet de tester la coh\'e9rence de la liaison entre la table member_relation et project \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 Verifier si les donn\'e9es des diff\'e9rentes colonnes de la table user (titre, description, cout,\'85) \
+sont obtenus \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+Mise \'e0 jour d\'92un projet \
+\
+Execution des requ\'eates suivantes: \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 UPDATE `project` SET title`="Tisne",`description`="Romain",`project_creator`="romainistne@mdr.fr",`product_owner`="4567" WHERE id = 1\
+REMOW\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 DELETE FROM mem_relations WHERE project=\'93project_id\'94\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 INSERT INTO cdp_scrum_bdd.member_relations (`id`, `project`, `member`) VALUES\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 V\'e9rifier que les tables project et member_relations ont les modifi\'e9es par les valeurs pass\'e9es aux requ\'eates UPDATE et INSERT.\
+\
+\
+\
+}
