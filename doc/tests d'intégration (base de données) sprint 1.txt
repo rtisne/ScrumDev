@@ -1,26 +1,27 @@
 Gestion du processus d’authentification
 
 Exécution de la requête d’insertion d’un utilisateur 
-INSERT INTO `user`(`id`, `name`, `first_name`, `email`, `password`) VALUES (1,"Labrousse","Thomas","thomaslab@lol.fr","1234")
+INSERT INTO `user`( `name`, `first_name`, `email`, `password`) VALUES ("user_name","user_first_name","user_email","user_password")
 
 Vérifier que l’utilisateur à bien été inséré dans la table en exécutant la requête suivante:
-SELECT * FROM `user` WHERE name = “user_name” and first_name = “user_firs_name” and email=“user_email” and password=“user_password”
+SELECT * FROM `user` WHERE name = “user_name” and first_name = “user_first_name” and email=“user_email” and password=“user_password”
 
 Exécution de la requête d’extraction d’un utilisateur 
 
-SELECT * FROM `user`
+SELECT * FROM `user` WHERE email = "user_email"
 
 Vérifier que toutes les colonnes de la table user sont renvoyées.
-Vérifier si les données des différentes colonnes de la table user (nom, prénom, email,…) 
-sont obtenus 
-Vérifier le nombre d’éléments obtenues permet de vérifier que toutes les données sont renvoyés 
+Vérifier que les valeurs des différentes colonnes de la table user (id,nom, prénom, email,…) 
+sont obtenues. 
+Vérifier le nombre d’éléments obtenus permet de vérifier que toutes les données sont renvoyés 
 
 Exécution plus fine 
 
-SELECT nom_de_colonne FROM `user`
+SELECT nom_de_colonne FROM `user` WHERE condition
 
-A partir d’une liste de colonnes effectué pour chaque valeur de la liste (nom_de_colonne) effectuer les actions suivantes :
+A partir d’une liste de colonnes, pour chaque valeur contenue dans la liste (nom_de_colonne) effectuer les actions suivantes :
 Vérifier si la donnée de la colonne spécifiée de la table user est obtenu 
+Vérifier l'unicité de la donnée obtenue.
 
 
 Exécution de la requête de mise à jour d'un utilisateur
@@ -28,7 +29,7 @@ Exécution de la requête de mise à jour d'un utilisateur
 UPDATE `user` SET `id`=2,`name`="user_name",`first_name`="user_first_name",`email`="user_email",`password`="user_password" WHERE id = 1
 
 Vérifier dans la base que les colonnes spécifiées ont été modifiées 
-Vérifier que les données sont au préalable présents dans la base avant l’exécution de requête de type UPDATE
+Vérifier que les données sont au préalable présents dans la base avant l’exécution de la requête de type UPDATE
 
 Gestion d’un projet 
 
@@ -36,10 +37,10 @@ Gestion d’un projet
 Exécution des requêtes de création d'un projet 
 
 
-INSERT INTO cdp_scrum_bdd.project (`id`, `title`, `description`, `date_added` ,..) VALUES (?,?,?,?,..)
-INSERT INTO cdp_scrum_bdd.member_relations (`id`, `project`, `member`) VALUES (?,?,?)
+INSERT INTO cdp_scrum_bdd.project ( `title`, `description`, `date_added` ,..) VALUES (?,?,?,..)
+INSERT INTO cdp_scrum_bdd.member_relations ( `project`, `member`) VALUES (?,?)
 
-Puis vérifier que l’insertion au niveau des deux tables (project et member_relation) a été effectué avec succès en exécutant la requête ci-dessous permettant d’obtenir la liste des projects.
+Vérifier que l’insertion au niveau des deux tables (project et member_relation) a été effectué avec succès en exécutant la requête ci-dessous permettant d’obtenir la liste des projects.
 
 
 Exécution de la requête d'extraction des projets d'un utilisateur 
@@ -54,16 +55,15 @@ WHERE `user`.`id` = 1
 ORDER BY `project`.`title` ASC
 
 Vérifier le fait que la base de données réponde favorablement à notre requête permet de tester la cohérence de la relation entre la table member_relation et project.
-
-Vérifier si les données des différentes colonnes de la table user (titre, description, cout,…)  sont obtenues 
+Vérifier si les données des différentes colonnes de la table project (id,titre, description,…)  sont obtenues 
 
 
 Exécution des requêtes suivantes de modification d’un projet 
 
 
-UPDATE `project` SET title`="project_title",`description`="project_description",`project_creator`="project_creator",`product_owner`="project_oner" WHERE id = project_id
-DELETE FROM mem_relations WHERE project=“project_id”
-INSERT INTO cdp_scrum_bdd.member_relations (`id`, `project`, `member`) VALUES
+UPDATE `project` SET title`="project_title",`description`="project_description",`project_creator`="project_creator",`product_owner`="project_owner" WHERE id = project_id
+DELETE FROM member_relations WHERE project=“project_id”
+INSERT INTO member_relations ( `project`, `member`) VALUES (?,?)
 
 Vérifier que les tables project et member_relations ont été modifié par les valeurs passées aux requêtes UPDATE et INSERT.
 
