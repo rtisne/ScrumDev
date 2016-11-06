@@ -4,7 +4,7 @@ Connexion à la page "signup.php"
 Remplir les champs "Nom","Prénom","Email" et "Password"
 Appuyer sur le bouton "S'inscrire"
 
-Le nouvel utilisateur est bien inscrit dans la base de données, il peut utiliser son
+Résultat attendu : Le nouvel utilisateur est bien inscrit dans la base de données, il peut utiliser son
 compte pour se connecter.
 
 
@@ -16,14 +16,21 @@ compte pour se connecter.
 Connexion d'un utilisateur inscrit :
 
 Connexion à la page "signin.php"
-Remplir les champs "Email" et "Password"
+Remplir les champs "Email" et "Password" avec les données utilisées lors de l'inscription
 Appuyer sur le bouton "Se connecter".
 
 
-Une fois connecté l'utilisateur accède à la page listant ses projet
+Resultat attendu : L'utilisateurest connecté il peut accèder à la page listant ses projet
 
 
+Test avec des données erronées
 
+
+Connexion à la page "signin.php"
+Remplir les champs "Email" et "Password" avec des données ne correspondant à aucun compte inscris
+Appuyer sur le bouton "Se connecter".
+
+Resultat attendu : L'utilisateurest n'est pas connecté il est redirigé vers la page "signin.php"
 
 
 
@@ -38,7 +45,7 @@ Connexion automatique à la page "myAccount.php"
 Remplir les champs "Nom","Prénom","Email" et "Password"
 Appuyer sur le bouton "Modifier"
 
-Les données de l'utilisateur ont bien été modifié
+Resultat attendu : Les données de l'utilisateur ont bien été modifié
 
 
 
@@ -52,7 +59,7 @@ Connexion à la page "listProjects.php"
 Cliquer sur le bouton représenté par le nom et prénom de l'utilisateur
 Cliquer sur "Deconnexion" dans le menu déroulant
 
-l'utilisateur a été déconnecté du site 
+Resultat attendu : l'utilisateur a été déconnecté du site 
 
 
 
@@ -72,7 +79,7 @@ Ajouter un product owner au projet :
 	- Cliquer sur un des membres dans la liste 
 Appuyer sur le bouton "Valider"
 
-Le projet à correctement été ajouté
+Resultat attendu : Le projet à correctement été ajouté
 
 
 
@@ -92,4 +99,4 @@ Ajouter un product owner au projet :
 	- Cliquer sur un des membres dans la liste 
 Appuyer sur le bouton "Valider"
 
-Le projet à correctement été modifié
+Resultat attendu : Le projet à correctement été modifié
