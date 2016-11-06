@@ -1,7 +1,2 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ismo
- * Date: 06/11/16
- * Time: 06:49
- */
+define("CSRF_TOKEN", sha1("SCRUM_DEV_ID"));

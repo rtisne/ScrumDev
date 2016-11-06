@@ -4,6 +4,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/helpers.js"> </script>
         <script type="text/javascript" src="js/createProject.js"> </script>
+<script type="text/javascript" src="js/logout.js"> </script>
 
 
 </body>

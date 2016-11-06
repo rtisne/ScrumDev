@@ -1,4 +1,4 @@
-<h2>Liste des Projets<button type="button" class="pull-right btn btn-primary"><a href="../createProject.php">Creer un nouveau Projet</a></button></h2>
+<h2>Liste des Projets<button type="button" class="pull-right btn btn-primary"><a href=<?php echo get_base_url(). '/createProject.php'?>>Creer un nouveau Projet</a></button></h2>
 <?php
 foreach ($projects as $projet) {
     ?>
@@ -9,6 +9,7 @@ foreach ($projects as $projet) {
 
             </div>
             <div class="panel-body">
+
                 <?= $projet['description']; ?>
 
             </div>
