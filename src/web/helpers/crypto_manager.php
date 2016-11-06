@@ -1,9 +1,12 @@
 <?php
 
-define('ENCODING',"BASE_64");
 define('MAXIMUM_TRIES',100);
 
-
+/**
+ * @param scalar $data
+ * @param scalar $key
+ * @return mixed
+ */
     function hmac_base64($data, $key) {
 
         if (!is_scalar($data) || !is_scalar($key)) {
@@ -15,8 +18,11 @@ define('MAXIMUM_TRIES',100);
         return str_replace(['+', '/', '='], ['-', '_', ''], $hmac);
     }
 
-    //Generates cryptographically secure pseudo-random bytes
-
+/**
+ * Generates cryptographically secure pseudo-random bytes
+ * @param int $length
+ * @return string
+ */
     function secure_random_bytes($length = 32) {
         if(intval($length) <= 8 ){
             $length = 32;
@@ -32,8 +38,15 @@ define('MAXIMUM_TRIES',100);
         }
     }
 
-    function generate_salt($length, $alphabet = '', $unique = FALSE) {
+/**
+ * @param $length
+ * @param string $alphabet
+ * @param bool $unique
+ * @return string
+ */
 
+    function generate_salt($length, $alphabet = '', $unique = FALSE) {
+        // TODO Maintain a list of existing values in order to ensure unicity ($unique = TRUE produce infinite loop )
         $attempt = 0;
 
         if(!$alphabet){
@@ -61,6 +74,11 @@ define('MAXIMUM_TRIES',100);
     }
 
 
+/**
+ * @param string $hash_one
+ * @param string $hash_two
+ * @return bool
+ */
 
 function comparison_between_hash($hash_one, $hash_two){
         return (!function_exists('hash_equals')) ? compare_hash($hash_one,$hash_two) : hash_equals($hash_one,$hash_two);

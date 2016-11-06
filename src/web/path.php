@@ -1,7 +1,5 @@
 <?php
 
-
-
 function get_current_url(){
     return sprintf(
         "%s://%s%s",
@@ -26,4 +24,4 @@ function absolute_path(){
     $current_dir=substr($abs_path,strlen($doc_root));
     return "/" . $current_dir;
 }
-?>
+

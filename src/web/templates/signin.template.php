@@ -18,4 +18,6 @@
             <button type="submit" class="btn btn-default" name="submit" >Se connecter</button>
         </div>
     </div>
+    <input type="hidden" id="login_token" name="token" value=<?php echo htmlspecialchars($csrf_token) ?> >
+
 </form>
