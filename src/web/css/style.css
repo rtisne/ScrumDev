@@ -1,3 +1,7 @@
+.navbar-default {
+    background-color: #F5F5F5;
+}
+
 h2 {
     margin-bottom: 30px;
 }
@@ -5,6 +9,7 @@ h2 {
 .panel_link {
     text-decoration: none;color: inherit;
 }
+
 .panel_link:hover {
     text-decoration: none;color: inherit;
 }
@@ -15,4 +20,65 @@ button a {
 
 button a:hover {
     text-decoration: none;color: inherit;
+}
+
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs, .nav-pills {
+    text-align:center;
+}
+
+.home_container {
+    padding: 0px;
+    margin-top: -20px;
+    padding-top: 20px;
+    background-color: #FAFAFA;
+}
+
+.project_name {
+    color: #bbb;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.project_name .name {
+    padding-left: 15px;
+    color: #4078c0;
+}
+
+.project_tab li a {
+    color: #666;
+}
+.active {
+    border-color: #d26911 #e5e5e5 transparent !important;
+}
+
+.project_container{
+    margin-top:20px;
+}
+
+.thead-backlog{
+    background-color: #FAFAFA;
+}
+
+th, td, .desc_sprint {
+    vertical-align:middle !important;
+}
+
+.sprint_item {
+    padding: 5px 40px;
+}
+
+.sprint_date {
+    margin-left: 20px;
+}
+
+.sprint_title {
+    font-weight: 600;
+    font-size: 1.1em;
 }
