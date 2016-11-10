@@ -1,0 +1,102 @@
+Inscription d'un nouvel utilisateur :
+
+Connexion à la page "signup.php"
+Remplir les champs "Nom","Prénom","Email" et "Password"
+Appuyer sur le bouton "S'inscrire"
+
+Résultat attendu : Le nouvel utilisateur est bien inscrit dans la base de données, il peut utiliser son
+compte pour se connecter.
+
+
+
+
+
+
+
+Connexion d'un utilisateur inscrit :
+
+Connexion à la page "signin.php"
+Remplir les champs "Email" et "Password" avec les données utilisées lors de l'inscription
+Appuyer sur le bouton "Se connecter".
+
+
+Resultat attendu : L'utilisateurest connecté il peut accèder à la page listant ses projet
+
+
+Test avec des données erronées
+
+
+Connexion à la page "signin.php"
+Remplir les champs "Email" et "Password" avec des données ne correspondant à aucun compte inscris
+Appuyer sur le bouton "Se connecter".
+
+Resultat attendu : L'utilisateurest n'est pas connecté il est redirigé vers la page "signin.php"
+
+
+
+
+
+Modification des paramètre du compte d'un utilisateur :
+
+Connexion à la page "listProjects.php"
+Cliquer sur le bouton représenté par le nom et prénom de l'utilisateur
+Cliquer sur "Paramètre du compte" dans le menu déroulant
+Connexion automatique à la page "myAccount.php"
+Remplir les champs "Nom","Prénom","Email" et "Password"
+Appuyer sur le bouton "Modifier"
+
+Resultat attendu : Les données de l'utilisateur ont bien été modifié
+
+
+
+
+
+
+
+Déconnexion d'un utilisateur :
+
+Connexion à la page "listProjects.php"
+Cliquer sur le bouton représenté par le nom et prénom de l'utilisateur
+Cliquer sur "Deconnexion" dans le menu déroulant
+
+Resultat attendu : l'utilisateur a été déconnecté du site 
+
+
+
+
+
+
+Création d'un nouveau projet :
+
+Connexion à la page "listProjects.php"
+Appuyer sur le bouton "Creer un nouveau projet"
+Remplir les champs "Nom" et "Description"
+Ajouter un ou plusieur membre au projet :
+	- Rechercher l'utilisateur par nom ou par email dans la barre de recherche "membres"
+	- Cliquer sur l'utilisateur correspondant dans la liste déroulante qui s'affiche
+Ajouter un product owner au projet :
+	- Cliquer sur la flèche grise pour faire dérouler la liste
+	- Cliquer sur un des membres dans la liste 
+Appuyer sur le bouton "Valider"
+
+Resultat attendu : Le projet à correctement été ajouté
+
+
+
+
+
+
+Modifier les paramètres d'un projet dont l'utilisateur est le créateur :
+
+Connexion à la page "listProjects.php"
+Cliquer sur le titre d'un projet à modifier possèdant une icone "Clef à Mollet"
+Remplir les champs "Nom" et "Description"
+Ajouter un ou plusieur membre au projet :
+	- Rechercher l'utilisateur par nom ou par email dans la barre de recherche "membres"
+	- Cliquer sur l'utilisateur correspondant dans la liste déroulante qui s'affiche
+Ajouter un product owner au projet :
+	- Cliquer sur la flèche grise pour faire dérouler la liste
+	- Cliquer sur un des membres dans la liste 
+Appuyer sur le bouton "Valider"
+
+Resultat attendu : Le projet à correctement été modifié
