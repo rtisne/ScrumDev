@@ -11,13 +11,17 @@ include("createSprint.template.php");
             </tr>
         </thead>
 
+<?php
+foreach ($sprints as $sprint) {
+    ?>
+
         <tbody>
             <tr>
-                <th scope="row" class="text-center">1</th>
+                <th scope="row" class="text-center"><?= $sprint['id']; ?></th>
                 <td>
                     <div class="row sprint_item">
                         <div class="col-md-6 desc_sprint">
-                            <div class="sprint_title">Titre du sprint</div>
+                            <div class="sprint_title"><?= $sprint['title']; ?></div>
                             <div>4/8 US finies</div>
                         </div>
                         <div class="col-md-3 col-md-offset-3">
@@ -26,7 +30,7 @@ include("createSprint.template.php");
                                     Début:
                                 </div>
                                 <div class="col-md-9 text-right">
-                                    Lundi 3 décembre
+                                    <?= $sprint['date_start']; ?>
                                 </div>
                             </div>
                             <div class="row">
@@ -34,7 +38,7 @@ include("createSprint.template.php");
                                     Fin:
                                 </div>
                                 <div class="col-md-9 text-right">
-                                    Vendredi 6 décembre
+                                    <?= $sprint['date_end']; ?>
                                 </div>
                             </div>
                         </div>
@@ -43,37 +47,10 @@ include("createSprint.template.php");
             </tr>
         </tbody>
 
-        <tbody>
-            <tr>
-                <th scope="row" class="text-center">2</th>
-                <td>
-                    <div class="row sprint_item">
-                        <div class="col-md-6 desc_sprint">
-                            <div class="sprint_title">Titre du sprint</div>
-                            <div>4/8 US finies</div>
-                        </div>
-                        <div class="col-md-3 col-md-offset-3">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    Début:
-                                </div>
-                                <div class="col-md-9 text-right">
-                                    Lundi 3 décembre
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    Fin:
-                                </div>
-                                <div class="col-md-9 text-right">
-                                    Vendredi 6 décembre
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
+    <?php
+}
+
+?>
 
     </table>
 </div>
