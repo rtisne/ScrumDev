@@ -28,7 +28,10 @@ INSERT INTO cdp_scrum_bdd.project (`id`, `title`, `description`, `date_added`, `
 
 CREATE TABLE cdp_scrum_bdd.sprint (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `duration` int(11) NOT NULL
+  `title` text NOT NULL,
+  `date_start` date NOT NULL,
+  `date_end` date NOT NULL,
+  `id_project` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -93,8 +96,8 @@ ALTER TABLE cdp_scrum_bdd.project
 --
 -- Index pour la table `sprint`
 --
--- ALTER TABLE cdp_scrum_bdd.sprint
---   ADD PRIMARY KEY (`id`);
+ALTER TABLE cdp_scrum_bdd.sprint
+   ADD KEY `id_project` (`id_project`);
 
 --
 -- Index pour la table `task`
@@ -141,6 +144,14 @@ ALTER TABLE cdp_scrum_bdd.member_relations
 ALTER TABLE cdp_scrum_bdd.project
   ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`creator`) REFERENCES cdp_scrum_bdd.user (`id`),
   ADD CONSTRAINT `project_ibfk_2` FOREIGN KEY (`product_owner`) REFERENCES cdp_scrum_bdd.user (`id`);
+
+
+--
+-- Contraintes pour la table `sprint`
+--
+ALTER TABLE cdp_scrum_bdd.sprint
+  ADD CONSTRAINT `sprint_ibfk_1` FOREIGN KEY (`id_project`) REFERENCES cdp_scrum_bdd.project (`id`);
+
 
 --
 -- Contraintes pour la table `task`
