@@ -54,9 +54,6 @@ button a:hover {
 .project_tab li a {
     color: #666;
 }
-.active {
-    border-color: #d26911 #e5e5e5 transparent !important;
-}
 
 .project_container{
     margin-top:20px;
@@ -81,4 +78,9 @@ th, td, .desc_sprint {
 .sprint_title {
     font-weight: 600;
     font-size: 1.1em;
+}
+
+.kanban tr:last-child td{
+    border-left: 0px;
+    border-right: 0px;
 }
