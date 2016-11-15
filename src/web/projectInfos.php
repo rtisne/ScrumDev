@@ -11,6 +11,7 @@ $project_desc =  $project_infos['description'];
 $product_owner_id =  $project_infos['product_owner'];
 
 $isCreator = ($project_infos['creator'] == $_SESSION['id']);
+$isProductOwner = ($project_infos['product_owner'] == $_SESSION['id']);
 $isMember = ($project_infos['creator'] == $_SESSION['id']);
 if(!$isCreator)
 {

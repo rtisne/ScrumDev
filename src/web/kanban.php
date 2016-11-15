@@ -10,38 +10,17 @@ $developers = getDevelopers(intval($_GET['id_project']));
 
 function getAllUsersStorys($id_project) {
     $sql_query = "SELECT * FROM user_story WHERE user_story.id_project=$id_project";
-    $arr = perform_query($sql_query);
-	$rows = [];
-	while($row = mysqli_fetch_array($arr))
-	{
-    	$rows[] = $row;
-	}
-
-    return $rows;
+    return fetch_all($sql_query);
 }
 
 function getSprintUS($id_sprint) {
     $sql_query = "SELECT * FROM user_story WHERE user_story.id_sprint=$id_project";
-    $arr = perform_query($sql_query);
-	$rows = [];
-	while($row = mysqli_fetch_array($arr))
-	{
-    	$rows[] = $row;
-	}
-
-    return $rows;
+    return fetch_all($sql_query);
 }
 
 function getTaskForSprint($id_sprint) {
     $sql_query = "SELECT * FROM task WHERE task.id_us=$id_sprint";
-    $arr = perform_query($sql_query);
-	$rows = [];
-	while($row = mysqli_fetch_array($arr))
-	{
-    	$rows[] = $row;
-	}
-
-    return $rows;
+    return fetch_all($sql_query);
 }
 
 function getDevelopers($id_project) {

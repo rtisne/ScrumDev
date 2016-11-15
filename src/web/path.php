@@ -22,7 +22,7 @@ function absolute_path(){
     $abs_path=substr(__FILE__,0,strrpos(__FILE__,'/'));
     $doc_root=substr($_SERVER['DOCUMENT_ROOT'],strrpos($_SERVER['DOCUMENT_ROOT'], $_SERVER['PHP_SELF']));
     $current_dir=substr($abs_path,strlen($doc_root));
-    (substr($current_dir,-1)!='/') ? $current_dir.='/' : $current_dir;
+    //(substr($current_dir,-1)!='/') ? $current_dir.='/' : $current_dir;
     return "/" . $current_dir ;
 }
 
