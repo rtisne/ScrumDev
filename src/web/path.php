@@ -19,9 +19,7 @@ function get_base_url(){
 }
 
 function absolute_path(){
-    /*$script_len=strlen('SCRIPT');
-    $file = substr($file, 1 + $i);
-    $test = realpath($dir.$test);*/
+
 
     $abs_path = file_exists(__FILE__) ? __FILE__ : rtrim(realpath('.'), DIRECTORY_SEPARATOR);
     $pos = strrpos($abs_path, DIRECTORY_SEPARATOR);
@@ -46,6 +44,7 @@ function get_absolute_path($path) {
     }
     $path = implode(DIRECTORY_SEPARATOR, $absolutes);
     return (substr($path,-1)!='/') ? $path = $path . '/' : $path;
+
 }
 
 
