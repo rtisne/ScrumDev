@@ -27,7 +27,7 @@ if (!empty($title) &&
     !empty($cost) &&
     !empty($priority)
  ) {
-    $safe_values = array("title" => $title , "description"=>$description, "cost"=>intval($cost), "priority" =>intval($priority), "state" => 0, "num_sprint" => 1);
+    $safe_values = array("title" => $title , "description"=>$description, "cost"=>intval($cost), "priority" =>intval($priority), "state" => 0, "id_sprint" => 1);
     add_user_story_in_db($safe_values);
     }
 

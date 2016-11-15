@@ -14,7 +14,7 @@ function getAllUsersStorys($id_project) {
 }
 
 function getSprintUS($id_sprint) {
-    $sql_query = "SELECT * FROM user_story WHERE user_story.id_sprint=$id_project";
+    $sql_query = "SELECT * FROM user_story WHERE user_story.id_sprint=$id_sprint";
     return fetch_all($sql_query);
 }
 
@@ -24,7 +24,7 @@ function getTaskForSprint($id_sprint) {
 }
 
 function getDevelopers($id_project) {
-    return getProjectMembers();
+    return getProjectMembers($id_project);
 }
 
 $tab="sprints";

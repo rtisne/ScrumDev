@@ -319,6 +319,7 @@ function fetch_first($sql_query){
 function fetch_all($sql_query){
     $query = perform_query($sql_query);
     $result = [];
+    if($query == NULL) return [];
     while($row = $query->fetch_array(MYSQLI_ASSOC))
     {
         $result[] = $row;
