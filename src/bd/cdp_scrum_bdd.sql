@@ -83,6 +83,7 @@ CREATE TABLE cdp_scrum_bdd.user_story (
   `cost` int(11),
   `priority` int(11),
   `state` int(11) NOT NULL,
+  `is_all` BOOLEAN DEFAULT 0,
   `id_project` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
