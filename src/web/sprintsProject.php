@@ -13,7 +13,7 @@ function createSprint() {
 
         $safe_values = array("title" => $title , "date_start"=>$date_start, "date_end"=>$date_end, "id_project"=>intval($_GET['id_project']));
 		$sprint_id = add_sprint_in_db($safe_values);
-        $kanbanUrl = get_base_url() . "kanban.php?id_project=" . $_GET['id_project'] . "&ampid_sprint=" . $sprint_id;
+        $kanbanUrl = get_base_url() . "kanban.php?id_project=" . intval($_GET['id_project']) . "&ampid_sprint=" . $sprint_id;
         header("Location: " . $kanbanUrl);
     }
 }

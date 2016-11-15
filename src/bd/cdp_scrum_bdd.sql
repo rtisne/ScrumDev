@@ -42,14 +42,14 @@ CREATE TABLE cdp_scrum_bdd.task (
   `state` int(11) NOT NULL,
   `cost` int(11) NOT NULL,
   `implementer` int(11) NOT NULL,
-  `num_us` int(11) NOT NULL
+  `id_us` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE cdp_scrum_bdd.task_dependency (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `task_first` int(11) NOT NULL,
-  `task_second` int(11) NOT NULL
+  `task` int(11) NOT NULL,
+  `depend_to` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -75,7 +75,7 @@ CREATE TABLE cdp_scrum_bdd.user_story (
   `cost` int(11) NOT NULL,
   `priority` int(11) NOT NULL,
   `state` int(11) NOT NULL,
-  `num_sprint` int(11) NOT NULL
+  `id_sprint` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -104,14 +104,14 @@ ALTER TABLE cdp_scrum_bdd.sprint
 --
 ALTER TABLE cdp_scrum_bdd.task
   ADD KEY `implementer` (`implementer`),
-  ADD KEY `num_us` (`num_us`);
+  ADD KEY `id_us` (`id_us`);
 
 --
 -- Index pour la table `task_dependency`
 --
 ALTER TABLE cdp_scrum_bdd.task_dependency
-  ADD KEY `task_first` (`task_first`),
-  ADD KEY `task_second` (`task_second`);
+  ADD KEY `task` (`task`),
+  ADD KEY `depend_to` (`depend_to`);
 
 
 --
@@ -124,7 +124,7 @@ ALTER TABLE cdp_scrum_bdd.task_dependency
 -- Index pour la table `user story`
 --
 ALTER TABLE cdp_scrum_bdd.user_story
-  ADD KEY `num_sprint` (`num_sprint`);
+  ADD KEY `id_sprint` (`id_sprint`);
 
 
 --
@@ -158,18 +158,18 @@ ALTER TABLE cdp_scrum_bdd.sprint
 --
 ALTER TABLE cdp_scrum_bdd.task
   ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`implementer`) REFERENCES cdp_scrum_bdd.user (`id`),
-  ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`num_us`) REFERENCES cdp_scrum_bdd.user_story (`id`);
+  ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`id_us`) REFERENCES cdp_scrum_bdd.user_story (`id`);
 
 --
 -- Contraintes pour la table `task_dependency`
 --
 ALTER TABLE cdp_scrum_bdd.task_dependency
-  ADD CONSTRAINT `task_dependency_ibfk_1` FOREIGN KEY (`task_first`) REFERENCES cdp_scrum_bdd.task (`id`),
-  ADD CONSTRAINT `task_dependency_ibfk_2` FOREIGN KEY (`task_second`) REFERENCES cdp_scrum_bdd.task (`id`);
+  ADD CONSTRAINT `task_dependency_ibfk_1` FOREIGN KEY (`task`) REFERENCES cdp_scrum_bdd.task (`id`),
+  ADD CONSTRAINT `task_dependency_ibfk_2` FOREIGN KEY (`depend_to`) REFERENCES cdp_scrum_bdd.task (`id`);
 
 
 --
 -- Contraintes pour la table `user story`
 --
 ALTER TABLE cdp_scrum_bdd.user_story
-  ADD CONSTRAINT `user story_ibfk_1` FOREIGN KEY (`num_sprint`) REFERENCES cdp_scrum_bdd.sprint (`id`);
+  ADD CONSTRAINT `user story_ibfk_1` FOREIGN KEY (`id_sprint`) REFERENCES cdp_scrum_bdd.sprint (`id`);
