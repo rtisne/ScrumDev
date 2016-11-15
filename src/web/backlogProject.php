@@ -1,8 +1,8 @@
 <?php
-include('config.php');
+include_once('config.php');
+include_once('projectInfos.php');
 
 
-$project_name = "The project name";
 $tab="backlog";
 
 include("templates/projectHeader.template.php");

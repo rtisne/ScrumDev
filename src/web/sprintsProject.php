@@ -1,25 +1,26 @@
 <?php
-include('config.php');
+include_once('config.php');
+include_once('projectInfos.php');
 
 $sprints = ListSprints();
 
-if(isset($_POST['submit']))
+if(isset($_POST['submit']) && $isMember)
     createSprint();
 
 function createSprint() {
     extract($_POST);
     if (!empty($title) ) {
-        
-        $safe_values = array("title" => $title , "date_start"=>$date_start, "date_end"=>$date_end, "id_project"=>1);
-        var_dump($safe_values);
+
+        $safe_values = array("title" => $title , "date_start"=>$date_start, "date_end"=>$date_end, "id_project"=>intval($_GET['id_project']));
 		$sprint_id = add_sprint_in_db($safe_values);
-		var_dump($sprint_id);
+        $kanbanUrl = get_base_url() . "kanban.php?id_project=" . $_GET['id_project'] . "&ampid_sprint=" . $sprint_id;
+        header("Location: " . $kanbanUrl);
     }
 }
 
 function ListSprints() {
 
-	$id_project = 1;
+	$id_project = intval($_GET['id_project']);
 
     $res = get_all_sprint($id_project);
 
@@ -39,8 +40,6 @@ function add_sprint_in_db($values){
     return execute_query(create_insert_sql("sprint",$sprint_columns),$sprint_values);
 }
 
-
-$project_name = "The project name";
 $tab="sprints";
 
 include("templates/projectHeader.template.php");

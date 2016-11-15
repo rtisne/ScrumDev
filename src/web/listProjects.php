@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include_once('config.php');
 
 if(!isset($_SESSION['id']))
     header("Location: " . get_base_url() . "index.php");
@@ -22,11 +22,11 @@ function ListProject() {
 
     	if( $r[6] == $id_user)
     	{
-    		$res_f[$i] = array("link" => "updateProject.php?project_id=".$r[0],"title" => $r[1],'isEditable' => true ,"description" => $r[2]);
+    		$res_f[$i] = array("link" => "homeProject.php?id_project=".$r[0],"title" => $r[1],'isEditable' => true ,"description" => $r[2]);
     	}
     	else
     	{
-   			$res_f[$i] = array("link" => "","title" => $r[1],'isEditable' => false ,"description" => $r[2]);
+   			$res_f[$i] = array("link" => "homeProject.php?id_project=".$r[0],"title" => $r[1],'isEditable' => false ,"description" => $r[2]);
    		}
 
    		$i = $i +1;

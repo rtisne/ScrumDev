@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+include_once("config.php");
 
 if(isset($_SESSION['name']))
     header("Location: " . get_base_url() . "listProjects.php");
