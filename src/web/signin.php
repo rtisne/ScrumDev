@@ -53,7 +53,6 @@ function user_login(){
     }
 }
 
-
 function user_logout() {
     destroy_current_session();
 

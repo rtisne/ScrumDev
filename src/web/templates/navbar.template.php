@@ -12,7 +12,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <?php echo $_SESSION['name'] . " " . $_SESSION['first_name'];?></a>
                     <ul class="dropdown-menu">
-                        <li><a href= <?php echo get_base_url(). '/myAccount.php'?>>Paramètre du compte</a></li>
+                        <li><a href= <?php echo get_base_url(). 'myAccount.php'?>>Paramètre du compte</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a id="logout_link" href="">Déconnexion</a></li>
 
@@ -21,8 +21,8 @@
             <?php
             }else {
             ?>
-            <li><a href=<?php echo get_base_url(). '/signin.php'?>>Connexion</a></li>
-            <li><a href=<?php echo get_base_url(). '/signup.php'?>>Inscription</a></li>
+            <li><a href=<?php echo get_base_url(). 'signin.php'?>>Connexion</a></li>
+            <li><a href=<?php echo get_base_url(). 'signup.php'?>>Inscription</a></li>
             <?php
             }
             ?>

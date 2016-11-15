@@ -26,7 +26,7 @@ button a:hover {
     float:none;
     display:inline-block;
     *display:inline; /* ie7 fix */
-     zoom:1; /* hasLayout ie7 trigger */
+    zoom:1; /* hasLayout ie7 trigger */
 }
 
 .nav-tabs, .nav-pills {
@@ -83,4 +83,8 @@ th, td, .desc_sprint {
 .kanban tr:last-child td{
     border-left: 0px;
     border-right: 0px;
+}
+
+div.pagination-center {
+    text-align: center;
 }

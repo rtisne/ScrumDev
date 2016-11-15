@@ -311,6 +311,21 @@ function fetch_first($sql_query){
 
 }
 
+/**
+ * @param $sql_query
+ * @return array
+ */
+
+function fetch_all($sql_query){
+    $query = perform_query($sql_query);
+    $result = [];
+    while($row = $query->fetch_array(MYSQLI_ASSOC))
+    {
+        $result[] = $row;
+    }
+    return $result;
+}
+
 function query_to_json($sql_query){
     if (empty($db)) {
         $db = &$GLOBALS['database'];
