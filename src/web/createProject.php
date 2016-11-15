@@ -36,6 +36,7 @@ function add_member_to_project($values){
     $link_values = array_values($values);
     return execute_query(create_insert_sql("member_relations",$link_columns),$link_values);
 }
+
 $page_title = "Creer un nouveau projet";
 $project_owner = array("id" => $_SESSION['id'], "first_name" => $_SESSION['first_name'], "name" => $_SESSION['name']);
 $project_po = array("id" => $_SESSION['id'], "first_name" => $_SESSION['first_name'], "name" => $_SESSION['name']);
