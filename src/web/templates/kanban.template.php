@@ -25,17 +25,33 @@ include("addUSToKanban.template.php");
             <tr>
                 <th scope="row" class="text-center">ALL</th>
                 <td>
-                    <div class="panel panel-default">
+                    <!-- <div class="panel panel-default">
                         <div class="panel-heading text-center">Titre de la tâche fezfez fezfezfezfez fez fez</div>
                         <div class="panel-body text-center">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         </div>
-                    </div>
+                    </div> -->
                 </td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
+            <?php
+            foreach ($usersStorys as $us) {
+                ?>
+                <tr>
+                    <th scope="row" class="text-center"><?=$us['id'];?></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <?php
+            }
+
+
+            ?>
             <tr>
                 <th class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUSToKanbanmodal"><span class="glyphicon glyphicon-plus"></span></button></th>
                 <td class="active"></td>

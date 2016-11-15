@@ -25,7 +25,7 @@ foreach ($sprints as $sprint) {
                 <td>
                     <div class="row sprint_item">
                         <div class="col-md-6 desc_sprint">
-                            <div class="sprint_title"><?= $sprint['title']; ?></div>
+                            <div class="sprint_title"><a href="<?= get_base_url() . "kanban.php?id_project=" . intval($_GET['id_project']) . "&id_sprint=" . $sprint['id'];?>"><?= $sprint['title']; ?></a></div>
                             <div>4/8 US finies</div>
                         </div>
                         <div class="col-md-3 col-md-offset-3">

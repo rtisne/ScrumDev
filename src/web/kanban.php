@@ -4,7 +4,7 @@ include_once('projectInfos.php');
 
 $allUsersStorys = getAllUsersStorys(intval($_GET['id_project']));
 $usersStorys = getSprintUS(intval($_GET['id_sprint']));
-$tasks = getTaskForSprint(intval($_GET['id_sprint']));
+//$tasks = getTaskForSprint(intval($_GET['id_sprint']));
 $developers = getDevelopers(intval($_GET['id_project']));
 
 

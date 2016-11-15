@@ -30,13 +30,17 @@
                                 <li class="list-group-item">
                                     <div class="dropdown dropdown-input">
                                         <select class="form-control select_po" name="product_owner">
-                                            <option value="lala">Tâche 2 - Faire la base de données</option>
-                                            <option value="lala">Tâche 1 - Faire les templates des pages</option>
+                                            <?php
+                                            foreach ($tasks as $task) {
+                                                ?>
+                                                <option value="lala"><?= $task['title'];?></option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </li>
-                                <li class="list-group-item">Tache 3 - Faire ca et ca</li>
-                                <li class="list-group-item" >Tâche 5 - lorem <a  class="pull-right remove_task"><span class="glyphicon glyphicon-remove"></span></a></li>
+                                <!-- <li class="list-group-item" >Tâche 5 - lorem <a  class="pull-right remove_task"><span class="glyphicon glyphicon-remove"></span></a></li> -->
                             </ul>
                         </div>
                     </div>
