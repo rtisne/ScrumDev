@@ -4,6 +4,10 @@ include("createSprint.template.php");
 <h2>Sprints<button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target="#createSprintmodal"><a href="#">Creer un nouveau sprint</a></button></h2>
 <div class="panel panel-default">
     <table class="table table-bordered">
+        <colgroup>
+            <col class="col-xs-1">
+            <col class="col-xs-11">
+        </colgroup>
         <thead class="thead-backlog">
             <tr>
                 <th class="text-center">#</th>

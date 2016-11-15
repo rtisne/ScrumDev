@@ -1,12 +1,12 @@
 <?php
-include('config.php');
+include_once('config.php');
+include_once('projectInfos.php');
 
 define("PAGE_DEFAULT_LIMIT", 5);
 
 
 $user_stories = array();
 
-$project_name = "The project name";
 $tab="backlog";
 
 if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']))

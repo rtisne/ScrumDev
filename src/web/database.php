@@ -338,4 +338,16 @@ function query_to_json($sql_query){
         return json_encode($myArray);
     }
 }
+
+function getProjectInfos($id_project){
+    $sql_query = "SELECT * FROM project WHERE id = ".intval($id_project)."";
+    $arr = fetch_first($sql_query);
+    return $arr;
+}
+
+function getProjectMembers($id_project){
+    $sql_query = "SELECT * FROM user INNER JOIN member_relations ON  user.id = member_relations.member WHERE member_relations.project='".$id_project."'";
+    $arr = perform_query($sql_query);
+    return $arr;
+}
 ?>
