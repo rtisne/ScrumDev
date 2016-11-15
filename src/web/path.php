@@ -19,11 +19,33 @@ function get_base_url(){
 }
 
 function absolute_path(){
-    $abs_path=substr(__FILE__,0,strrpos(__FILE__,'/'));
+    /*$script_len=strlen('SCRIPT');
+    $file = substr($file, 1 + $i);
+    $test = realpath($dir.$test);*/
+
+    $abs_path = file_exists(__FILE__) ? __FILE__ : rtrim(realpath('.'), DIRECTORY_SEPARATOR);
+    $pos = strrpos($abs_path, DIRECTORY_SEPARATOR);
+    $dir = substr($abs_path, 0,1+ $pos);
+
     $doc_root=substr($_SERVER['DOCUMENT_ROOT'],strrpos($_SERVER['DOCUMENT_ROOT'], $_SERVER['PHP_SELF']));
-    $current_dir=substr($abs_path,strlen($doc_root));
-    (substr($current_dir,-1)!='/') ? $current_dir.='/' : $current_dir;
-    return "/" . $current_dir ;
+    $current_dir=substr($dir,strlen($doc_root));
+    return '/'. get_absolute_path($current_dir) ;
+}
+
+function get_absolute_path($path) {
+    $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+    $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
+    $absolutes = array();
+    foreach ($parts as $part) {
+        if ('.' == $part) continue;
+        if ('..' == $part) {
+            array_pop($absolutes);
+        } else {
+            $absolutes[] = $part;
+        }
+    }
+    $path = implode(DIRECTORY_SEPARATOR, $absolutes);
+    return (substr($path,-1)!='/') ? $path = $path . '/' : $path;
 }
 
 
