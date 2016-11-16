@@ -3,9 +3,9 @@ include_once('config.php');
 include_once('projectInfos.php');
 include_once('sprintInfos.php');
 
-$allUsersStorys = getAllUsersStorys(intval($_GET['id_project']));
+$allUsersStorys = getAllUsersStorys(intval($project_id));
 //$tasks = getTaskForSprint(intval($_GET['id_sprint']));
-$developers = getDevelopers(intval($_GET['id_project']));
+$developers = getDevelopers(intval($project_id));
 
 
 function getAllUsersStorys($id_project) {

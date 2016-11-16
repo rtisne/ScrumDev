@@ -9,18 +9,21 @@ if(isset($_POST['submit']) && $isMember)
 
 function createSprint() {
     extract($_POST);
+    global $project_id;
+
+
     if (!empty($title) ) {
 
-        $safe_values = array("title" => $title , "date_start"=>$date_start, "date_end"=>$date_end, "id_project"=>intval($_GET['id_project']));
+        $safe_values = array("title" => $title , "date_start"=>$date_start, "date_end"=>$date_end, "id_project"=>intval($project_id));
 		$sprint_id = add_sprint_in_db($safe_values);
-        $kanbanUrl = get_base_url() . "kanban.php?id_project=" . intval($_GET['id_project']) . "&id_sprint=" . $sprint_id;
+        $kanbanUrl = get_base_url() . "kanban.php?id_project=" . $_GET['id_project'] . "&id_sprint=" . $sprint_id;
         header("Location: " . $kanbanUrl);
     }
 }
 
 function ListSprints() {
-
-	$id_project = intval($_GET['id_project']);
+    global $project_id;
+	$id_project = intval($project_id);
 
     $res = get_all_sprint($id_project);
 

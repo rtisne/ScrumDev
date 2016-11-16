@@ -18,7 +18,7 @@ $isMember = ($project_infos['creator'] == $_SESSION['id']);
 
 if(!$isCreator)
 {
-    $project_members_request = getProjectMembers(intval($_GET['id_project']));
+    $project_members_request = getProjectMembers(intval($project_id));
     $project_members = array();
     while($row = $project_members_request->fetch_array())
         if($row['member'] == $_SESSION['id'] )

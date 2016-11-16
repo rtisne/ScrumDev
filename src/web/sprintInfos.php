@@ -1,11 +1,13 @@
 <?php
 if(!isset($_GET['id_sprint']))
     header("Location: " . get_base_url() . "index.php");
-
+var_dump(intval($_GET['id_sprint']));
 $sprint_infos = getSprintInfos(intval($_GET['id_sprint']));
+
+/* A enlever des que l'insertion d'un sprint est ok
 if($sprint_infos == NULL)
     header("Location: " . get_base_url() . "index.php");
-
+*/
 $sprint_name =  $sprint_infos['title'];
 $sprint_id = $sprint_infos['id'];
 

@@ -9,26 +9,28 @@ if(isset($_POST['submit']))
     updateProject();
 
 function updateProject() {
+    global $project_id;
     extract($_POST);
     if (!empty($name) && !empty($description)) {
         $safe_values = array("title" => $name , "description"=>$description, "creator"=>$_SESSION['id'], "product_owner" =>intval($product_owner));
         update_project_in_db($safe_values);
-        remove_members(intval($_GET['id_project']));
+        remove_members(intval($project_id));
         if(isset($_POST['member'])){
             foreach( $_POST['member'] as $m ) {
-                $values = array("project" => intval($_GET['id_project']) , "member"=>intval($m));
+                $values = array("project" => intval($project_id) , "member"=>intval($m));
                 add_member_to_project($values);
             }
         }
-        header("Location: " . get_base_url() . "homeProject.php?id_project=" . $_GET['id_project']);
+        header("Location: " . get_base_url() . "homeProject.php?id_project=" . $project_id);
     }
 }
 
 
 function update_project_in_db($values){
+    global $project_id;
     $project_columns =  array_keys($values);
     $project_values = array_values($values);
-    $project_values["id"] = intval($_GET['id_project']);
+    $project_values["id"] = intval($project_id);
     execute_query(create_update_sql("project",$project_columns),$project_values);
 
 }
@@ -40,7 +42,8 @@ function add_member_to_project($values){
 }
 
 function remove_members(){
-    $sql_query = "DELETE FROM member_relations WHERE project='".intval($_GET['id_project'])."'";
+    global $project_id;
+    $sql_query = "DELETE FROM member_relations WHERE project='".intval($project_id)."'";
     $arr = perform_query($sql_query);
 }
 
