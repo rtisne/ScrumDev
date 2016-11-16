@@ -1,9 +1,9 @@
 <?php
 include_once('config.php');
 include_once('projectInfos.php');
+include_once('sprintInfos.php');
 
 $allUsersStorys = getAllUsersStorys(intval($_GET['id_project']));
-$usersStorys = getSprintUS(intval($_GET['id_sprint']));
 //$tasks = getTaskForSprint(intval($_GET['id_sprint']));
 $developers = getDevelopers(intval($_GET['id_project']));
 
@@ -13,10 +13,6 @@ function getAllUsersStorys($id_project) {
     return fetch_all($sql_query);
 }
 
-function getSprintUS($id_sprint) {
-    $sql_query = "SELECT * FROM user_story WHERE user_story.id_sprint=$id_sprint";
-    return fetch_all($sql_query);
-}
 
 function getTaskForSprint($id_sprint) {
     $sql_query = "SELECT * FROM task WHERE task.id_us=$id_sprint";

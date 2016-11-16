@@ -25,7 +25,7 @@
           <li <?= ($tab=="backlog")?"class=\"active\"":"";?>><a href="<?= get_base_url() . "backlogProject.php?id_project=" . $_GET['id_project']?>"><span class="glyphicon glyphicon-list-alt"></span>  Backlog</a></li>
           <li <?= ($tab=="sprints")?"class=\"active\"":"";?>><a href="<?= get_base_url() . "sprintsProject.php?id_project=" . $_GET['id_project']?>"><span class="glyphicon glyphicon-calendar"></span>  Sprints</a></li>
           <li <?= ($tab=="graphs")?"class=\"active\"":"";?>><a href="#"><span class="glyphicon glyphicon-stats"></span>  Graphs</a></li>
-          <li <?= ($tab=="config")?"class=\"active\"":"";?>><a href="<?= get_base_url() . "updateProject.php?id_project=" . $_GET['id_project']?>"><span class="glyphicon glyphicon-cog"></span>  Configuration</a></li>
+          <?php if($isCreator){?><li <?= ($tab=="config")?"class=\"active\"":"";?>><a href="<?= get_base_url() . "updateProject.php?id_project=" . $_GET['id_project']?>"><span class="glyphicon glyphicon-cog"></span>  Configuration</a></li><?php } ?>
         </ul>
 </div>
 <div class="container project_container col-md-8 col-md-offset-2">

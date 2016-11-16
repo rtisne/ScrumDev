@@ -1,4 +1,3 @@
-
 <div class="modal fade" tabindex="-1" role="dialog" id="addUSToKanbanmodal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -10,16 +9,16 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="developpeur" class="control-label">Liste des US</label>
-                        <select class="form-control select_po" name="product_owner">
+                        <select class="form-control select_po" name="userstory">
                             <?php foreach ($allUsersStorys as $userStory): ?>
-                                    <option value="lala"><?= $userStory['title'];?></option>
+                                    <option data-id="<?= $userStory['id'];?>"><?= $userStory['title'];?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary">Valider</button>
+                    <button type="button" class="btn btn-primary" id="addUS">Valider</button>
                 </div>
             </form>
         </div>

@@ -2,7 +2,7 @@
 include("createTask.template.php");
 include("addUSToKanban.template.php");
 ?>
-<h2>Sprint name<button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target="#createTaskmodal"><a href="#">Creer une nouvelle tâche</a></button></h2>
+<h2 data-id="<?=intval($sprint_id);?>"><?=$sprint_name;?><button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target="#createTaskmodal"><a href="#">Creer une nouvelle tâche</a></button></h2>
 <div class="panel panel-default">
     <table class="table table-bordered kanban">
         <colgroup>
@@ -40,7 +40,20 @@ include("addUSToKanban.template.php");
             foreach ($usersStorys as $us) {
                 ?>
                 <tr>
-                    <th scope="row" class="text-center"><?=$us['id'];?></th>
+                    <th scope="row" class="text-center">
+                        <div class="popover-markup">
+                             <a class="trigger">US#<?=$us['number'];?></a>
+                             <div class="content hide">
+                                <div class="form-group">
+                                    <p><?=$us['title'];?></p>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block" id="removeUS" data-id="<?=$us['id'];?>">
+                                    Remove
+                                </button>
+                            </div>
+
+                        </div>
+                    </th>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -52,7 +65,7 @@ include("addUSToKanban.template.php");
 
 
             ?>
-            <tr>
+            <tr class="addUSRow">
                 <th class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUSToKanbanmodal"><span class="glyphicon glyphicon-plus"></span></button></th>
                 <td class="active"></td>
                 <td class="active"></td>

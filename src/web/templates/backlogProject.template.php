@@ -20,11 +20,11 @@ include("createUserStory.template.php");
         <tbody> 
         <?php foreach ($user_stories as $story) : ?>
         <tr>
-            <td scope="row" class="text-center"><?php echo $story["title"] ?></td> 
-            <td><?php echo $story["description"] ?></td> 
+            <td scope="row" class="text-center"><?php echo $story["number"] ?></td> 
+            <td><?php echo $story["title"] ?></td> 
             <td class="text-center"><?php echo $story["cost"] ?></td> 
             <td class="text-center"><?php echo $story["priority"] ?></td> 
-            <td class="text-center"><?php echo  $story["state"] ?></td> 
+            <td class="text-center"><?=  ($story["state"])? "Finie" : "En cours"; ?></td> 
             <td class="text-center"><?php echo "" ?></td>
         </tr>
         <?php endforeach; ?>

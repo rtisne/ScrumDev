@@ -88,3 +88,14 @@ th, td, .desc_sprint {
 div.pagination-center {
     text-align: center;
 }
+
+.kanban tr {
+    line-height: 70px;
+    min-height: 70px;
+    height: 70px;
+}
+
+a:hover{
+    text-decoration: none;
+    cursor:pointer;
+}

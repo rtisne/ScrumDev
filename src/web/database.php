@@ -346,6 +346,12 @@ function getProjectInfos($id_project){
     return $arr;
 }
 
+function getSprintInfos($id_sprint){
+    $sql_query = "SELECT * FROM sprint WHERE id = ".intval($id_sprint)."";
+    $arr = fetch_first($sql_query);
+    return $arr;
+}
+
 function getProjectMembers($id_project){
     $sql_query = "SELECT * FROM user INNER JOIN member_relations ON  user.id = member_relations.member WHERE member_relations.project='".$id_project."'";
     $arr = perform_query($sql_query);
