@@ -19,7 +19,7 @@ function createSprint() {
         $number_Sprint_Actual = intval($number_Sprint["num"]) + 1;     
         $safe_values = array("number" => $number_Sprint_Actual, "title" => $title , "date_start"=>$date_start, "date_end"=>$date_end, "id_project"=>intval($_GET['id_project']));
 		    $sprint_id = add_sprint_in_db($safe_values);
-        $kanbanUrl = get_base_url() . "kanban.php?id_project=" . intval($_GET['id_project']) . "&id_sprint=" . $sprint_id;
+        $kanbanUrl = get_base_url() . "kanban.php?id_project=" . $_GET['id_project'] . "&id_sprint=" . $sprint_id;
         header("Location: " . $kanbanUrl);
     }
 }
@@ -37,7 +37,7 @@ function ListSprints() {
     		$i = $i +1;
 	}
     return $res_f;
-}
+}   
 
 function add_sprint_in_db($values){
     $sprint_columns =  array_keys($values);
