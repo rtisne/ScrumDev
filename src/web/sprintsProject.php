@@ -14,9 +14,12 @@ function createSprint() {
 
     if (!empty($title) ) {
 
-        $safe_values = array("title" => $title , "date_start"=>$date_start, "date_end"=>$date_end, "id_project"=>intval($project_id));
-		$sprint_id = add_sprint_in_db($safe_values);
-        $kanbanUrl = get_base_url() . "kanban.php?id_project=" . $_GET['id_project'] . "&id_sprint=" . $sprint_id;
+
+        $number_Sprint = get_number_sprint(intval($_GET['id_project']));
+        $number_Sprint_Actual = intval($number_Sprint["num"]) + 1;     
+        $safe_values = array("number" => $number_Sprint_Actual, "title" => $title , "date_start"=>$date_start, "date_end"=>$date_end, "id_project"=>intval($_GET['id_project']));
+		    $sprint_id = add_sprint_in_db($safe_values);
+        $kanbanUrl = get_base_url() . "kanban.php?id_project=" . intval($_GET['id_project']) . "&id_sprint=" . $sprint_id;
         header("Location: " . $kanbanUrl);
     }
 }
@@ -30,7 +33,7 @@ function ListSprints() {
    	$res_f = [];
    	$i = 0;
    foreach ($res as $r) {
-   			$res_f[$i] = array("id" => $r["id"],"title" => $r["title"],'date_start' => $r["date_start"] ,"date_end" => $r["date_end"]);
+   			$res_f[$i] = array("id" => $r["number"],"title" => $r["title"],'date_start' => $r["date_start"] ,"date_end" => $r["date_end"]);
     		$i = $i +1;
 	}
     return $res_f;
@@ -52,6 +55,12 @@ include("templates/footer.template.php");
 function get_all_sprint($id_project){
     $sql_query = "SELECT * FROM sprint WHERE sprint.id_project=$id_project ORDER BY sprint.date_start ASC";
     return fetch_all($sql_query);
+}
+
+
+function get_number_sprint($id_project){
+  $sql_query = "SELECT COUNT(*) as num FROM sprint WHERE sprint.id_project=$id_project ";
+  return fetch_first($sql_query);
 }
 
 ?>
