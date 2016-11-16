@@ -99,3 +99,8 @@ a:hover{
     text-decoration: none;
     cursor:pointer;
 }
+
+#story_kind.active
+{
+    background:green;
+}

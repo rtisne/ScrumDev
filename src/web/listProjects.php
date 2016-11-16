@@ -18,19 +18,24 @@ function ListProject() {
 
    	$res_f = [];
    	$i = 0;
+	$project_ids = array();
    foreach ($res as $r) {
+	   $secure_project_id = hmac_base64($r[0].$r[1], PROJECT_SECRET_KEY);
 
-    	if( $r[6] == $id_user)
+	   if( $r[6] == $id_user)
     	{
-    		$res_f[$i] = array("link" => "homeProject.php?id_project=".$r[0],"title" => $r[1],'isEditable' => true ,"description" => $r[2]);
+			$project_ids[$secure_project_id] = $r[0];
+    		$res_f[$i] = array("link" => "homeProject.php?id_project=".$secure_project_id,"title" => $r[1],'isEditable' => true ,"description" => $r[2]);
     	}
     	else
     	{
-   			$res_f[$i] = array("link" => "homeProject.php?id_project=".$r[0],"title" => $r[1],'isEditable' => false ,"description" => $r[2]);
+   			$res_f[$i] = array("link" => "homeProject.php?id_project=". $secure_project_id ,"title" => $r[1],'isEditable' => false ,"description" => $r[2]);
    		}
 
    		$i = $i +1;
 	}
+	set_session_var("project_ids",$project_ids);
+
     return $res_f;
 }
 
