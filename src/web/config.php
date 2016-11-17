@@ -1,5 +1,4 @@
 <?php
-define("PROJECT_SECRET_KEY",sha1("project_management"));
 $GLOBALS['base'] = dirname(__FILE__);
 
 // Load database variables

@@ -21,27 +21,15 @@ function project_backlog_user_stories(){
 }
 
 function project_backlog(){
-    global $project_id;
     extract($_POST);
-
-    if (!empty($title) &&
+if (!empty($title) &&
     !empty($description) &&
-    !empty($number)&&
-    !empty($kind) &&
-    isset($project_id)
+    !empty($cost) &&
+    !empty($priority)
  ) {
-
-
-    $safe_values = array("number" => intval($number), "title" => $title , "description" => $description, "is_all"  => intval($kind), "state" => 0, "id_project" => intval($project_id));
-
-
-    if(!empty($cost))
-        $safe_values["cost"] = intval($cost);
-    if(!empty($priority))
-        $safe_values["priority"] = intval($priority);
-
+    $safe_values = array("title" => $title , "description"=>$description, "cost"=>intval($cost), "priority" =>intval($priority), "state" => 0, "id_sprint" => 1);
     add_user_story_in_db($safe_values);
-}
+    }
 
 }
 
@@ -62,14 +50,15 @@ function add_user_story_in_db($values){
 }
 
 function backlog_user_stories_by_project_id($project_id){
-
+    // TODO
+    $sql_query = "";
+    return fetch_all($sql_query);
 }
 
 
-function backlog_user_stories_by_id($story_id){
+function backlog_user_stories_by_backlog_id(){
     // TODO
 }
-
 handle_backlog_pagination();
 
 /**
@@ -77,7 +66,6 @@ handle_backlog_pagination();
  */
 
 function handle_backlog_pagination($page_limit = PAGE_DEFAULT_LIMIT ){
-    global $project_id;
     // fetch GET parameters
     global $user_stories, $pagination_item;
     if(!isset($_GET[$pagination_item]))
@@ -86,7 +74,7 @@ function handle_backlog_pagination($page_limit = PAGE_DEFAULT_LIMIT ){
         $page_number = $_GET[$pagination_item];
 
     if(!empty($page_number)){
-        $sql_query = "SELECT * FROM user_story WHERE id_project=$project_id  ORDER BY id ASC LIMIT $page_limit OFFSET ". (get_offset($page_number,$page_limit));
+        $sql_query = "SELECT * FROM user_story ORDER BY id ASC LIMIT $page_limit OFFSET ". (get_offset($page_number,$page_limit));
         $user_stories = fetch_all($sql_query);
         start_pagination($sql_query,array("num_items_per_page" => $page_limit,"current_page_number" => $page_number , "items" => $user_stories));
     }
