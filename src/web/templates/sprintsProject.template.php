@@ -46,6 +46,9 @@ foreach ($sprints as $sprint) {
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6 desc_sprint">
+                                <button type="submit" class="btn btn-primary btn-block" id="removeSprint" data-id="<?=$sprint['id'];?>">Remove</button>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -58,3 +61,4 @@ foreach ($sprints as $sprint) {
 
     </table>
 </div>
+
