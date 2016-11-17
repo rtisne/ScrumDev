@@ -21,7 +21,7 @@ foreach ($sprints as $sprint) {
 
         <tbody>
             <tr>
-                <th scope="row" class="text-center"><?= $sprint['id']; ?></th>
+                <th scope="row" class="text-center"><?= $sprint['number']; ?></th>
                 <td>
                     <div class="row sprint_item">
                         <div class="col-md-6 desc_sprint">

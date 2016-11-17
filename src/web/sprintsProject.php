@@ -29,7 +29,7 @@ function ListSprints() {
    	$res_f = [];
    	$i = 0;
    foreach ($res as $r) {
-   			$res_f[$i] = array("id" => $r["id"],"title" => $r["title"],'date_start' => $r["date_start"] ,"date_end" => $r["date_end"]);
+   			$res_f[$i] = array("id" => $r["id"],"number" => $r["number"],"title" => $r["title"],'date_start' => $r["date_start"] ,"date_end" => $r["date_end"]);
     		$i = $i +1;
 	}
     return $res_f;
@@ -49,7 +49,7 @@ include("templates/footer.template.php");
 
 
 function get_all_sprint($id_project){
-    $sql_query = "SELECT * FROM sprint WHERE sprint.id_project=$id_project ORDER BY sprint.date_start ASC";
+    $sql_query = "SELECT * FROM sprint WHERE sprint.id_project=$id_project ORDER BY sprint.number ASC";
     return fetch_all($sql_query);
 }
 
