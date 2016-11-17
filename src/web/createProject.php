@@ -8,9 +8,12 @@ if(isset($_POST['submit']))
 
 function createProject() {
     extract($_POST);
+    $project_ids = array();
+
     if (!empty($name) && !empty($description)) {
         $safe_values = array("title" => $name , "description"=>$description, "creator"=>$_SESSION['id'], "product_owner" =>intval($product_owner), "date_added" =>'2016-10-10',"date_available" =>'2016-10-10');
         $project_id = add_project_in_db($safe_values);
+
         if(isset($_POST['member'])){
             foreach( $_POST['member'] as $m ) {
                 $values = array("project" => $project_id , "member"=>intval($m));

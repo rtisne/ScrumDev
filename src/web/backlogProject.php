@@ -73,15 +73,19 @@ handle_backlog_pagination();
 function handle_backlog_pagination($page_limit = PAGE_DEFAULT_LIMIT ){
     // fetch GET parameters
     global $user_stories, $pagination_item;
+    $project_id = $_GET["id_project"];
     if(!isset($_GET[$pagination_item]))
         $page_number = 1;
     else
         $page_number = $_GET[$pagination_item];
 
     if(!empty($page_number)){
-        $sql_query = "SELECT * FROM user_story ORDER BY id ASC LIMIT $page_limit OFFSET ". (get_offset($page_number,$page_limit));
+        $sql_query = "SELECT * FROM user_story WHERE id_project=$project_id  ORDER BY priority ASC LIMIT $page_limit OFFSET ". (get_offset($page_number,$page_limit));
+        $total_items = fetch_first("SELECT COUNT(*) as total FROM user_story WHERE id_project=$project_id")["total"];
+
         $user_stories = fetch_all($sql_query);
-        start_pagination($sql_query,array("num_items_per_page" => $page_limit,"current_page_number" => $page_number , "items" => $user_stories));
+        start_pagination(array("num_items_per_page" => $page_limit,"current_page_number" => $page_number , "items" => $user_stories, "total_items" => $total_items));
+
     }
 
 }

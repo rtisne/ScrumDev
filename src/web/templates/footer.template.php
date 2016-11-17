@@ -8,6 +8,7 @@
     <script type="text/javascript" src="js/kanbanUS.js"> </script>
     <script type="text/javascript" src="js/logout.js"> </script>
     <script type="text/javascript" src="js/datepicker.js"></script>
+<script type="text/javascript" src="js/backlog.js"> </script>
 
 
 </body>

@@ -31,3 +31,48 @@ function absolute_path(){
 function get_current_url_without_query_string(){
     return strtok(get_current_url(),'?');
 }
+
+
+function generate_url(array $url, array $query_string){
+
+    $url['query'] = http_build_query($query_string, '', '&');
+    $scheme = isset($url['scheme']) ? $url['scheme'].'://' : '';
+    $host = isset($url['host']) ? $url['host'] : '';
+    $port = isset($url['port']) ? ':'.$url['port'] : '';
+    $path = isset($url['path']) ? $url['path'] : '';
+    $query = isset($url['query']) && $url['query'] ? '?'.$url['query'] : '';
+    $fragment = isset($url['fragment']) ? '#'.$url['fragment'] : '';
+    return $scheme.$host.$port.$path.$query.$fragment;
+}
+
+
+function check_url_security($url_param){
+    $url = parse_url($url_param);
+    if (isset($url['query'])) {
+        parse_str($url['query'], $query_string);
+    } else {
+        $query_string = array();
+    }
+
+    return check_query_string_security($query_string);
+}
+
+
+function check_query_string_security($query_string){
+    foreach ($query_string as $query_string_key => $query_string_value){
+        $result = preg_match("/_hash$/",$query_string_key) && check_encoded_value($query_string_key,$query_string_value) ;
+        if(!$result)
+            return false;
+    }
+
+    return true;
+}
+
+function check_encoded_value($query_string_key,$query_string_value){
+    if(!$_SESSION)
+        throw new RuntimeException("Session is not set to check if this url is secure");
+    $values = get_session_var("session_" . $query_string_key);
+    var_dump($_SESSION);
+    $value = $values[$_GET[$query_string_key]] . preg_replace("/_hash$/","",$query_string_key);
+    return comparison_between_hash(hmac_base64($value,PROJECT_SECRET_KEY),$query_string_value);
+}

@@ -1,6 +1,8 @@
 <?php
 define("DEFAULT_PAGINATION", "page");
 define("DEFAULT_RANGE",5);
+define("DEFAULT_PAGE_LIMIT", 5);
+
 $page_count = $start_page =  $end_page = $previous = $next = $current = null;
 $pages_in_range = array();
 $pagination_item = DEFAULT_PAGINATION;
@@ -14,7 +16,6 @@ function pagination_data(array $values, $range = DEFAULT_RANGE )
     $items = $values["items"];
     $page_count = intval(ceil($total_items / $num_items_per_page));
     $current = $values["current_page_number"];
-
     if ($page_count < $current) {
         $current = $page_count;
     }
@@ -104,11 +105,9 @@ function get_number_of_items($items){
     count($items);
 }
 
-function start_pagination($sql_query, array $values){
-    $total_items = fetch_first("SELECT COUNT(*) as total FROM user_story")["total"];
+function start_pagination(array $values){
     // merge all into only one array
-    $merged_values = array_merge($values, array("total_items"=>$total_items));
-    assign_varaiables(pagination_data($merged_values));
+    assign_varaiables(pagination_data($values));
 
 }
 
