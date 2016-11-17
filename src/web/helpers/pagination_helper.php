@@ -96,7 +96,6 @@ function assign_varaiables(array $pagination_vars ){
     $previous = $previous;
     $current = $current;
 
-
 }
 
 function get_number_of_items($items){

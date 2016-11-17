@@ -2,9 +2,6 @@
 include_once('config.php');
 include_once('projectInfos.php');
 
-define("PAGE_DEFAULT_LIMIT", 20);
-
-
 $user_stories = array();
 
 $tab="backlog";
@@ -60,7 +57,7 @@ handle_backlog_pagination();
  * @param int $page_limit
  */
 
-function handle_backlog_pagination($page_limit = PAGE_DEFAULT_LIMIT ){
+function handle_backlog_pagination($page_limit = DEFAULT_PAGE_LIMIT ){
     // fetch GET parameters
     global $user_stories, $pagination_item;
     $project_id = $_GET["id_project"];
@@ -68,7 +65,6 @@ function handle_backlog_pagination($page_limit = PAGE_DEFAULT_LIMIT ){
         $page_number = 1;
     else
         $page_number = $_GET[$pagination_item];
-
     if(!empty($page_number)){
         $id_project = intval($_GET['id_project']);
         $sql_query = "SELECT * FROM user_story WHERE is_all = 0 AND id_project = $id_project ORDER BY id ASC LIMIT $page_limit OFFSET ". (get_offset($page_number,$page_limit));
@@ -77,6 +73,8 @@ function handle_backlog_pagination($page_limit = PAGE_DEFAULT_LIMIT ){
         start_pagination(array("num_items_per_page" => $page_limit,"current_page_number" => $page_number , "items" => $user_stories, "total_items" => $total_items));
 
     }
+
+
 
 }
 
