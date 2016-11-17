@@ -22,17 +22,17 @@
                     <div class="form-group">
                         <label for="detail" class="control-label">Coût</label>
                         <div>
-                            <input type="number" class="form-control" name="cost" min="1" value="1">
+                            <input type="number" class="form-control" name="cost" value="">
                         </div>
                     </div>
-                     <?php if(1): ?>
-                    <div class="form-group">
-                        <label for="detail" class="control-label">Priorité</label>
-                        <div>
-                            <input type="number" class="form-control" name="priority" min="1" value="1">
-                        </div>
-                    </div>
-                    <?php endif; ?>
+                    <?php if($isProductOwner): ?>
+                   <div class="form-group">
+                       <label for="detail" class="control-label">Priorité</label>
+                       <div>
+                           <input type="number" class="form-control" name="priority" value="">
+                       </div>
+                   </div>
+                   <?php endif; ?>
                     <?php if(0) : ?>
                    <div class="form-group">
                        <label for="detail" class="control-label">Commit</label>

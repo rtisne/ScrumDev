@@ -22,12 +22,17 @@ function project_backlog_user_stories(){
 
 function project_backlog(){
     extract($_POST);
-if (!empty($title) &&
-    !empty($description) &&
-    !empty($cost) &&
-    !empty($priority)
- ) {
-    $safe_values = array("title" => $title , "description"=>$description, "cost"=>intval($cost), "priority" =>intval($priority), "state" => 0, "id_sprint" => 1);
+    if (!empty($title) &&
+        !empty($description)) {
+
+        $number_US = get_number_us(intval($_GET['id_project']));
+        $number_US_Actual = intval($number_US["num"]) + 1;
+        $safe_values = array("number" => $number_US_Actual, "title" => $title , "description" => $description, "is_all"  => 0, "state" => 0, "id_project" => intval($_GET['id_project']));
+        if(!empty($cost))
+            $safe_values["cost"] = intval($cost);
+        if(!empty($priority))
+            $safe_values["priority"] = intval($priority);
+
     add_user_story_in_db($safe_values);
     }
 
@@ -81,6 +86,10 @@ function handle_backlog_pagination($page_limit = PAGE_DEFAULT_LIMIT ){
 
 }
 
+function get_number_us($id_project){
+  $sql_query = "SELECT COUNT(*) as num FROM user_story WHERE user_story.id_project=$id_project ";
+  return fetch_first($sql_query);
+}
 
 include("templates/projectHeader.template.php");
 include("templates/backlogProject.template.php");
