@@ -24,7 +24,7 @@ foreach ($sprints as $sprint) {
                 <th scope="row" class="text-center"><?= $sprint['number']; ?></th>
                 <td>
                     <div class="row sprint_item">
-                        <div class="col-md-6 desc_sprint">
+                        <div class="col-md-4 desc_sprint">
                             <div class="sprint_title"><a href="<?= get_base_url() . "kanban.php?id_project=" . intval($_GET['id_project']) . "&id_sprint=" . $sprint['id'];?>"><?= $sprint['title']; ?></a></div>
                             <div>4/8 US finies</div>
                         </div>
@@ -44,9 +44,10 @@ foreach ($sprints as $sprint) {
                                 <div class="col-md-9 text-right">
                                     <?= $sprint['date_end']; ?>
                                 </div>
+
                             </div>
                         </div>
-                        <div class="col-md-6 desc_sprint">
+                        <div class="col-md-2 desc_sprint pull-right">
                                 <button type="submit" class="btn btn-primary btn-block" id="removeSprint" data-id="<?=$sprint['id'];?>">Remove</button>
                         </div>
                     </div>
@@ -61,4 +62,3 @@ foreach ($sprints as $sprint) {
 
     </table>
 </div>
-
