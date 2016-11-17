@@ -48,7 +48,7 @@ foreach ($sprints as $sprint) {
                             </div>
                         </div>
                         <div class="col-md-2 desc_sprint pull-right">
-                                <button type="submit" class="btn btn-primary btn-block" id="removeSprint" data-id="<?=$sprint['id'];?>">Remove</button>
+                                <a href="<?= get_base_url() . "deleteSprint.php?id_project=" . intval($_GET['id_project']) . "&id_sprint=" . $sprint['id'];?>" class="btn btn-primary btn-block" >Remove</a>
                         </div>
                     </div>
                 </td>

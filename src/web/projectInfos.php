@@ -9,9 +9,10 @@ if($project_infos == NULL)
 $project_name =  $project_infos['title'];
 $project_desc =  $project_infos['description'];
 $product_owner_id =  $project_infos['product_owner'];
+$project_creator = $project_infos['creator'];
 
-$isCreator = ($project_infos['creator'] == $_SESSION['id']);
-$isProductOwner = ($project_infos['product_owner'] == $_SESSION['id']);
+$isCreator = ($project_creator == $_SESSION['id']);
+$isProductOwner = ($product_owner_id == $_SESSION['id']);
 $isMember = ($project_infos['creator'] == $_SESSION['id']);
 
 if(!$isCreator)

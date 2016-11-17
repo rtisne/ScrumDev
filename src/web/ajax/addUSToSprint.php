@@ -12,13 +12,6 @@ if(isset($_GET['idUS']) && isset($_GET['idSprint'])){
     //print query_to_json($search_sql);
 }
 
-function add_user_story_to_sprint_in_db($values){
-    $user_story_columns =  array_keys($values);
-    $user_story_values = array_values($values);
-    return execute_query(create_insert_sql("user_story_in_sprint",$user_story_columns),$user_story_values);
-
-}
-
 function getSprintUS($id_sprint, $id_us) {
     $sql_query = "SELECT * FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint AND user_story_in_sprint.user_story=$id_us";
     return fetch_all($sql_query);

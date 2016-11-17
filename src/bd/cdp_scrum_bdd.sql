@@ -38,7 +38,6 @@ CREATE TABLE cdp_scrum_bdd.sprint (
 
 CREATE TABLE cdp_scrum_bdd.task (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `number` int(11) NOT NULL,
   `title` text NOT NULL,
   `description` text,
   `state` int(11) NOT NULL,

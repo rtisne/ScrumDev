@@ -10,9 +10,13 @@
                     <div class="form-group">
                         <label for="developpeur" class="control-label">Liste des US</label>
                         <select class="form-control select_po" name="userstory">
-                            <?php foreach ($allUsersStorys as $userStory): ?>
-                                    <option data-id="<?= $userStory['id'];?>"><?= $userStory['title'];?></option>
-                            <?php endforeach; ?>
+                            <?php foreach ($allUsersStorys as $userStory):
+                                if(!$userStory['is_all']):
+                                ?>
+                                    <option data-id="<?= $userStory['id'];?>" data-number="<?= $userStory['number'];?>"><?= $userStory['title'];?></option>
+                            <?php
+                                endif;
+                            endforeach; ?>
                         </select>
                     </div>
                 </div>

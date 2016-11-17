@@ -352,8 +352,26 @@ function getSprintInfos($id_sprint){
     return $arr;
 }
 
+/**
+ * @param array $values
+ */
+
+function add_user_story_in_db($values){
+    $user_story_columns =  array_keys($values);
+    $user_story_values = array_values($values);
+    return execute_query(create_insert_sql("user_story",$user_story_columns),$user_story_values);
+
+}
+
+function add_user_story_to_sprint_in_db($values){
+    $user_story_columns =  array_keys($values);
+    $user_story_values = array_values($values);
+    return execute_query(create_insert_sql("user_story_in_sprint",$user_story_columns),$user_story_values);
+
+}
+
 function getProjectMembers($id_project){
-    $sql_query = "SELECT * FROM user INNER JOIN member_relations ON  user.id = member_relations.member WHERE member_relations.project='".$id_project."'";
+    $sql_query = "SELECT user.id, user.name, user.first_name, user.email FROM user INNER JOIN member_relations ON  user.id = member_relations.member WHERE member_relations.project='".$id_project."'";
     $arr = perform_query($sql_query);
     return $arr;
 }

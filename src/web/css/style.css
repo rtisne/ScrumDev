@@ -99,3 +99,7 @@ a:hover{
     text-decoration: none;
     cursor:pointer;
 }
+
+.name_implementer{
+    font-size: .8em;
+}
