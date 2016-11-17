@@ -22,45 +22,59 @@ include("addUSToKanban.template.php");
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row" class="text-center">ALL</th>
-                <td>
-                    <!-- <div class="panel panel-default">
-                        <div class="panel-heading text-center">Titre de la tâche fezfez fezfezfezfez fez fez</div>
-                        <div class="panel-body text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </div>
-                    </div> -->
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
             <?php
             foreach ($usersStorys as $us) {
+                if($us['is_all']) {
                 ?>
-                <tr>
-                    <th scope="row" class="text-center">
-                        <div class="popover-markup">
-                             <a class="trigger">US#<?=$us['number'];?></a>
-                             <div class="content hide">
-                                <div class="form-group">
-                                    <p><?=$us['title'];?></p>
+                    <tr id="all" data-id="<?=$us['id'];?>">
+                        <th scope="row" class="text-center">ALL</th>
+                        <td>
+                            <?php foreach ($tasks as $task):?>
+                            <?php if($task["id_us"] == $us['id'] && $task["state"] ==0): ?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading text-center">
+                                    <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block" id="removeUS" data-id="<?=$us['id'];?>">
-                                    Remove
-                                </button>
+                                <div class="panel-body text-center">
+                                    <?= $task['description']; ?>
+                                </div>
                             </div>
+                            <?php endif; ?>
+                            <?php endforeach; ?>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+            <?php
+                }
+            }
 
-                        </div>
-                    </th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            foreach ($usersStorys as $us) {
+                if(!$us['is_all']) {
+                    ?>
+                    <tr data-id="<?=$us['id'];?>">
+                        <th scope="row" class="text-center">
+                            <div class="popover-markup">
+                                 <a class="trigger">US#<?=$us['number'];?></a>
+                                 <div class="content hide">
+                                    <div class="form-group">
+                                        <p><?=$us['title'];?></p>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block" id="removeUS" data-id="<?=$us['id'];?>">
+                                        Remove
+                                    </button>
+                                </div>
 
-                <?php
+                            </div>
+                        </th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <?php
+                }
             }
 
 

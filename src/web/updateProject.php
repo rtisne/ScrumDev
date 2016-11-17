@@ -47,7 +47,7 @@ function remove_members(){
 $project_members_request = getProjectMembers(intval($_GET['id_project']));
 $project_members = array();
 while($row = $project_members_request->fetch_array())
-    array_push($project_members,array("id" => $row['member'], "first_name" => $row['first_name'], "name" => $row['name']));
+    array_push($project_members,array("id" => $row['id'], "first_name" => $row['first_name'], "name" => $row['name']));
 
 $page_title = "Modifier le projet";
 $project_owner = array("id" => $_SESSION['id'], "first_name" => $_SESSION['first_name'], "name" => $_SESSION['name']);

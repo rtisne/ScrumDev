@@ -14,7 +14,7 @@ $usersStorys = getSprintUS(intval($_GET['id_sprint']));
 
 
 function getSprintUS($id_sprint) {
-    $sql_query = "SELECT * FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint";
+    $sql_query = "SELECT user_story.id, user_story.number, user_story.title, user_story.state, user_story.is_all FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint";
     return fetch_all($sql_query);
 }
 

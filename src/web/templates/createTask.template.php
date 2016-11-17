@@ -5,11 +5,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Creer une tâche</h4>
             </div>
-            <form>
+            <form method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="title">Titre de la tâche</label>
-                        <input type="text" class="form-control" id="title" placeholder="Titre">
+                        <input type="text" class="form-control" name="title" placeholder="Titre">
                     </div>
                     <div class="form-group">
                         <label for="detail" class="control-label">Detail</label>
@@ -19,8 +19,16 @@
                     </div>
                     <div class="form-group">
                         <label for="developpeur" class="control-label">Développeur</label>
-                        <select class="form-control select_po" name="product_owner">
-                            <option value="lala">Romain TISNE</option>
+                        <select class="form-control select_dev" name="develop">
+                            <option disabled selected value> -- Selectionner un membre -- </option>
+                            <?php
+                            foreach ($developers as $developer) {
+                                ?>
+                                <option value="<?= $developer['id'] ?>"><?= $developer['first_name'] ?> <?= $developer['name'] ?></option>
+                                <?php
+                            }
+                            ?>
+
                         </select>
                     </div>
                     <div class="form-group">
@@ -29,11 +37,12 @@
                             <ul class="list-group list_member">
                                 <li class="list-group-item">
                                     <div class="dropdown dropdown-input">
-                                        <select class="form-control select_po" name="product_owner">
+                                        <select class="form-control select_task_dependency" name="tasks">
+                                            <option disabled selected value> -- Selectionner une tâche -- </option>
                                             <?php
                                             foreach ($tasks as $task) {
                                                 ?>
-                                                <option value="lala"><?= $task['title'];?></option>
+                                                <option value="<?= $task['id'];?>"><?= $task['title'];?></option>
                                                 <?php
                                             }
                                             ?>

@@ -2,7 +2,7 @@
 include_once('config.php');
 include_once('projectInfos.php');
 
-define("PAGE_DEFAULT_LIMIT", 5);
+define("PAGE_DEFAULT_LIMIT", 20);
 
 
 $user_stories = array();
@@ -43,16 +43,6 @@ function init_backlog(){
     $user_stories = project_backlog_user_stories();
 }
 
-/**
- * @param array $values
- */
-
-function add_user_story_in_db($values){
-    $user_story_columns =  array_keys($values);
-    $user_story_values = array_values($values);
-    execute_query(create_insert_sql("user_story",$user_story_columns),$user_story_values);
-
-}
 
 function backlog_user_stories_by_project_id($project_id){
     // TODO
@@ -79,7 +69,8 @@ function handle_backlog_pagination($page_limit = PAGE_DEFAULT_LIMIT ){
         $page_number = $_GET[$pagination_item];
 
     if(!empty($page_number)){
-        $sql_query = "SELECT * FROM user_story ORDER BY id ASC LIMIT $page_limit OFFSET ". (get_offset($page_number,$page_limit));
+        $id_project = intval($_GET['id_project']);
+        $sql_query = "SELECT * FROM user_story WHERE is_all = 0 AND id_project = $id_project ORDER BY id ASC LIMIT $page_limit OFFSET ". (get_offset($page_number,$page_limit));
         $user_stories = fetch_all($sql_query);
         start_pagination($sql_query,array("num_items_per_page" => $page_limit,"current_page_number" => $page_number , "items" => $user_stories));
     }
