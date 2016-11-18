@@ -43,7 +43,7 @@
             </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary" name="submit" >Valider</button>
+                    <button type="submit" class="btn btn-primary" name="submit" value="create">Valider</button>
                 </div>
             </form>
 

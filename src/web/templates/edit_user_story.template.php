@@ -1,17 +1,15 @@
 <div class="modal fade" id="edit_user_story" tabindex="-1" role="dialog" aria-labelledby="edit_user_story" aria-hidden="true">
     <div class="modal-dialog">
+        <form action="" method="post">
+
         <div class="modal-content">
+
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                <h4 class="modal-title custom_align" id="Heading">Modification de la user story</h4>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="detail" class="control-label"></label>
-                    <div>
-                        <input type="number" class="form-control" name="number" min="1" value= $story["number"]>>
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <label for="title">Titre de la user story</label>
                     <input type="text" class="form-control" name="title" value="">
@@ -41,11 +39,25 @@
                         </div>
                     </div>
                 <?php endif; ?>
+                <!-- when user story is done -->
+                <?php if(0): ?>
+
+                <div class="form-group">
+                    <label for="detail" class="control-label">Commit</label>
+                    <input type="text" class="form-control" name="title" value="">
+
+                </div>
+                <?php endif; ?>
+                <input type='hidden' class="user_story_selected" name="number" value="">
+
             </div>
             <div class="modal-footer ">
-                <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                <button type="submit" class="btn btn-warning btn-lg" name="submit" value="update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
             </div>
+
         </div>
+        </form>
+
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->

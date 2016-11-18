@@ -6,11 +6,15 @@ $user_stories = array();
 
 $tab="backlog";
 
-if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']))
+if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "create") )
     project_backlog();
 
 if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "delete"))
     project_backlog_item_delete();
+
+if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "update"))
+    project_backlog_item_update();
+
 
 function project_backlog_user_stories(){
     $user_stories = backlog_user_stories();
@@ -77,6 +81,31 @@ function project_backlog_item_delete(){
     }
 }
 
+
+function project_backlog_item_update(){
+    extract($_POST);
+    if (!empty($title) &&
+        !empty($number) &&
+        !empty($description)) {
+        $safe_values = array( "title" => $title , "description" => $description, "is_all"  => 0 , "number" => $number, "id_project" => intval($_GET['id_project']));
+        if(!empty($cost))
+            $safe_values["cost"] = intval($cost);
+        if(!empty($priority))
+            $safe_values["priority"] = intval($priority);
+        (!empty($state)) ? $safe_values["state"] = intval($state) : $safe_values["state"] = 0 ;
+        update_user_story_in_db($safe_values);
+
+    }
+}
+
+function update_user_story_in_db($values){
+    $user_story_columns =  array_keys($values);
+    $user_story_values = array_values($values);
+    $user_story_values["id"] = user_story_id_by_number($_POST["number"]);
+
+    execute_query(create_update_sql("user_story",$user_story_columns),$user_story_values);
+
+}
 function user_story_id_by_number($user_story_number){
     $sql_query = "SELECT user_story.id FROM user_story WHERE is_all = 0 AND user_story.number = $user_story_number ";
     return fetch_all($sql_query);
