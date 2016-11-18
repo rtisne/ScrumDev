@@ -131,7 +131,7 @@ function handle_backlog_pagination($page_limit = DEFAULT_PAGE_LIMIT ){
         $user_stories = fetch_all($sql_query);
         if(empty($user_stories))
             return;
-        $total_items = fetch_first("SELECT COUNT(*) as total FROM user_story WHERE id_project=$project_id")["total"];
+        $total_items = fetch_first("SELECT COUNT(*) as total FROM user_story WHERE is_all = 0 AND id_project=$project_id")["total"];
 
         start_pagination(array("num_items_per_page" => $page_limit,"current_page_number" => $page_number , "items" => $user_stories, "total_items" => $total_items));
 
