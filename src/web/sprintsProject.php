@@ -4,8 +4,13 @@ include_once('projectInfos.php');
 
 $sprints = ListSprints();
 
+$test = print_US_progression_sprint(1);
+var_dump($test);
+
 if(isset($_POST['submit']) && $isMember)
     createSprint();
+
+
 
 function createSprint() {
     extract($_POST);
@@ -64,5 +69,42 @@ function get_number_sprint($id_project){
   $sql_query = "SELECT COUNT(*) as num FROM sprint WHERE sprint.id_project=$id_project ";
   return fetch_first($sql_query);
 }
+
+function get_pourcentage_US_down($id_sprint){
+  $sql_query = "SELECT COUNT(*) as num  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint";
+  $res = fetch_first($sql_query);
+  $total = intval($res["num"]);
+
+  $sql_query = "SELECT COUNT(*) as num  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint AND user_story.state = 1";
+  $res = fetch_first($sql_query);
+  $down = intval($res["num"]);
+
+  return ($down*100)/$total;
+
+}
+
+function get_nb_US($id_sprint){
+
+  $sql_query = "SELECT COUNT(*) as num  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint";
+  $res = fetch_first($sql_query);
+  return intval($res["num"]);
+
+}
+
+function get_nb_US_down($id_sprint){
+
+  $sql_query = "SELECT COUNT(*) as num  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint AND user_story.state = 1";
+  $res = fetch_first($sql_query);
+  return intval($res["num"]);
+}
+
+
+function print_US_progression_sprint($id_sprint)
+{
+  return get_nb_US_down($id_sprint)."/".get_nb_US($id_sprint)." US finies";
+}
+
+
+
 
 ?>
