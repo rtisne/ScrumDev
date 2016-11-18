@@ -35,7 +35,6 @@ include ("edit_user_story.template.php");
         <tbody> 
             <?php foreach ($user_stories as $story) : ?>
                 <tr>
-
                     <td scope="row backlog_item" class="text-center"><?php echo $story["number"] ?></td> 
                     <td><?php echo $story["title"] ?></td> 
                     <td class="text-center"><?php echo $story["cost"] ?></td> 

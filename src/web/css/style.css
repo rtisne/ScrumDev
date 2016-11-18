@@ -103,3 +103,26 @@ a:hover{
 .name_implementer{
     font-size: .8em;
 }
+
+.invisible_link {
+    text-decoration: none;color: inherit;
+}
+
+
+.margin-bottom{
+    margin-bottom: 5px;
+}
+
+.equal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.equal > div[class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-equal {
+    height: 100%;
+}

@@ -26,7 +26,7 @@ if(!isset($_SESSION['id'])) {
         $project_members_request = getProjectMembers(intval($_GET['id_project']));
         $project_members = array();
         while($row = $project_members_request->fetch_array())
-            if($row['member'] == $_SESSION['id'] )
+            if($row['id'] == $_SESSION['id'] )
                 $isMember = true;
     }
 }

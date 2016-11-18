@@ -2,6 +2,7 @@
 if($isMember) {
     include("createTask.template.php");
     include("addUSToKanban.template.php");
+    include("updateTask.template.php");
 }
 
 ?>
@@ -40,8 +41,15 @@ if($isMember) {
                             <?php if($task["id_us"] == $us['id'] && $task["state"] ==0): ?>
                             <div class="panel panel-default">
                                 <div class="panel-heading text-center">
-                                    <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
+                                    <?php if($isMember): ?>
+                                    <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php endif; ?>
+                                        <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
+                                    <?php if($isMember): ?>
+                                    </a>
+                                    <?php endif; ?>
                                 </div>
+
                                 <div class="panel-body text-center">
                                     <?= $task['description']; ?>
                                 </div>
