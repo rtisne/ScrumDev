@@ -75,11 +75,10 @@ function user_story_is_not_assigned_to_srpint($user_story_id){
 function project_backlog_item_delete(){
     $user_story_id = $_POST["user_story_id"];
     if(!empty($user_story_id)){
-        $result = user_story_id_by_id($user_story_id);
-        if(!empty($result))
-            delete_user_story_from_backlog_using_id($result[0]["id"]);
+            delete_user_story_from_backlog_using_id($user_story_id);
     }
     header("Refresh:0");
+
 }
 
 
