@@ -5,7 +5,6 @@ include_once('projectInfos.php');
 $sprints = ListSprints();
 
 $test = print_US_progression_sprint(1);
-var_dump($test);
 
 if(isset($_POST['submit']) && $isMember)
     createSprint();

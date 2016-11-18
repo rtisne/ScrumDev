@@ -52,7 +52,8 @@
 
             </div>
             <div class="modal-footer ">
-                <button type="submit" class="btn btn-primary  btn-lg" name="submit" value="update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" name="submit" class="btn btn-primary" name="submit" value="update">Modifier</button>
             </div>
 
         </div>
@@ -62,4 +63,3 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-
