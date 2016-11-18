@@ -142,7 +142,7 @@ function handle_backlog_pagination($page_limit = DEFAULT_PAGE_LIMIT ){
 }
 
 function get_number_us($id_project){
-  $sql_query = "SELECT COUNT(*) as num FROM user_story WHERE user_story.id_project=$id_project ";
+  $sql_query = "SELECT COUNT(*) as num FROM user_story WHERE user_story.id_project=$id_project AND is_all = 0";
   return fetch_first($sql_query);
 }
 
