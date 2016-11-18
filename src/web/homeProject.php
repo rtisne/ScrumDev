@@ -9,6 +9,9 @@ $desc_project = get_description_project($_GET['id_project']);
 $date_actual = date("Y-m-d");
 $sprint = get_actual_sprint($_GET['id_project'],$date_actual);
 
+$project_creator = get_creator_project($_GET['id_project']);
+$product_owner = get_PO_project($_GET['id_project']);
+$list_member = ListMember();
 
 
 
@@ -17,8 +20,35 @@ include("templates/projectHeader.template.php");
 include("templates/homeProject.template.php");
 include("templates/footer.template.php");
 
+function ListMember() {
 
+	$id_project = intval($_GET['id_project']);
 
+    $res = get_all_member($id_project);
+
+   	$res_f = [];
+   	$i = 0;
+   foreach ($res as $r) {
+   			$res_f[$i] = array("name" => $r["name"],"first_name" => $r["first_name"],"email" => $r["email"]);
+    		$i = $i +1;
+	}
+    return $res_f;
+}
+
+function get_all_member($id_project){
+    $sql_query = "SELECT * FROM user INNER JOIN member_relations ON  user.id = member_relations.member WHERE member_relations.project='".$id_project."'";
+		return fetch_all($sql_query);
+}
+
+function get_creator_project($id_project){
+    $sql_query = "SELECT * FROM user JOIN project ON user.id = project.creator WHERE project.id=$id_project";
+	return fetch_first($sql_query);
+}
+
+function get_PO_project($id_project){
+    $sql_query = "SELECT * FROM user JOIN project ON user.id = project.product_owner WHERE project.id=$id_project";
+	return fetch_first($sql_query);
+}
 
 function get_description_project($id_project){
     $sql_query = "SELECT description FROM project WHERE project.id=$id_project";
