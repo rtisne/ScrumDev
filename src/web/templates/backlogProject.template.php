@@ -1,5 +1,7 @@
 <?php
 include("createUserStory.template.php");
+include ("delete_user_story.template.php");
+include ("edit_user_story.template.php");
 ?>
 <h2>Backlog<button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target="#createUSmodal"><a href="#">Creer une UserStory</a></button></h2>
     <table class="table table-bordered">
@@ -19,6 +21,8 @@ include("createUserStory.template.php");
                 <th class="text-center">Priorité</th>
                 <th class="text-center">Etat</th>
                 <th class="text-center">Commit</th>
+                <th class="text-center" colspan="2"> </th>
+
             </tr>
         </thead>
 
@@ -32,6 +36,9 @@ include("createUserStory.template.php");
                     <td class="text-center"><?php echo $story["priority"] ?></td> 
                     <td class="text-center"><?=  ($story["state"])? "Finie" : "En cours"; ?></td> 
                     <td class="text-center"><?php echo "" ?></td>
+                    <td><p class="pull-right" data-id="<?php echo $story["number"] ?>" data-toggle="tooltip" title="Edit"><button class="backlog_management btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit_user_story" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                    <td><p id="backlog_story_values" data-placement="top" data-id="<?php echo json_encode($story) ?>" data-toggle="tooltip" title="Delete"><button class="backlog_management btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete_user_story" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+
 
                 </tr>
             <?php endforeach; ?>

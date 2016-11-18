@@ -9,6 +9,8 @@ $tab="backlog";
 if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']))
     project_backlog();
 
+if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "delete"))
+    project_backlog_item_delete();
 
 function project_backlog_user_stories(){
     $user_stories = backlog_user_stories();
@@ -41,16 +43,47 @@ function init_backlog(){
 }
 
 
-function backlog_user_stories_by_project_id($project_id){
-    // TODO
+function delete_user_story_from_backlog_using_id($user_story_id){
+
     $sql_query = "";
+    if(!user_story_has_empty_task($user_story_id))  $sql_query .= "DELETE FROM task  WHERE id_us = $user_story_id;";
+    if(!user_story_is_not_assigned_to_srpint($user_story_id)) $sql_query .= "DELETE FROM user_story_in_sprint WHERE user_story = $user_story_id ;";
+    if(!user_story_not_found($user_story_id)) $sql_query .= "DELETE FROM user_story WHERE id = $user_story_id;";
+    var_dump($sql_query);
+    if(!empty($sql_query))
+        $GLOBALS["database"]->multi_query($sql_query);
+}
+
+function user_story_not_found($user_story_id){
+    $total_items = fetch_first("SELECT COUNT(*) as total FROM user_story WHERE id=$user_story_id")["total"];
+    return (intval($total_items) == 0);
+}
+
+function user_story_has_empty_task($user_story_id){
+    $total_items = fetch_first("SELECT COUNT(*) as total FROM task WHERE id=$user_story_id")["total"];
+    return (intval($total_items) == 0);
+}
+function user_story_is_not_assigned_to_srpint($user_story_id){
+    $total_items = fetch_first("SELECT COUNT(*) as total FROM user_story_in_sprint WHERE id=$user_story_id")["total"];
+    return (intval($total_items) == 0);
+
+}
+
+function project_backlog_item_delete(){
+    $number = $_POST["number"];
+    var_dump($_POST);
+    if(!empty($number)){
+        $result = user_story_id_by_number($number);
+        if(!empty($result))
+            delete_user_story_from_backlog_using_id($result[0]["id"]);
+    }
+}
+
+function user_story_id_by_number($user_story_number){
+    $sql_query = "SELECT user_story.id FROM user_story WHERE is_all = 0 AND user_story.number = $user_story_number ";
     return fetch_all($sql_query);
 }
 
-
-function backlog_user_stories_by_backlog_id(){
-    // TODO
-}
 handle_backlog_pagination();
 
 /**
