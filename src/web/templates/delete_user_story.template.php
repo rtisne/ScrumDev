@@ -10,8 +10,8 @@
       </div>
           <div class="modal-body">
 
-       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Etes ous sur de vouloir supprimer cette user story?</div>
-              <input type='hidden' class="user_story_selected" name="number" value="">
+       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Etes vous certain de vouloir supprimer cette user story?</div>
+              <input type='hidden' class="user_story_selected" name="user_story_id" value="">
       </div>
 
           <div class="modal-footer ">

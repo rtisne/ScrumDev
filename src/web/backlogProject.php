@@ -73,12 +73,12 @@ function user_story_is_not_assigned_to_srpint($user_story_id){
 }
 
 function project_backlog_item_delete(){
-    $number = $_POST["number"];
-    if(!empty($number)){
-        $result = user_story_id_by_number($number);
-        if(!empty($result))
-            delete_user_story_from_backlog_using_id($result[0]["id"]);
+    $user_story_id = $_POST["user_story_id"];
+    if(!empty($user_story_id)){
+            delete_user_story_from_backlog_using_id($user_story_id);
     }
+    header("Refresh:0");
+
 }
 
 
@@ -106,8 +106,8 @@ function update_user_story_in_db($values){
     execute_query(create_update_sql("user_story",$user_story_columns),$user_story_values);
 
 }
-function user_story_id_by_number($user_story_number){
-    $sql_query = "SELECT user_story.id FROM user_story WHERE is_all = 0 AND user_story.number = $user_story_number ";
+function user_story_id_by_id($user_story_id){
+    $sql_query = "SELECT user_story.id FROM user_story WHERE is_all = 0 AND user_story.id = $user_story_id ";
     return fetch_all($sql_query);
 }
 
