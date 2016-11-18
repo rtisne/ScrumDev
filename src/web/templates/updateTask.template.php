@@ -14,21 +14,16 @@
                     <div class="form-group">
                         <label for="detail" class="control-label">Detail</label>
                         <div>
-                            <textarea class="form-control" rows="5" name="detail" placeholder="Detail" required="required"></textarea>
+                            <textarea class="form-control" rows="5" name="detail" placeholder="Detail" required="required" id="update_form__task_description"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="developpeur" class="control-label">Développeur</label>
-                        <select class="form-control select_dev" name="develop">
+                        <select class="form-control select_dev" name="develop" id="update_form__task_implementer">
                             <option disabled selected value> -- Selectionner un membre -- </option>
-                            <?php
-                            foreach ($developers as $developer) {
-                                ?>
+                                <?php foreach ($developers as $developer): ?>
                                 <option value="<?= $developer['id'] ?>"><?= $developer['first_name'] ?> <?= $developer['name'] ?></option>
-                                <?php
-                            }
-                            ?>
-
+                                <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
@@ -39,13 +34,9 @@
                                     <div class="dropdown dropdown-input">
                                         <select class="form-control select_task_dependency" name="tasks">
                                             <option disabled selected value> -- Selectionner une tâche -- </option>
-                                            <?php
-                                            foreach ($tasks as $task) {
-                                                ?>
+                                            <?php foreach ($tasks as $task): ?>
                                                 <option value="<?= $task['id'];?>"><?= $task['title'];?></option>
-                                                <?php
-                                            }
-                                            ?>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </li>
@@ -53,11 +44,13 @@
                             </ul>
                         </div>
                     </div>
+                    <input  type='hidden' class="task_selected" name="task_id" value="">
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Valider</button>
+                    <button type="submit" class="btn btn-default" value="delete" name="submit">Supprimer</button>
+                    <button type="submit" class="btn btn-primary" value="update" name="submit">Valider</button>
                 </div>
             </form>
         </div>
