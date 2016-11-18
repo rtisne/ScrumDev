@@ -49,7 +49,6 @@ function delete_user_story_from_backlog_using_id($user_story_id){
     if(!user_story_has_empty_task($user_story_id))  $sql_query .= "DELETE FROM task  WHERE id_us = $user_story_id;";
     if(!user_story_is_not_assigned_to_srpint($user_story_id)) $sql_query .= "DELETE FROM user_story_in_sprint WHERE user_story = $user_story_id ;";
     if(!user_story_not_found($user_story_id)) $sql_query .= "DELETE FROM user_story WHERE id = $user_story_id;";
-    var_dump($sql_query);
     if(!empty($sql_query))
         $GLOBALS["database"]->multi_query($sql_query);
 }
@@ -60,18 +59,17 @@ function user_story_not_found($user_story_id){
 }
 
 function user_story_has_empty_task($user_story_id){
-    $total_items = fetch_first("SELECT COUNT(*) as total FROM task WHERE id=$user_story_id")["total"];
+    $total_items = fetch_first("SELECT COUNT(*) as total FROM task WHERE id_us=$user_story_id")["total"];
     return (intval($total_items) == 0);
 }
 function user_story_is_not_assigned_to_srpint($user_story_id){
-    $total_items = fetch_first("SELECT COUNT(*) as total FROM user_story_in_sprint WHERE id=$user_story_id")["total"];
+    $total_items = fetch_first("SELECT COUNT(*) as total FROM user_story_in_sprint WHERE user_story=$user_story_id")["total"];
     return (intval($total_items) == 0);
 
 }
 
 function project_backlog_item_delete(){
     $number = $_POST["number"];
-    var_dump($_POST);
     if(!empty($number)){
         $result = user_story_id_by_number($number);
         if(!empty($result))
@@ -101,8 +99,11 @@ function handle_backlog_pagination($page_limit = DEFAULT_PAGE_LIMIT ){
     if(!empty($page_number)){
         $id_project = intval($_GET['id_project']);
         $sql_query = "SELECT * FROM user_story WHERE is_all = 0 AND id_project = $id_project ORDER BY id ASC LIMIT $page_limit OFFSET ". (get_offset($page_number,$page_limit));
-        $total_items = fetch_first("SELECT COUNT(*) as total FROM user_story WHERE id_project=$project_id")["total"];
         $user_stories = fetch_all($sql_query);
+        if(empty($user_stories))
+            return;
+        $total_items = fetch_first("SELECT COUNT(*) as total FROM user_story WHERE id_project=$project_id")["total"];
+
         start_pagination(array("num_items_per_page" => $page_limit,"current_page_number" => $page_number , "items" => $user_stories, "total_items" => $total_items));
 
     }
