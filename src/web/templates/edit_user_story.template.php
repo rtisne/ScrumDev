@@ -12,47 +12,47 @@
 
                 <div class="form-group">
                     <label for="title">Titre de la user story</label>
-                    <input type="text" class="form-control" name="title" value="">
+                    <input id="update_form__user_story_title" type="text" class="form-control" name="title" value="">
                 </div>
                 <div class="form-group">
                     <label for="detail" class="control-label">Description</label>
                     <div>
-                        <textarea class="form-control" rows="5" name="description" value="" required="required"></textarea>
+                        <textarea id="update_form__user_story_description" class="form-control" rows="5" name="description" value="" required="required"></textarea>
                     </div>
                 </div>
 
                 <?php if($isMember) : ?>
 
-                    <div class="form-group">
+                    <div  class="form-group">
                         <label for="detail" class="control-label">Coût</label>
                         <div>
-                            <input type="number" class="form-control" name="cost" min="1" value="">
+                            <input id="update_form__user_story_cost" type="number" class="form-control" name="cost" min="1" value="">
                         </div>
                     </div>
                 <?php endif; ?>
 
                 <?php if($isProductOwner): ?>
-                    <div class="form-group">
+                    <div  class="form-group">
                         <label for="detail" class="control-label">Priorité</label>
                         <div>
-                            <input type="number" class="form-control" name="priority"  min="1" value="">
+                            <input id="update_form__user_story_priority" type="number" class="form-control" name="priority"  min="1" value="">
                         </div>
                     </div>
                 <?php endif; ?>
                 <!-- when user story is done -->
                 <?php if(0): ?>
 
-                <div class="form-group">
+                <div  class="form-group">
                     <label for="detail" class="control-label">Commit</label>
-                    <input type="text" class="form-control" name="title" value="">
+                    <input id="update_form_user_story_commit" type="text" class="form-control" name="title" value="">
 
                 </div>
                 <?php endif; ?>
-                <input type='hidden' class="user_story_selected" name="number" value="">
+                <input  type='hidden' class="user_story_selected" name="user_story_id" value="">
 
             </div>
             <div class="modal-footer ">
-                <button type="submit" class="btn btn-warning btn-lg" name="submit" value="update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                <button type="submit" class="btn btn-primary  btn-lg" name="submit" value="update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
             </div>
 
         </div>

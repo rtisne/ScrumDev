@@ -85,9 +85,9 @@ function project_backlog_item_delete(){
 function project_backlog_item_update(){
     extract($_POST);
     if (!empty($title) &&
-        !empty($number) &&
+        !empty($user_story_id) &&
         !empty($description)) {
-        $safe_values = array( "title" => $title , "description" => $description, "is_all"  => 0 , "number" => $number, "id_project" => intval($_GET['id_project']));
+        $safe_values = array( "title" => $title , "description" => $description, "is_all"  => 0 , "id_project" => intval($_GET['id_project']));
         if(!empty($cost))
             $safe_values["cost"] = intval($cost);
         if(!empty($priority))
@@ -101,7 +101,7 @@ function project_backlog_item_update(){
 function update_user_story_in_db($values){
     $user_story_columns =  array_keys($values);
     $user_story_values = array_values($values);
-    $user_story_values["id"] = user_story_id_by_number($_POST["number"]);
+    $user_story_values["id"] = $_POST["user_story_id"];
 
     execute_query(create_update_sql("user_story",$user_story_columns),$user_story_values);
 
