@@ -5,7 +5,7 @@ include_once('projectInfos.php');
 if(!$isCreator)
     header("Location: " . get_base_url() . "index.php");
 
-if(isset($_POST['submit']))
+if(isset($_POST['submit']) && $isCreator)
     updateProject();
 
 function updateProject() {

@@ -80,7 +80,7 @@ th, td, .desc_sprint {
     font-size: 1.1em;
 }
 
-.kanban tr:last-child td{
+.kanban .addUSRow td{
     border-left: 0px;
     border-right: 0px;
 }

@@ -1,8 +1,15 @@
 <?php
-include("createTask.template.php");
-include("addUSToKanban.template.php");
+if($isMember) {
+    include("createTask.template.php");
+    include("addUSToKanban.template.php");
+}
+
 ?>
-<h2 data-id="<?=intval($sprint_id);?>"><?=$sprint_name;?><button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target="#createTaskmodal"><a href="#">Creer une nouvelle tâche</a></button></h2>
+<h2 data-id="<?=intval($sprint_id);?>"><?=$sprint_name;?>
+    <?php if($isMember): ?>
+    <button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target="#createTaskmodal"><a href="#">Creer une nouvelle tâche</a></button>
+    <?php endif; ?>
+</h2>
 <div class="panel panel-default">
     <table class="table table-bordered kanban">
         <colgroup>
@@ -79,6 +86,7 @@ include("addUSToKanban.template.php");
 
 
             ?>
+            <?php if($isMember): ?>
             <tr class="addUSRow">
                 <th class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUSToKanbanmodal"><span class="glyphicon glyphicon-plus"></span></button></th>
                 <td class="active"></td>
@@ -86,6 +94,7 @@ include("addUSToKanban.template.php");
                 <td class="active"></td>
                 <td class="active"></td>
             </tr>
+            <?php endif; ?>
         </tbody>
     </table>
 </div>

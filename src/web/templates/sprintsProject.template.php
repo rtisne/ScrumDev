@@ -1,7 +1,11 @@
 <?php
 include("createSprint.template.php");
 ?>
-<h2>Sprints<button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target="#createSprintmodal"><a href="#">Creer un nouveau sprint</a></button></h2>
+<h2>Sprints
+    <?php if($isMember): ?>
+    <button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target="#createSprintmodal"><a href="#">Creer un nouveau sprint</a></button>
+    <?php endif; ?>
+</h2>
 <div class="panel panel-default">
     <table class="table table-bordered">
         <colgroup>
@@ -47,9 +51,11 @@ foreach ($sprints as $sprint) {
 
                             </div>
                         </div>
+                        <?php if($isMember): ?>
                         <div class="col-md-2 desc_sprint pull-right">
-                                <a href="<?= get_base_url() . "deleteSprint.php?id_project=" . intval($_GET['id_project']) . "&id_sprint=" . $sprint['id'];?>" class="btn btn-primary btn-block" >Remove</a>
+                                <a href="<?= get_base_url() . "deleteSprint.php?id_project=" . intval($_GET['id_project']) . "&id_sprint=" . $sprint['id'];?>" class="btn btn-primary btn-block" >Supprimer</a>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </td>
             </tr>
