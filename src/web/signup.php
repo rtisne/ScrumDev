@@ -1,6 +1,8 @@
 <?php
 include_once("config.php");
 
+if(get_session_var("id"))
+    header("Location: " . get_base_url() . "listProjects.php");
 
 if(isset($_POST['submit']))
     signup();

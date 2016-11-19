@@ -5,7 +5,8 @@ include_once("config.php");
 
 $csrf_token = null;
 
-
+if(get_session_var("id"))
+    header("Location: " . get_base_url() . "listProjects.php");
 
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' &&
