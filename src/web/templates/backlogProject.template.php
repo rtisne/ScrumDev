@@ -3,11 +3,11 @@ include("createUserStory.template.php");
 include ("delete_user_story.template.php");
 include ("edit_user_story.template.php");
 ?>
-<h2>Backlog
-    <?php if($isMember): ?>
-    <button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target="#createUSmodal"><a href="#">Creer une UserStory</a></button>
-    <?php endif; ?>
-</h2>
+    <h2>Backlog <?php if($isMember): ?>
+            <button type="button" class="pull-right btn btn-primary" data-toggle="modal" data-target="#createUSmodal"><a href="#">Creer une UserStory</a></button>
+        <?php endif; ?></h2>
+
+
     <table class="table table-bordered">
         <colgroup>
             <col class="col-xs-1">

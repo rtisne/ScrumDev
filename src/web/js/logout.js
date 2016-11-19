@@ -4,7 +4,9 @@ $("#logout_link").click(function() {
 		type: "POST",
 		url: get_absolute_path().concat('/signin.php'),
 		success: function(){
-			window.location.reload();
+			window.setTimeout(function(){
+				window.location.href = get_absolute_path().concat("/index.php");
+			},2);;
 		}
 	});
 });
