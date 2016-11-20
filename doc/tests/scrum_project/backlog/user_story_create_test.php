@@ -9,7 +9,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
 
   public function testMyTestCase()
   {
-    $this->open("/ScrumDev/src/web/backlogProject.php?id_project=3");
+    $this->assertTrue((bool)preg_match('/http:\/\/localhost\/ScrumDev\/src\/web\/backlogProject.php\?id_project=+[1-9]/',$this->getLocation()));
     $this->click("xpath=(//button[@type='button'])[7]");
     $this->type("name=title", "En tant que membre je souhaite me désinscrire");
     $this->type("name=description", "Pour raison de sécurité");
@@ -17,7 +17,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->type("name=priority", "14");
     $this->click("name=submit");
     $this->waitForPageToLoad("30000");
-    $this->assertTrue((bool)preg_match('/^http:\/\/localhost\/ScrumDev\/src\/web\/backlogProject\.php[\s\S]id_project=3$/',$this->getLocation()));
+    $this->assertTrue((bool)preg_match('/http:\/\/localhost\/ScrumDev\/src\/web\/backlogProject.php\?id_project=+[1-9]/',$this->getLocation()));
   }
 }
 ?>
