@@ -70,7 +70,7 @@ define('MAXIMUM_TRIES',100);
                 $random_string .= $alphabet[$random_number];
             }
             $attempt++;
-            ;
+
         } while($unique);
 
         return $random_string;
@@ -85,27 +85,28 @@ define('MAXIMUM_TRIES',100);
 
 function comparison_between_hash($hash_one, $hash_two){
         return (!function_exists('hash_equals')) ? compare_hash($hash_one,$hash_two) : hash_equals($hash_one,$hash_two);
-    }
+}
 
     function compare_hash($str_one, $str_two)
     {
+
         if (!is_string($str_one)) {
-            trigger_error(sprintf("Expected str_one to be a string, %s given", gettype($str1)), E_USER_WARNING);
-            return false;
+            trigger_error(sprintf("Expected str_one to be a string, %s given", gettype($str_one)), E_USER_WARNING);
         }
 
         if (!is_string($str_two)) {
-            trigger_error(sprintf("Expected str_two to be a string, %s given", gettype($str2)), E_USER_WARNING);
-            return false;
+            trigger_error(sprintf("Expected str_two to be a string, %s given", gettype($str_two)), E_USER_WARNING);
         }
 
         if (strlen($str_one) != strlen($str_two)) {
             return false;
-
         } else {
             $res = $str_one ^ $str_two;
             $ret = 0;
-            for ($i = strlen($res) - 1; $i >= 0; $i--) $ret |= ord($res[$i]);
+            for ($i = strlen($res) - 1; $i >= 0; $i--) {
+                $ret |= ord($res[$i]);
+
+            }
             return !$ret;
         }
     }

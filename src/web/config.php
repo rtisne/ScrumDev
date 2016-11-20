@@ -12,7 +12,7 @@ require($GLOBALS['base'] . "/helpers/timer.php");
 require($GLOBALS['base'] . "/helpers/token_generator.php");
 require($GLOBALS['base'] . "/helpers/csrf_token_manager.php");
 require($GLOBALS['base'] . "/helpers/pagination_helper.php");
-
+require($GLOBALS['base'] . "/helpers/project_manager.php");
 require($GLOBALS['base'] . "/path.php");
 
 db_connect($GLOBALS['database'], false);

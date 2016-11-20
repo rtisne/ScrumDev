@@ -29,8 +29,9 @@ function set_session_vars($vars){
  */
 
 function get_session_var($key){
-    if(!session_has_already_started())
+    if(!session_has_already_started()){
         return;
+    }
     return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
 }
 
@@ -40,8 +41,9 @@ function get_session_var($key){
  * @param $value
  */
 function set_session_var($key, $value){
-    if(!session_has_already_started())
+    if(!session_has_already_started()){
         return;
+    }
     $_SESSION[$key] = $value;
 
 }
@@ -52,8 +54,9 @@ function set_session_var($key, $value){
  * @return mixed the deleted value
  */
 function delete_session_var($key){
-    if(!session_has_already_started())
+    if(!session_has_already_started()){
         return;
+    }
     if (isset($_SESSION[$key])) {
         $value = $_SESSION[$key];
         unset($_SESSION[$key]);
@@ -71,8 +74,10 @@ function delete_session_var($key){
  */
 function has_session_var($key)
 {
-    if(!session_has_already_started())
+    if(!session_has_already_started()){
         return;
+
+    }
     return array_key_exists($key,$_SESSION) && isset($_SESSION[$key]);
 }
 
@@ -82,8 +87,10 @@ function has_session_var($key)
  */
 
 function start_session(){
-    if(session_has_already_started())
+    if(session_has_already_started()){
         return;
+
+    }
     session_name(APP_SESSION_ID);
 
     session_start();
@@ -145,10 +152,12 @@ function set_session_cookies_params($cookie_params = array("lifetime" => APP_COO
                                                             ,"http_only" => APP_COOKIE_HTTP_ONLY ))
 {
     extract($cookie_params);
-    if(isset($lifetime, $path, $domain, $secure, $http_only))
+    if(isset($lifetime, $path, $domain, $secure, $http_only)){
         session_set_cookie_params($lifetime, $path,$domain,$secure ,$http_only);
-    else
+    }
+    else{
         throw new InvalidArgumentException('cookie_params may have the following possible keys : lifetime, path, domain, secure and http_only.');
+    }
 
 }
 
@@ -158,8 +167,9 @@ function set_session_cookies_params($cookie_params = array("lifetime" => APP_COO
  */
 
 function get_num_items_in_session(){
-    if(!session_has_already_started())
+    if(!session_has_already_started()){
         return;
+    }
     return count($_SESSION);
 
 }

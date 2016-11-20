@@ -2,11 +2,13 @@
 include_once('config.php');
 include_once('projectInfos.php');
 
-if(!$isCreator)
+if(!$isCreator){
     header("Location: " . get_base_url() . "index.php");
+}
 
-if(isset($_POST['submit']) && $isCreator)
+if(isset($_POST['submit']) && $isCreator){
     updateProject();
+}
 
 function updateProject() {
     extract($_POST);
@@ -16,11 +18,11 @@ function updateProject() {
         remove_members(intval($_GET['id_project']));
         if(isset($_POST['member'])){
             foreach( $_POST['member'] as $m ) {
-                $values = array("project" => intval($_GET['id_project']) , "member"=>intval($m));
+                $values = array("project" => intval($_GET[GET_ID_PROJECT]) , "member"=>intval($m));
                 add_member_to_project($values);
             }
         }
-        header("Location: " . get_base_url() . "homeProject.php?id_project=" . $_GET['id_project']);
+        header("Location: " . get_base_url() . "homeProject.php?id_project=" . $_GET[GET_ID_PROJECT]);
     }
 }
 
@@ -40,14 +42,16 @@ function add_member_to_project($values){
 }
 
 function remove_members(){
-    $sql_query = "DELETE FROM member_relations WHERE project='".intval($_GET['id_project'])."'";
+    $sql_query = "DELETE FROM member_relations WHERE project='".intval($_GET[GET_ID_PROJECT])."'";
     $arr = perform_query($sql_query);
 }
 
 $project_members_request = getProjectMembers(intval($_GET['id_project']));
 $project_members = array();
-while($row = $project_members_request->fetch_array())
+while($row = $project_members_request->fetch_array()){
     array_push($project_members,array("id" => $row['id'], "first_name" => $row['first_name'], "name" => $row['name']));
+
+}
 
 $page_title = "Modifier le projet";
 $project_owner = array("id" => $_SESSION['id'], "first_name" => $_SESSION['first_name'], "name" => $_SESSION['name']);

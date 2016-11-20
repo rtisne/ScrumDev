@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Check user email using regex
  * @param $email
@@ -31,8 +32,9 @@ function user_credentials_check($credentials){
     // Check user credentials
     $user = user_data_from_db($credentials);
     if(!(user_email_check($credentials["email"]) &&
-        user_password_check($user , $credentials["password"])))
+        user_password_check($user , $credentials["password"]))){
         $user = array();
+    }
     return $user;
 }
 
@@ -48,12 +50,13 @@ function user_data_from_db($criteria = array()){
     $result = null;
     // extract from database
 
-    if(empty($criteria))
+    if(empty($criteria)){
         return array();
+    }
 
-    if(array_key_exists("email",$criteria))
+    if(array_key_exists("email",$criteria)){
         $result = user_data_by_email($criteria["email"]);
-
+    }
     return $result;
 }
 
@@ -65,6 +68,5 @@ function user_data_from_db($criteria = array()){
 
 function user_data_by_email($email){
     $sql_query = 'SELECT * FROM '. "user"." WHERE email='$email'";
-    $arr = fetch_first($sql_query);
-    return $arr;
+    return fetch_first($sql_query);
 }

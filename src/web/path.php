@@ -22,8 +22,9 @@ function absolute_path(){
     $abs_path=substr(__FILE__,0,strrpos(__FILE__,'/'));
     $doc_root=substr($_SERVER['DOCUMENT_ROOT'],strrpos($_SERVER['DOCUMENT_ROOT'], $_SERVER['PHP_SELF']));
     $current_dir=substr($abs_path,strlen($doc_root));
-    if($current_dir != "")
+    if($current_dir != ""){
         (substr($current_dir,-1)!='/') ? $current_dir.='/' : $current_dir;
+    }
     return "/" . $current_dir ;
 }
 
@@ -61,16 +62,20 @@ function check_url_security($url_param){
 function check_query_string_security($query_string){
     foreach ($query_string as $query_string_key => $query_string_value){
         $result = preg_match("/_hash$/",$query_string_key) && check_encoded_value($query_string_key,$query_string_value) ;
-        if(!$result)
+        if(!$result){
             return false;
+
+        }
     }
 
     return true;
 }
 
 function check_encoded_value($query_string_key,$query_string_value){
-    if(!$_SESSION)
-        throw new RuntimeException("Session is not set to check if this url is secure");
+    if(!$_SESSION){
+        trigger_error("Session is not set to check if this url is secure");
+
+    }
     $values = get_session_var("session_" . $query_string_key);
     var_dump($_SESSION);
     $value = $values[$_GET[$query_string_key]] . preg_replace("/_hash$/","",$query_string_key);

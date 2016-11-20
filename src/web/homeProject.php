@@ -4,13 +4,13 @@ include_once('projectInfos.php');
 
 $tab="home";
 
-$desc_project = get_description_project($_GET['id_project']);
+$desc_project = get_description_project($_GET[GET_ID_PROJECT]);
 
 $date_actual = date("Y-m-d");
 $sprint = get_actual_sprint($_GET['id_project'],$date_actual);
 
-$project_creator = get_creator_project($_GET['id_project']);
-$product_owner = get_PO_project($_GET['id_project']);
+$project_creator = get_creator_project($_GET[GET_ID_PROJECT]);
+$product_owner = get_PO_project($_GET[GET_ID_PROJECT]);
 $list_member = ListMember();
 
 

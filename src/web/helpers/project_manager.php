@@ -1,5 +1,7 @@
 <?php
 
+define("GET_ID_PROJECT", "id_project");
+
 function get_all_project_items($id){
     $sql_query = "SELECT * FROM project JOIN member_relations ON project.id = member_relations.project
     				JOIN user ON member_relations.member = user.id WHERE user.id=$id ORDER BY project.title ASC";
@@ -20,8 +22,6 @@ function get_all_project_items($id){
 
     return $rows;
 }
-
-
 
 function get_all_sprint_items($project_id) {
     $sql_query = "SELECT * FROM sprint WHERE sprint.id_project=$project_id ORDER BY sprint.date_start ASC";

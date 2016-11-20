@@ -1,5 +1,8 @@
 <?php
 
+define("MYSQL_EXTENSION","mysql_extension");
+define("DATABASE_SELECTED","database_selected");
+define("MYSQLI", "mysqli");
 /**
  * @param $db
  * @param string $database_name
@@ -11,20 +14,27 @@
 
 function db_connect(&$db, $database_name = null, $mysql_server = null, $mysql_username = null, $mysql_password = null)
 {
-    if(empty($mysql_server))
+    if(empty($mysql_server)){
         $mysql_server = $GLOBALS['hostname'];
 
-    if(empty($mysql_user))
+    }
+
+    if(empty($mysql_user)){
         $mysql_username = $GLOBALS['username'];
 
-    if(empty($mot_de_passe_mysql))
+    }
+
+    if(empty($mot_de_passe_mysql)){
         $mysql_password = $GLOBALS['password'];
 
-    if(empty($database_name))
+    }
+
+    if(empty($database_name)){
         $database_name = $GLOBALS['database_name'];
+    }
 
 
-    if($GLOBALS['mysql_extension'] == 'mysqli') {
+    if($GLOBALS[MYSQL_EXTENSION] == MYSQLI) {
         $port = @ini_get("mysqli.default_port");
         if(empty($port)) {
             // default port
@@ -32,34 +42,30 @@ function db_connect(&$db, $database_name = null, $mysql_server = null, $mysql_us
         }
         $server = explode(':',$mysql_server);
 
-        if(isset($GLOBALS['site_parameters']['use_database_permanent_connection']) && ($GLOBALS['site_parameters']['use_database_permanent_connection'] === true || ($GLOBALS['site_parameters']['use_database_permanent_connection'] == 'local' && (strpos($GLOBALS['wwwroot'], '://localhost')!==false || strpos($GLOBALS['wwwroot'], '://127.0.0.1')!==false)))) {
-            // Use  pconnect for optimization
 
-            $db = mysqli_connect('p:'.$server[0], $mysql_username, $mysql_password, '', $port);
-        } else {
-            $db= mysqli_connect($server[0], $mysql_username, $mysql_password, '', $port);
-        }
+        $db= mysqli_connect($server[0], $mysql_username, $mysql_password, '', $port);
+
 
     } else {
         // If someone use a very very old version of PHP
         $db = mysql_connect($mysql_server, $mysql_username, $mysql_password);
     }
     if(!empty($database_name)) {
-        $GLOBALS['database_selected'] = _select_db($database_name, $db);
+        $GLOBALS[DATABASE_SELECTED] = _select_db($database_name, $db);
     }
     return $db;
 }
 
 function _select_db($db_name,&$db_instance)
 {
-    if ($GLOBALS['mysql_extension'] == 'mysqli') {
-        $GLOBALS['database_selected'] = $db_instance->select_db($db_name);
+    if ($GLOBALS['mysql_extension'] == MYSQLI) {
+        $GLOBALS[DATABASE_SELECTED] = $db_instance->select_db($db_name);
 
     }else{
-        $GLOBALS['database_selected'] = mysql_select_db($db_name, $db_instance);
+        $GLOBALS[DATABASE_SELECTED] = mysql_select_db($db_name, $db_instance);
 
     }
-    return $GLOBALS['database_selected'];
+    return $GLOBALS[DATABASE_SELECTED];
 }
 
 
@@ -80,8 +86,11 @@ function perform_query($sql_query ,$db = null, $silent_if_error = false, $sql_fi
 
     // throw malicious queries
 
-    if ($sql_filter && (strpos(strtolower($sql_query), 'information_schema') !== false || strpos(strtolower($sql_query), 'loadfile') !== false || strpos(strtolower($sql_query), 'union all') !== false) || strpos(strtolower($sql_query), 'benchmark(') !== false) {
-        return false;
+    if ($sql_filter && (strpos(strtolower($sql_query), 'information_schema') !== false || strpos(strtolower($sql_query), 'loadfile') !== false)){
+
+        return (false || strpos(strtolower($sql_query), 'union all') !== false || strpos(strtolower($sql_query), 'benchmark(') !== false) ;
+
+
     }
 
     if (empty($db)) {
@@ -103,7 +112,7 @@ function perform_query($sql_query ,$db = null, $silent_if_error = false, $sql_fi
                 }
                 db_connect($db);
 
-            }elseif($error_number == 1364 && String::strpos($sql_query, 'sql_mode') === false) {
+            }else if($error_number == 1364 && String::strpos($sql_query, 'sql_mode') === false) {
             set_configuration_variable(array('technical_code' => 'mysql_sql_mode_force', 'string' => 'MYSQL40', 'site_id' => 0, 'origin' => 'auto'), true);
 
             query("SET @@session.sql_mode='MYSQL40'");
@@ -115,44 +124,41 @@ function perform_query($sql_query ,$db = null, $silent_if_error = false, $sql_fi
         }
         if (!empty($db)) {
 
-            if ($GLOBALS['mysql_extension'] == 'mysqli') {
+            if ($GLOBALS[MYSQL_EXTENSION] == MYSQLI) {
 
-                    if ($silent_if_error) {
-                        $query_values = @$db->query($sql_query);
-
-                    } else {
-                        $query_values = $db->query($sql_query);
-                    }
+                if ($silent_if_error) {
+                    $query_values = @$db->query($sql_query);
                 } else {
-                    if ($silent_if_error) {
-                        $query_values = @mysql_query($sql_query, $db);
-                    } else {
-                        $query_values = mysql_query($sql_query, $db);
-                    }
+                    $query_values = $db->query($sql_query);
                 }
+            } else {
+
+                if ($silent_if_error) {
+                    $query_values = @mysql_query($sql_query, $db);
+                } else {
+                    $query_values = mysql_query($sql_query, $db);
+                }
+            }
 
         }
 
         if (empty($query_values) && !empty($database_object)) {
 
-                if ($GLOBALS['mysql_extension'] == 'mysqli') {
+                if ($GLOBALS[MYSQL_EXTENSION] == 'mysqli') {
                     $error_number = $db->errno;
-                    $error_name = $db->error;
                 } else {
                     $error_number = mysql_errno($db);
-                    $error_name = mysql_error($db);
                 }
-            }
-            $i++;
-            if ($i >= 2) {
-                break;
-            }
-
-            if (!empty($query_values)) {
-                return $query_values;
-            }
+        }
+        $i++;
+        if ($i >= 2) {
+            break;
         }
 
+        if (!empty($query_values)) {
+            return $query_values;
+        }
+    }
 
 }
 
@@ -173,22 +179,27 @@ function execute_query($sql_query, $values = array()){
     $stmt = $db->prepare($sql_query);
     $types = '';
     foreach($values as $k => $v) {
-        if (is_string($v)) $types .= 's';
-        else if (is_integer($v)) $types .= 'i';
-        else $types .= 'd';
+        if (is_string($v)){
+            $types .= 's';
+        }
+        else if (is_integer($v)){
+            $types .= 'i';
+        }else{
+            $types .= 'd';
+
+        }
     }
     if (strnatcmp(phpversion(),'5.3') >= 0) //Reference is required for PHP 5.3+
     {
         $ref_values = array();
-        foreach($values as $key => $value)
+        foreach($values as $key => $value){
             $ref_values[$key] = &$values[$key];
-
+        }
     }
     $func_arr = array_merge( array($stmt,$types), $ref_values );
     call_user_func_array('mysqli_stmt_bind_param',$func_arr);
     mysqli_stmt_execute($stmt);
-    $status = mysqli_insert_id($db);
-    return $status;
+    return mysqli_insert_id($db);
 }
 
 /**
@@ -199,22 +210,22 @@ function execute_query($sql_query, $values = array()){
  */
 function create_insert_sql($table_name, $columns = null, $insert_sql = null){
 
-    if($insert_sql != null)
+    if($insert_sql != null){
         return $insert_sql;
 
-    if(empty($table_name))
-        $table_name = get_table_name();
+    }
+
+
 
     if (empty($columns)) {
-        $insert_sql = create_insert_sql_identity();
-        return $insert_sql;
+        return create_insert_sql_identity();
     }
 
     $values =array();
     $columns = array_unique($columns);
 
 
-    foreach ($columns as $column) {
+    for ($i = 0; $i < count($columns); ++$i) {
         $placeholder = "?";
         if(isset($GLOBALS['column_fields']) && isset($GLOBALS['column_types'] )){
             $placeholder = '?';
@@ -229,8 +240,6 @@ function create_insert_sql($table_name, $columns = null, $insert_sql = null){
 }
 
 function create_update_sql($table_name, $columns = null){
-    if(empty($table_name))
-        $table_name = get_table_name();
 
     if (empty($columns)) {
         $insert_sql = create_insert_sql_identity();
@@ -244,39 +253,7 @@ function create_update_sql($table_name, $columns = null){
     }
 
     $values = implode(', ', $values);
-    $insert_sql = sprintf('UPDATE %s SET %s WHERE id = ?', $table_name, $values);
-    return $insert_sql;
-}
-
-
-
-
-
-/**
- * @return string
- */
-function get_table_name(){
-    // TODO
-    return "";
-}
-
-/**
- * @return array
- */
-
-function get_all_columns(){
-    // TODO
-    $columns = array();
-
-    $column_query = "";
-    /* Get field information for all fields */
-    if($result = perform_query($column_query)){
-        $fields_info = $result->fetch_fields();
-        foreach ($fields_info as $field_info){
-            $columns[] = $field_info->name;
-        }
-    }
-    return $columns;
+    return sprintf('UPDATE %s SET %s WHERE id = ?', $table_name, $values);
 }
 
 
@@ -319,7 +296,9 @@ function fetch_first($sql_query){
 function fetch_all($sql_query){
     $query = perform_query($sql_query);
     $result = [];
-    if($query == NULL) return [];
+    if($query == NULL){
+        return $result;
+    }
     while($row = $query->fetch_array(MYSQLI_ASSOC))
     {
         $result[] = $row;
@@ -342,14 +321,12 @@ function query_to_json($sql_query){
 
 function getProjectInfos($id_project){
     $sql_query = "SELECT * FROM project WHERE id = ".intval($id_project)."";
-    $arr = fetch_first($sql_query);
-    return $arr;
+    return fetch_first($sql_query);
 }
 
 function getSprintInfos($id_sprint){
     $sql_query = "SELECT * FROM sprint WHERE id = ".intval($id_sprint)."";
-    $arr = fetch_first($sql_query);
-    return $arr;
+    return fetch_first($sql_query);
 }
 
 /**
@@ -372,7 +349,6 @@ function add_user_story_to_sprint_in_db($values){
 
 function getProjectMembers($id_project){
     $sql_query = "SELECT user.id, user.name, user.first_name, user.email FROM user INNER JOIN member_relations ON  user.id = member_relations.member WHERE member_relations.project='".$id_project."'";
-    $arr = perform_query($sql_query);
-    return $arr;
+    return perform_query($sql_query);
 }
 ?>

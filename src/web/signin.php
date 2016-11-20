@@ -5,8 +5,10 @@ include_once("config.php");
 
 $csrf_token = null;
 
-if(get_session_var("id"))
+if(get_session_var("id")){
     header("Location: " . get_base_url() . "listProjects.php");
+
+}
 
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' &&
@@ -15,10 +17,12 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
 }
 
 
-if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']))
+if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit'])){
     user_login();
-else
+}
+else{
     user_token_initialization();
+}
 
 
 
@@ -34,8 +38,9 @@ function user_login(){
     $csrf_token_value = $_POST['token'];
     $csrf_token = array("id" => CSRF_TOKEN."12", "value" => $csrf_token_value);
 
-    if(!is_token_valid($csrf_token))
-        throw new RuntimeException("CSRF attack detected.");
+    if(!is_token_valid($csrf_token)){
+        trigger_error("CSRF attack detected.");
+    }
 
     if (!empty($email) &&
         !empty($password)
@@ -48,8 +53,10 @@ function user_login(){
             set_session_vars($user);
             header("Location: " . get_base_url() . "listProjects.php");
         }
-        else
+        else{
             header("Location: " . get_base_url() . "index.php");
+
+        }
 
     }
 }

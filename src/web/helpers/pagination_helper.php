@@ -3,8 +3,8 @@ define("DEFAULT_PAGINATION", "page");
 define("DEFAULT_RANGE",5);
 define("DEFAULT_PAGE_LIMIT", 5);
 
-$page_count = $start_page =  $end_page = $previous = $next = $current = null;
-$pages_in_range = array();
+$page_count_global = $start_page_global =  $end_page_global = $previous_global = $next_global = $current_global = null;
+$pages_in_range_global = array();
 $pagination_item = DEFAULT_PAGINATION;
 
 
@@ -86,28 +86,36 @@ function pagination_data(array $values, $range = DEFAULT_RANGE )
 }
 
 function assign_varaiables(array $pagination_vars ){
-    global $page_count, $start_page, $end_page, $pages_in_range, $next,  $previous, $current;
+    global $page_count_global, $start_page_global, $end_page_global, $pages_in_range_global, $next_global,  $previous_global, $current_global;
     extract($pagination_vars);
-    $page_count = $page_count;
-    $start_page = $start_page;
-    $end_page = $end_page;
-    $pages_in_range = $pages_in_range;
-    $next = $next;
-    $previous = $previous;
-    $current = $current;
+    if(isset($page_count,$start_page,$end_page,$pages_in_range,$current)){
+        $page_count_global = $page_count;
+        $start_page_global = $start_page;
+        $end_page_global = $end_page;
+        $pages_in_range_global = $pages_in_range;
+       if(isset($previous)){
+           $previous_global = $previous;
+       }
+       if(isset($next)){
+           $next_global = $next;
+
+       }
+        $current_global = $current;
+    }
+
 
 }
 
 function get_number_of_items($items){
-    if(!is_array($items))
+    if(!is_array($items)){
         return 0;
+    }
     count($items);
 }
 
 function start_pagination(array $values){
     // merge all into only one array
     assign_varaiables(pagination_data($values));
-
 }
 
 

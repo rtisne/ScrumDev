@@ -4,19 +4,25 @@ include_once('projectInfos.php');
 include_once('sprintInfos.php');
 
 
-if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "create") && $isMember)
+if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "create") && $isMember){
     createTask();
-if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "delete") && $isMember)
+
+}
+if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "delete") && $isMember){
     deleteTask();
-if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "update") && $isMember)
+
+}
+if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "update") && $isMember){
     updateTask();
+}
 
 function createTask() {
     extract($_POST);
     if (!empty($title) && !empty($detail)) {
         $safe_values = array("title" => $title , "description"=>$detail, "state"=>0, "id_us"=>intval(getAllID(intval($_GET['id_sprint']))['id']));
-        if(!empty($develop))
+        if(!empty($develop)){
             $safe_values["implementer"] = $develop;
+        }
 		$task_id = add_task_in_db($safe_values);
 
         if(isset($_POST['tasks'])){
@@ -38,8 +44,9 @@ function updateTask(){
     if (!empty($title) &&
         !empty($detail)) {
         $safe_values = array("title" => $title , "description"=>$detail, "state"=>0, "id_us"=>intval(getAllID(intval($_GET['id_sprint']))['id']));
-        if(!empty($develop))
+        if(!empty($develop)){
             $safe_values["implementer"] = $develop;
+        }
         update_task_in_db($safe_values);
         remove_dependencies(intval($_POST["task_id"]));
         if(isset($_POST['tasks'])){
@@ -67,7 +74,7 @@ function update_task_in_db($values){
 
 function remove_dependencies($task_id){
     $sql_query = "DELETE FROM task_dependency WHERE task='".$task_id."'";
-    $arr = perform_query($sql_query);
+    return perform_query($sql_query);
 }
 
 function deleteTask(){
@@ -76,7 +83,6 @@ function deleteTask(){
     $arr = perform_query($sql_query);
     $sql_query = "DELETE FROM task WHERE id='".$task_id."'";
     $arr = perform_query($sql_query);
-    var_dump($arr);
     header("Refresh:0");
 }
 
@@ -91,10 +97,10 @@ $ids_us = array();
 foreach ($usersStorys as $userstory) {
     array_push($ids_us, intval($userstory['id']));
 }
-$allUsersStorys = getAllUsersStorys(intval($_GET['id_project']));
+$allUsersStorys = getAllUsersStorys(intval($_GET[GET_ID_PROJECT]));
 $tasks = getTaskForSprint($ids_us);
-$developers = getDevelopers(intval($_GET['id_project']));
-$result = getCreator(intval($_GET['id_project']));
+$developers = getDevelopers(intval($_GET[GET_ID_PROJECT]));
+$result = getCreator(intval($_GET[GET_ID_PROJECT]));
 $creator = array_shift($result);
 array_push($developers, $creator);
 
@@ -121,8 +127,7 @@ function getCreator($id_project) {
 
 function getAllID($id_sprint){
     $sql_query = "SELECT user_story.id FROM user_story JOIN user_story_in_sprint on user_story.id = user_story_in_sprint.user_story WHERE user_story.is_all = 1 AND user_story_in_sprint.sprint = ". $id_sprint."";
-    $arr = fetch_first($sql_query);
-    return $arr;
+    return fetch_first($sql_query);
 }
 
 function add_task_dependency($values) {

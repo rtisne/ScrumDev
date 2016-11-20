@@ -2,11 +2,14 @@
 include_once('config.php');
 
 
-if(!isset($_SESSION['id']))
+if(!isset($_SESSION['id'])){
     header("Location: " . get_base_url() . "index.php");
+}
 
-if(isset($_POST['submit']))
+if(isset($_POST['submit'])){
     ModifAccount();
+
+}
 
 
 
@@ -54,8 +57,7 @@ function update_user_in_db($values){
 
 function getUserInfos($user_id){
     $sql_query = "SELECT * FROM user WHERE id = ".intval($user_id)."";
-    $arr = fetch_first($sql_query);
-    return $arr;
+    return fetch_first($sql_query);
 }
 
 
