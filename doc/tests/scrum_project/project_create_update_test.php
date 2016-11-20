@@ -39,7 +39,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->assertEquals("Product Owner", $this->getText("//div[4]/label"));
     $this->click("name=submit");
     $this->waitForPageToLoad("30000");
-    $this->assertTrue((bool)preg_match('/http:\/\/localhost\/ScrumDev\/src\/web\/homeProject.php\?id_project=*[0-9]/',$this->getLocation()));
+    $this->assertTrue((bool)preg_match('/http:\/\/localhost\/ScrumDev\/src\/web\/homeProject.php\?id_project=+[1-9]/',$this->getLocation()));
     $this->assertTrue($this->isElementPresent("link=Home"));
     $this->assertEquals("Home", $this->getText("link=Home"));
     $this->assertEquals("Description du projet", $this->getText("css=h3.panel-title"));

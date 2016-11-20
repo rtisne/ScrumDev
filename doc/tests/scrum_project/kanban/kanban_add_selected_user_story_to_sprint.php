@@ -16,7 +16,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
     $this->click("css=th.text-center > button.btn.btn-primary");
     $this->assertEquals("Liste des US", $this->getText("css=#addUSToKanbanmodal > div.modal-dialog > div.modal-content > form > div.modal-body > div.form-group > label.control-label"));
     $this->click("id=addUS");
-    $this->assertTrue((bool)preg_match('/http:\/\/localhost\/ScrumDev\/src\/web\/kanban.php\?id_project=+[0-9]\&id_sprint=+[0-9]/',$this->getLocation()));
+    $this->assertTrue((bool)preg_match('/http:\/\/localhost\/ScrumDev\/src\/web\/kanban.php\?id_project=+[1-9]\&id_sprint=+[1-9]/',$this->getLocation()));
     $this->assertTrue($this->isElementPresent("link=regexp:US#[1-9]+$"));
   }
 }

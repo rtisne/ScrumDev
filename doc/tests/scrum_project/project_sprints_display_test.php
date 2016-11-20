@@ -9,7 +9,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase
 
   public function testMyTestCase()
   {
-    $this->open("/ScrumDev/src/web/backlogProject.php?id_project=3");
+    $this->assertTrue((bool)preg_match('/http:\/\/localhost\/ScrumDev\/src\/web\/backlogProject.php\?id_project=+[1-9]/',$this->getLocation()));
     $this->click("link=Sprints");
     $this->waitForPageToLoad("30000");
     $this->assertTrue($this->isElementPresent("xpath=(//button[@type='button'])[3]"));
