@@ -8,7 +8,7 @@ class Example extends PHPUnit_Extensions_Selenium2TestCase
     $this->setBrowserUrl($GLOBALS['serverPath']);
   }
 
-  public function testElements()
+  public function testPage()
   {
       $this->url("signin.php");
       $this->assertEquals("Scrumify", $this->title());

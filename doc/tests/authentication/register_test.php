@@ -1,29 +1,37 @@
 <?php
-class Example extends PHPUnit_Extensions_SeleniumTestCase
+include_once('conf.php');
+class Example extends PHPUnit_Extensions_Selenium2TestCase
 {
-  protected function setUp()
-  {
-    $this->setBrowser("*chrome");
-    $this->setBrowserUrl("http://localhost/");
-  }
+    protected function setUp()
+    {
+        $this->setBrowser("chrome");
+        $this->setBrowserUrl($GLOBALS['serverPath']);
+    }
 
-  public function testMyTestCase()
-  {
-    $this->open("/ScrumDev/src/web/signin.php");
-    $this->click("link=Inscription");
-    $this->waitForPageToLoad("30000");
-    $this->verifyText("css=h2.text-center", "Inscription");
-    $this->assertEquals("Nom", $this->getText("css=label.col-sm-2.control-label"));
-    $this->type("id=last_name", "Visitor");
-    $this->assertEquals("Prenom", $this->getText("//div[2]/label"));
-    $this->type("id=first_name", "visiteur");
-    $this->assertEquals("Email", $this->getText("//div[3]/label"));
-    $this->type("id=email", "visiteur@hotmail.fr");
-    $this->assertEquals("Password", $this->getText("//div[4]/label"));
-    $this->type("id=password", "visiteurScrum");
-    $this->click("name=submit");
-    $this->waitForPageToLoad("30000");
-    $this->assertEquals("http://localhost/ScrumDev/src/web/listProjects.php", $this->getLocation());
-  }
+    public function testPage()
+    {
+        $this->url("signup.php");
+        $this->assertEquals( $this->byCssSelector("h2.text-center")->text(), "Inscription");
+        $this->assertTrue($this->byName('last_name')->size()!=0);
+        $this->assertTrue($this->byName('first_name')->size()!=0);
+        $this->assertTrue($this->byName('email')->size()!=0);
+        $this->assertTrue($this->byName('password')->size()!=0);
+        $this->assertTrue($this->byName('submit')->size()!=0);
+
+    }
+
+    public function testRegister()
+    {
+        $this->url("signup.php");
+        $this->byName('last_name')->value('Dupond');
+        $this->byName('first_name')->value('Jean');
+        $this->byName('email')->value('jeandupond@hotmail.fr');
+        $this->byName('password')->value('password');
+        $this->byName('submit')->click();
+        $this->timeouts()->implicitWait(30000);
+        $this->assertContains('listProjects.php', $this->url());
+        $this->assertEquals( $this->byCssSelector(".nav .dropdown a")->text(), "Dupond Jean");
+    }
+
 }
 ?>

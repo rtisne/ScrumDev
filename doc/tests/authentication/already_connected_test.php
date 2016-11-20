@@ -1,18 +1,17 @@
 <?php
-class Example extends PHPUnit_Extensions_SeleniumTestCase
+include_once('conf.php');
+class Example extends PHPUnit_Extensions_Selenium2TestCase
 {
   protected function setUp()
   {
-    $this->setBrowser("*chrome");
-    $this->setBrowserUrl("http://localhost/");
+      $this->setBrowser("chrome");
+      $this->setBrowserUrl($GLOBALS['serverPath']);
   }
 
   public function testMyTestCase()
   {
-    $this->open("/ScrumDev/src/web/signin.php");
-    $this->assertEquals("http://localhost/ScrumDev/src/web/listProjects.php", $this->getLocation());
-    $this->open("/ScrumDev/src/web/signin.php");
-    $this->assertEquals("http://localhost/ScrumDev/src/web/listProjects.php", $this->getLocation());
+      $this->url("signin.php");
+      $this->assertContains("listProjects.php", $this->getLocation());
   }
 }
 ?>

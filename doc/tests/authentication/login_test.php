@@ -1,25 +1,32 @@
 <?php
-class Example extends PHPUnit_Extensions_SeleniumTestCase
+include_once('conf.php');
+class Example extends PHPUnit_Extensions_Selenium2TestCase
 {
   protected function setUp()
   {
-    $this->setBrowser("*chrome");
-    $this->setBrowserUrl("http://localhost/");
+      $this->setBrowser("chrome");
+      $this->setBrowserUrl($GLOBALS['serverPath']);
   }
 
-  public function testMyTestCase()
+  public function testPage()
   {
-    $this->open("/ScrumDev/src/web/signin.php");
-    $this->type("id=email", "visiteur@hotmail.fr");
-    $this->type("id=password", "visiteurScrum");
-    $this->click("name=submit");
-    $this->waitForPageToLoad("30000");
-    $this->assertEquals("http://localhost/ScrumDev/src/web/listProjects.php", $this->getLocation());
-    $this->assertTrue($this->isElementPresent("link=Scrumify"));
-    $this->assertTrue($this->isElementPresent("link=Visitor visiteur"));
-    $this->assertTrue($this->isElementPresent("link=Paramètre du compte"));
-    $this->assertTrue($this->isElementPresent("id=logout_link"));
-    $this->assertTrue($this->isElementPresent("//button[@type='button']"));
+      $this->url("signin.php");
+      $this->assertEquals( $this->byCssSelector("h2.text-center")->text(), "Connexion");
+      $this->assertTrue($this->byName('email')->size()!=0);
+      $this->assertTrue($this->byName('password')->size()!=0);
+      $this->assertTrue($this->byName('submit')->size()!=0);
+
+  }
+
+  public function testLogin()
+  {
+      $this->url("signin.php");
+      $this->byName('email')->value('jeandupond@hotmail.fr');
+      $this->byName('password')->value('password');
+      $this->byName('submit')->click();
+      $this->timeouts()->implicitWait(30000);
+      $this->assertContains('listProjects.php', $this->url());
+      $this->assertEquals( $this->byCssSelector(".nav .dropdown a")->text(), "Dupond Jean");
   }
 }
 ?>

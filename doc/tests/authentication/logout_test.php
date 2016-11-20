@@ -1,18 +1,24 @@
 <?php
-class Example extends PHPUnit_Extensions_SeleniumTestCase
+include_once('conf.php');
+class Example extends PHPUnit_Extensions_Selenium2TestCase
 {
   protected function setUp()
   {
-    $this->setBrowser("*chrome");
-    $this->setBrowserUrl("http://localhost/");
+      $this->setBrowser('chrome');
+      $this->setBrowserUrl($GLOBALS['serverPath']);
   }
 
-  public function testMyTestCase()
+  public function testLogout()
   {
-    $this->click("link=Visitor visiteur");
-    $this->click("id=logout_link");
-    $this->waitForPageToLoad("30000");
-    $this->assertEquals("http://localhost/ScrumDev/src/web/signin.php", $this->getLocation());
+      $this->url("signin.php");
+      $this->byName('email')->value('jeandupond@hotmail.fr');
+      $this->byName('password')->value('password');
+      $this->byName('submit')->click();
+      $this->timeouts()->implicitWait(30000);
+      $this->byLinkText('Dupond Jean')->click();
+      $this->byId('logout_link')->click();
+      $this->timeouts()->implicitWait(30000);
+      $this->assertContains('signin.php', $this->url());
   }
 }
 ?>
