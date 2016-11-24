@@ -284,6 +284,8 @@ function perform_multiple_queries(...$queries){
 function fetch_first($sql_query){
 
     $query = perform_query($sql_query);
+    if($query == null)
+        return false;
     return $query->fetch_array(MYSQLI_ASSOC);
 
 }
