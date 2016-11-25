@@ -1,36 +1,24 @@
 <?php
+
+
 include_once('config.php');
 include_once('projectInfos.php');
 
+
 $tab="graphs";
 
-$id_project = intval($_GET[GET_ID_PROJECT]);
+include("templates/projectHeader.template.php");
 
+$id_project = intval($_GET[GET_ID_PROJECT]);
 
 $res_attendu =  create_tab_res_attendu($id_project);
 $res_real = create_tab_res_real($id_project);
 
-
-
-
-
 var_dump($res_attendu);
 var_dump($res_real);
 
-
-
-
-include("templates/projectHeader.template.php");
-//include("templates/homeProject.template.php");
+include("templates/graphProject.template.php");
 include("templates/footer.template.php");
-
-
-
-
-
-
-
-
 
 
 function get_number_sprint($id_project){
@@ -87,6 +75,12 @@ function create_tab_res_attendu($id_project)
 	$res_attendu[0] = get_total_effort_project($id_project);
 
 	$tmp = get_res_attendu($id_project);
+  	
+  	foreach ($tmp as $r) {
+
+   		$res_attendu[$r["first_sprint"]] = 0;
+
+	}
 
   	foreach ($tmp as $r) {
    		$res_attendu[$r["first_sprint"]] += $r["cost"];
@@ -113,6 +107,12 @@ function create_tab_res_real($id_project)
 	$res_real[0] = get_total_effort_project($id_project);
 
 	$tmp = get_res_real($id_project);
+
+	foreach ($tmp as $r) {
+
+   		$res_real[$r["first_sprint"]] = 0;
+
+	}
 
   	foreach ($tmp as $r) {
 
