@@ -26,7 +26,7 @@ class Example extends PHPUnit_Extensions_Selenium2TestCase
       $this->byName('submit')->click();
       $this->timeouts()->implicitWait(30000);
       $this->assertContains('listProjects.php', $this->url());
-      $this->assertEquals( $this->byCssSelector(".nav .dropdown a")->text(), "Dupond Jean");
+      $this->assertEquals( $this->byCssSelector('.nav .dropdown a')->text(), 'Dupond Jean');
   }
 }
 ?>
