@@ -14,9 +14,6 @@ $id_project = intval($_GET[GET_ID_PROJECT]);
 $res_attendu =  create_tab_res_attendu($id_project);
 $res_real = create_tab_res_real($id_project);
 
-var_dump($res_attendu);
-var_dump($res_real);
-
 include("templates/graphProject.template.php");
 include("templates/footer.template.php");
 
