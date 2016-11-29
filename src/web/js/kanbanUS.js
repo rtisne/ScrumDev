@@ -27,12 +27,13 @@ function addUS(){
     });
 }
 
-
 function removeUS(){
     var idUS = $(this).data('id');
+    var idSprint = $('h2').data('id');
     var row = $(this).closest('tr');
     $.getJSON(get_absolute_path().concat('/ajax/removeUSToSprint.php'), {
-        idRelation: idUS
+        idUS: idUS,
+        idSprint: idSprint,
     } ,function(data) {
         if(data == 1)
         {
