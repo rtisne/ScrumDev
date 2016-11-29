@@ -41,7 +41,7 @@ include ("edit_user_story.template.php");
                     <td class="text-center"><?php echo $story["cost"] ?></td> 
                     <td class="text-center"><?php echo $story["priority"] ?></td> 
                     <td class="text-center"><?=  ($story["state"])? "Finie" : "En cours"; ?></td> 
-                    <td class="text-center"><?php echo "" ?></td>
+                    <td class="text-center"><?php echo $story["commit"] ?></td>
                     <?php if($isMember): ?>
                     <td><button data-id="<?php echo htmlspecialchars(json_encode($story), ENT_QUOTES, 'UTF-8'); ?>"  class="backlog_management btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit_user_story" ><span class="glyphicon glyphicon-pencil"></span></button></td>
                     <td><button  data-id="<?php echo htmlspecialchars(json_encode(array("id"=> $story["id"])), ENT_QUOTES, 'UTF-8'); ?>"  class="backlog_management btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete_user_story" ><span class="glyphicon glyphicon-trash"></span></button></td>

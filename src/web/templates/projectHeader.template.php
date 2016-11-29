@@ -24,7 +24,7 @@
         <li <?= ($tab=="home")?"class=\"active\"":"";?>><a href="<?= get_base_url() . "homeProject.php?id_project=" . $_GET['id_project']?>"><span class="glyphicon glyphicon-home"></span>  Home</a></li>
         <li <?= ($tab=="backlog")?"class=\"active\"":"";?>><a href="<?= get_base_url() . "backlogProject.php?id_project=" . $_GET['id_project']?>"><span class="glyphicon glyphicon-list-alt"></span>  Backlog</a></li>
         <li <?= ($tab=="sprints")?"class=\"active\"":"";?>><a href="<?= get_base_url() . "sprintsProject.php?id_project=" . $_GET['id_project']?>"><span class="glyphicon glyphicon-calendar"></span>  Sprints</a></li>
-        <li <?= ($tab=="graphs")?"class=\"active\"":"";?>><a href="#"><span class="glyphicon glyphicon-stats"></span>  Graphs</a></li>
+        <li <?= ($tab=="graphs")?"class=\"active\"":"";?>><a href="<?= get_base_url() . "graphsProject.php?id_project=" . $_GET['id_project']?>"><span class="glyphicon glyphicon-stats"></span>  Graphs</a></li>
         <?php if($isCreator){?><li <?= ($tab=="config")?"class=\"active\"":"";?>><a href="<?= get_base_url() . "updateProject.php?id_project=" . $_GET['id_project']?>"><span class="glyphicon glyphicon-cog"></span>  Configuration</a></li><?php } ?>
     </ul>
 </div>
