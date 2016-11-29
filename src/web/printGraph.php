@@ -1,8 +1,9 @@
 <?php
 include ('jpgraph/jpgraph.php');
 include ('jpgraph/jpgraph_line.php');
+include_once ('config.php');
 $id_project = intval($_GET['idProject']);
-
+var_dump($id_project);
 $test_attendu = array(11,7,4,0);
 $test_reel = array(11,8,6,2);
 
