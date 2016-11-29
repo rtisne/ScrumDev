@@ -36,6 +36,7 @@ CREATE TABLE cdp_scrum_bdd.user_story (
   `cost` int(11),
   `priority` int(11),
   `state` int(11) NOT NULL,
+  `commit` text,
   `is_all` BOOLEAN DEFAULT 0,
   `id_project` int(11) NOT NULL,
   FOREIGN KEY (`id_project`) REFERENCES cdp_scrum_bdd.project (id)

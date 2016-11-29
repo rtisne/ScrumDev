@@ -39,15 +39,20 @@
                         </div>
                     </div>
                 <?php endif; ?>
-                <!-- when user story is done -->
-                <?php if(0): ?>
+
+                <div  class="form-group">
+                    <label for="detail" class="control-label">Etat</label>
+                    <div class="checkbox">
+                        <label><input type="checkbox" id="update_form_user_story_state" name="state">Elle a été réalisé</label>
+                    </div>
+                </div>
+
 
                 <div  class="form-group">
                     <label for="detail" class="control-label">Commit</label>
-                    <input id="update_form_user_story_commit" type="text" class="form-control" name="title" value="">
+                    <input id="update_form_user_story_commit" type="text" class="form-control" name="commit" value="" disabled>
 
                 </div>
-                <?php endif; ?>
                 <input  type='hidden' class="user_story_selected" name="user_story_id" value="">
 
             </div>

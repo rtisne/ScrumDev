@@ -110,8 +110,14 @@ function project_backlog_item_update(){
         if(!empty($priority)){
             $safe_values["priority"] = intval($priority);
         }
-
-        (!empty($state)) ? $safe_values["state"] = intval($state) : $safe_values["state"] = 0 ;
+        if(!empty($commit)){
+            $safe_values["commit"] = $commit;
+        }
+        $safe_values["state"] = 1;
+        if(empty($state)) {
+            $safe_values["state"] = 0;
+            $safe_values["commit"] = null;
+        }
         update_user_story_in_db($safe_values);
 
     }
