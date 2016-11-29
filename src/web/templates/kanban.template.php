@@ -12,7 +12,7 @@ if($isMember) {
     <?php endif; ?>
 </h2>
 <div class="panel panel-default">
-    <table class="table table-bordered kanban">
+    <table  id="kanban" class="table table-bordered kanban">
         <colgroup>
             <col class="col-xs-1">
             <col class="col-xs-2">
@@ -39,7 +39,7 @@ if($isMember) {
                         <td>
                             <?php foreach ($tasks as $task):?>
                             <?php if($task["id_us"] == $us['id'] && $task["state"] ==0): ?>
-                            <div class="panel panel-default">
+                            <div id = <?= "task_" . $task["id"]; ?> class="connectedSortable panel panel-default">
                                 <div class="panel-heading text-center">
                                     <?php if($isMember): ?>
                                     <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
