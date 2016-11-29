@@ -1,4 +1,4 @@
-<?php 
+<?php
 include ('jpgraph/jpgraph.php');
 include ('jpgraph/jpgraph_line.php');
 

@@ -16,24 +16,16 @@ CREATE TABLE cdp_scrum_bdd.project (
   `date_available` date NOT NULL,
   `product_owner` int(11) NOT NULL,
   `creator` int(11) NOT NULL,
-  FOREIGN KEY (`product_owner`) REFERENCES cdp_scrum_bdd.user (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE,
+  FOREIGN KEY (`product_owner`) REFERENCES cdp_scrum_bdd.user (id),
   FOREIGN KEY (`creator`) REFERENCES cdp_scrum_bdd.user (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cdp_scrum_bdd.member_relations (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `project` int(11) NOT NULL,
-  FOREIGN KEY (`project`) REFERENCES cdp_scrum_bdd.project (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE,
+  FOREIGN KEY (`project`) REFERENCES cdp_scrum_bdd.project (id),
   `member` int(11) NOT NULL,
    FOREIGN KEY (`member`) REFERENCES cdp_scrum_bdd.user (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cdp_scrum_bdd.user_story (
@@ -47,8 +39,6 @@ CREATE TABLE cdp_scrum_bdd.user_story (
   `is_all` BOOLEAN DEFAULT 0,
   `id_project` int(11) NOT NULL,
   FOREIGN KEY (`id_project`) REFERENCES cdp_scrum_bdd.project (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cdp_scrum_bdd.sprint (
@@ -59,8 +49,6 @@ CREATE TABLE cdp_scrum_bdd.sprint (
   `date_end` date NOT NULL,
   `id_project` int(11) NOT NULL,
   FOREIGN KEY (`id_project`) REFERENCES cdp_scrum_bdd.project (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cdp_scrum_bdd.task (
@@ -71,32 +59,22 @@ CREATE TABLE cdp_scrum_bdd.task (
   `implementer` int(11),
   `id_us` int(11) NOT NULL,
   FOREIGN KEY (`id_us`) REFERENCES cdp_scrum_bdd.user_story (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cdp_scrum_bdd.task_dependency (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `task` int(11) NOT NULL,
-   FOREIGN KEY (`task`) REFERENCES cdp_scrum_bdd.task (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE,
+   FOREIGN KEY (`task`) REFERENCES cdp_scrum_bdd.task (id),
   `depend_to` int(11) NOT NULL,
   FOREIGN KEY (`depend_to`) REFERENCES cdp_scrum_bdd.task (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cdp_scrum_bdd.user_story_in_sprint (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `user_story` int(11) NOT NULL,
-  FOREIGN KEY (`user_story`) REFERENCES cdp_scrum_bdd.user_story (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE,
+  FOREIGN KEY (`user_story`) REFERENCES cdp_scrum_bdd.user_story (id),
   `sprint` int(11) NOT NULL,
   FOREIGN KEY (`sprint`) REFERENCES cdp_scrum_bdd.sprint (id)
-       ON DELETE CASCADE
-       ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
