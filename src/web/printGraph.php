@@ -4,17 +4,44 @@ include ('jpgraph/jpgraph_line.php');
 include_once('config.php');
 
 $id_project = intval($_GET['idProject']);
-$test_attendu = array(11,7,4,0);
-$test_real = array(11,8,6,2);
+
 
 $res_attendu =  create_tab_res_attendu($id_project);
 $res_real = create_tab_res_real($id_project);
 
-//var_dump($test_attendu);
-//var_dump($test_real);
 
-//var_dump($res_attendu);
-//var_dump($res_real);
+
+//Création du tableau Label + mise en forme du tableau attendu
+$i = 1;
+foreach ($res_attendu as $k => $v) {
+
+		$label_sprint[0] = "Initial";
+		$res_attendu_final[0] = $res_attendu[0];
+		
+		if ($k > 0)
+		{
+    		$label = get_name_sprint($k);
+    		$label_sprint[$i] = $label["title"];
+    		$res_attendu_final[$i] = $res_attendu[$k];
+    		$i = $i +1; 
+		}
+}
+
+$i = 1;
+// Mise en forme du tableau real
+foreach ($res_real as $k => $v) {
+
+		$res_real_final[0] = $res_real[0];
+		
+		if ($k > 0)
+		{
+    		$res_real_final[$i] = $res_real[$k];
+    		$i = $i +1; 
+		}
+}
+
+
+
 
 
 // Setup the graph
@@ -36,17 +63,19 @@ $graph->yaxis->HideTicks(false,false);
 
 $graph->xgrid->Show();
 $graph->xgrid->SetLineStyle("solid");
-$graph->xaxis->SetTickLabels(array('Initial','Sprint 1','Sprint 2','Sprint 3'));
+
+$graph->xaxis->SetTickLabels($label_sprint);
+
 $graph->xgrid->SetColor('#E3E3E3');
 
 // Create the first line
-$p1 = new LinePlot($res_attendu);
+$p1 = new LinePlot($res_attendu_final);
 $graph->Add($p1);
 $p1->SetColor("#6495ED");
 $p1->SetLegend('résultat attendu');
 
 // Create the second line
-$p2 = new LinePlot($res_real);
+$p2 = new LinePlot($res_real_final);
 $graph->Add($p2);
 $p2->SetColor("#B22222");
 $p2->SetLegend('résultat reel');
@@ -61,6 +90,11 @@ $graph->Stroke();
 
 function get_number_sprint($id_project){
   $sql_query = "SELECT COUNT(*) as num FROM sprint WHERE sprint.id_project=$id_project ";
+  return fetch_first($sql_query);
+}
+
+function get_name_sprint($id_sprint){
+  $sql_query = "SELECT title FROM sprint WHERE sprint.id=$id_sprint";
   return fetch_first($sql_query);
 }
 
