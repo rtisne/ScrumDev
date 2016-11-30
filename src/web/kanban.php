@@ -77,7 +77,6 @@ function update_task_in_db($values){
     $task_columns =  array_keys($values);
     $task_values = array_values($values);
     $task_values["id"] = isset($_POST["task_id"])?$_POST["task_id"]:$_POST["id"];
-
     execute_query(create_update_sql("task",$task_columns),$task_values);
 
 }
@@ -146,30 +145,31 @@ function add_task_dependency($values) {
     return execute_query(create_insert_sql("task_dependency",$task_dependency_columns),$task_dependency_values);
 }
 
-function get_stories_state(){
-    $sql_query = "";
-    header('Content-Type: application/json');
-    print json_encode($data);
-}
+
 
 function update_task_state(){
     $state = $_POST["state"];
     $user_story = $_POST["user_story_id"];
     $valid_state = ["TODO","DOING","TESTING","DONE"];
-
     if(!empty($state)  && in_array($state,$valid_state)){
         $safe_values = ["state" => array_search($state,$valid_state) , "id_us" => $user_story]; // assume that $valid_state does not contains duplicate items
         update_task_in_db($safe_values);
     }
+
     if(user_story_has_done($user_story)){
         perform_query("UPDATE user_story SET state=1 WHERE id=$user_story");
+
+    }else{
+        perform_query("UPDATE user_story SET state=0 WHERE id=$user_story");
 
     }
 }
 
 function user_story_has_done($user_story_id){
+
     $sql_query = "SELECT state from task WHERE id_us = $user_story_id";
     $all_state = fetch_all($sql_query);
+
     foreach($all_state as $state){
         if($state["state"] != 3){
             return false;
