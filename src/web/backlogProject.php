@@ -20,12 +20,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["
 }
 
 
-function project_backlog_user_stories(){
-    $user_stories = backlog_user_stories();
 
-    return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
-        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') ? json_encode($user_stories) : $user_stories;
-}
 
 function project_backlog(){
     extract($_POST);
@@ -49,10 +44,6 @@ function project_backlog(){
 
 }
 
-function init_backlog(){
-    global $user_stories;
-    $user_stories = project_backlog_user_stories();
-}
 
 
 function delete_user_story_from_backlog_using_id($user_story_id){

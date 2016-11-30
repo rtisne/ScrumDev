@@ -77,7 +77,6 @@ function check_encoded_value($query_string_key,$query_string_value){
 
     }
     $values = get_session_var("session_" . $query_string_key);
-    var_dump($_SESSION);
     $value = $values[$_GET[$query_string_key]] . preg_replace("/_hash$/","",$query_string_key);
     return comparison_between_hash(hmac_base64($value,PROJECT_SECRET_KEY),$query_string_value);
 }
