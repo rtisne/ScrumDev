@@ -78,7 +78,7 @@
 		<div class="panel panel-default panel-equal">
 			<div class="panel-heading"><h3 class="panel-title">BurnDown Chart</h3></div>
 			<div class="panel-body">
-				(sprint 3)
+				<img src="printGraph.php?idProject=<?=$_GET['id_project'];?>">
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,6 @@
 <?php
-include_once('conf.php');
+include_once("conf.php");
+
 class Example extends PHPUnit_Extensions_Selenium2TestCase
 {
   protected function setUp()

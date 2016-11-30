@@ -12,7 +12,7 @@ if($isMember) {
     <?php endif; ?>
 </h2>
 <div class="panel panel-default">
-    <table class="table table-bordered kanban">
+    <table  id="kanban" class="table table-bordered kanban">
         <colgroup>
             <col class="col-xs-1">
             <col class="col-xs-2">
@@ -39,10 +39,10 @@ if($isMember) {
                         <td>
                             <?php foreach ($tasks as $task):?>
                             <?php if($task["id_us"] == $us['id'] && $task["state"] ==0): ?>
-                            <div class="panel panel-default">
+                            <div class="connectedSortable panel panel-default">
                                 <div class="panel-heading text-center">
                                     <?php if($isMember): ?>
-                                    <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
+                                    <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-story="<?php echo htmlspecialchars(json_encode($us), ENT_QUOTES, 'UTF-8'); ?>" data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
                                     <?php endif; ?>
                                         <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
                                     <?php if($isMember): ?>
@@ -57,9 +57,69 @@ if($isMember) {
                             <?php endif; ?>
                             <?php endforeach; ?>
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <?php foreach ($tasks as $task):?>
+                                <?php if($task["id_us"] == $us['id'] && $task["state"] ==1): ?>
+                                    <div class="connectedSortable panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            <?php if($isMember): ?>
+                                            <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-story = "<?php echo htmlspecialchars(json_encode($us), ENT_QUOTES, 'UTF-8'); ?>" data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <?php endif; ?>
+                                                <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
+                                                <?php if($isMember): ?>
+                                            </a>
+                                        <?php endif; ?>
+                                        </div>
+
+                                        <div class="panel-body text-center">
+                                            <?= $task['description']; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </td>
+                        <td>
+                            <?php foreach ($tasks as $task):?>
+                                <?php if($task["id_us"] == $us['id'] && $task["state"] ==2): ?>
+                                    <div class="connectedSortable panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            <?php if($isMember): ?>
+                                            <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-story = "<?php echo htmlspecialchars(json_encode($us), ENT_QUOTES, 'UTF-8'); ?>"  data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <?php endif; ?>
+                                                <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
+                                                <?php if($isMember): ?>
+                                            </a>
+                                        <?php endif; ?>
+                                        </div>
+
+                                        <div class="panel-body text-center">
+                                            <?= $task['description']; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </td>
+                        <td>
+                            <?php foreach ($tasks as $task):?>
+                                <?php if($task["id_us"] == $us['id'] && $task["state"] ==3): ?>
+                                    <div class="connectedSortable panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            <?php if($isMember): ?>
+                                            <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-story = "<?php echo htmlspecialchars(json_encode($us), ENT_QUOTES, 'UTF-8'); ?>" data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <?php endif; ?>
+                                                <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
+                                                <?php if($isMember): ?>
+                                            </a>
+                                        <?php endif; ?>
+                                        </div>
+
+                                        <div class="panel-body text-center">
+                                            <?= $task['description']; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </td>
                     </tr>
             <?php
                 }
@@ -83,10 +143,88 @@ if($isMember) {
 
                             </div>
                         </th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><?php foreach ($tasks as $task):?>
+                                <?php if($task["id_us"] == $us['id'] && $task["state"] ==0): ?>
+                                    <div class="connectedSortable panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            <?php if($isMember): ?>
+                                            <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-story = "<?php echo htmlspecialchars(json_encode($us), ENT_QUOTES, 'UTF-8'); ?>" data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <?php endif; ?>
+                                                <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
+                                                <?php if($isMember): ?>
+                                            </a>
+                                        <?php endif; ?>
+                                        </div>
+
+                                        <div class="panel-body text-center">
+                                            <?= $task['description']; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?></td>
+                        <td>
+                            <?php foreach ($tasks as $task):?>
+                                <?php if($task["id_us"] == $us['id'] && $task["state"] ==1): ?>
+                                    <div class="connectedSortable panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            <?php if($isMember): ?>
+                                            <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-story = "<?php echo htmlspecialchars(json_encode($us), ENT_QUOTES, 'UTF-8'); ?>" data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <?php endif; ?>
+                                                <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
+                                                <?php if($isMember): ?>
+                                            </a>
+                                        <?php endif; ?>
+                                        </div>
+
+                                        <div class="panel-body text-center">
+                                            <?= $task['description']; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </td>
+                        <td>
+                            <?php foreach ($tasks as $task):?>
+                                <?php if($task["id_us"] == $us['id'] && $task["state"] ==2): ?>
+                                    <div class="connectedSortable panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            <?php if($isMember): ?>
+                                            <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-story = "<?php echo htmlspecialchars(json_encode($us), ENT_QUOTES, 'UTF-8'); ?>" data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <?php endif; ?>
+                                                <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
+                                                <?php if($isMember): ?>
+                                            </a>
+                                        <?php endif; ?>
+                                        </div>
+
+                                        <div class="panel-body text-center">
+                                            <?= $task['description']; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </td>
+                        <td>
+                            <?php foreach ($tasks as $task):?>
+                                <?php if($task["id_us"] == $us['id'] && $task["state"] ==3  ): ?>
+                                    <div class="connectedSortable panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            <?php if($isMember): ?>
+                                            <a class="invisible_link task_management" data-toggle="modal" data-target="#updateTaskmodal" data-title="Edit" data-story = "<?php echo htmlspecialchars(json_encode($us), ENT_QUOTES, 'UTF-8'); ?>"  data-id="<?php echo htmlspecialchars(json_encode($task), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <?php endif; ?>
+                                                <?= $task['title']; ?> <?=(!empty($task['implementer']))? "<div class=\"name_implementer text-primary\">" . $task['first_name']. " ". $task['name'] ."</div>":"";?>
+                                                <?php if($isMember): ?>
+                                            </a>
+                                        <?php endif; ?>
+                                        </div>
+
+                                        <div class="panel-body text-center">
+                                            <?= $task['description']; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </td>
                     </tr>
                     <?php
                 }

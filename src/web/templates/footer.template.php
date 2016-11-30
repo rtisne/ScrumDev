@@ -1,15 +1,12 @@
 </div>
-    <script src="js/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="js/helpers.js"> </script>
-    <script type="text/javascript" src="js/createProject.js"> </script>
-    <script type="text/javascript" src="js/kanbanUS.js"> </script>
-    <script type="text/javascript" src="js/kanbanTask.js"> </script>
-    <script type="text/javascript" src="js/logout.js"> </script>
-    <script type="text/javascript" src="js/datepicker.js"></script>
-<script type="text/javascript" src="js/backlog.js"> </script>
+<script type="text/javascript" src="js/helpers.js"> </script>
+<script type="text/javascript" src="js/init.js"> </script>
 
 
 </body>

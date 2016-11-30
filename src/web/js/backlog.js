@@ -1,6 +1,5 @@
 $(document).on("click", ".backlog_management", function () {
     var story = $(this).data('id');
-    console.log(story);
 
     $(".user_story_selected").val( story.id );
     if($(this).data('title').toLowerCase() === "edit" )
@@ -23,6 +22,7 @@ $('#update_form_user_story_state').on("change", function () {
 
 function fill_form_input(story_values){
 
+
     $("#update_form__user_story_title").val(story_values.title);
     $("#update_form__user_story_description").val(story_values.description);
     $("#update_form__user_story_cost").val(story_values.cost);
@@ -37,7 +37,6 @@ function fill_form_input(story_values){
         $("#update_form_user_story_commit").attr( "disabled", true );
         $("#update_form_user_story_commit").val('');
     }
-
 
 
 
