@@ -3,7 +3,7 @@
 		<div class="panel panel-default panel-equal">
 			<div class="panel-heading"><h3 class="panel-title">Description du projet</h3></div>
 
-			<div class="panel-body"><?= $desc_project['description']; ?></div>
+			<div class="panel-body"><?= $project_desc; ?></div>
 		</div>
 	</div>
 

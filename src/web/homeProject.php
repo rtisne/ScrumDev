@@ -4,8 +4,6 @@ include_once('projectInfos.php');
 
 $tab="home";
 
-$desc_project = get_description_project($_GET[GET_ID_PROJECT]);
-
 $date_actual = date("Y-m-d");
 $sprint = get_actual_sprint($_GET['id_project'],$date_actual);
 
@@ -47,11 +45,6 @@ function get_creator_project($id_project){
 
 function get_PO_project($id_project){
     $sql_query = "SELECT * FROM user JOIN project ON user.id = project.product_owner WHERE project.id=$id_project";
-	return fetch_first($sql_query);
-}
-
-function get_description_project($id_project){
-    $sql_query = "SELECT description FROM project WHERE project.id=$id_project";
 	return fetch_first($sql_query);
 }
 
