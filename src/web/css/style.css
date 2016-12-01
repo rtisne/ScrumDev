@@ -130,3 +130,9 @@ a:hover{
 .open-default{
     display: block;
 }
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}

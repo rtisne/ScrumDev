@@ -1,2 +1,3 @@
-
-<img src="printGraph.php?idProject=<?=$_GET['id_project'];?>">
+<div>
+    <img class="displayed" src="printGraph.php?idProject=<?=$_GET['id_project'];?>">
+</div>
