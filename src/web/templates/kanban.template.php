@@ -3,6 +3,7 @@ if($isMember) {
     include("createTask.template.php");
     include("addUSToKanban.template.php");
     include("updateTask.template.php");
+    include("USDonePopup.template.php");
 }
 
 ?>
@@ -34,7 +35,7 @@ if($isMember) {
             foreach ($usersStorys as $us) {
                 if($us['is_all']) {
                 ?>
-                    <tr id="all" data-id="<?=$us['id'];?>">
+                    <tr id="all" data-id="<?php echo htmlspecialchars(json_encode($us), ENT_QUOTES, 'UTF-8'); ?>">
                         <th scope="row" class="text-center">ALL</th>
                         <td>
                             <?php foreach ($tasks as $task):?>
@@ -128,7 +129,7 @@ if($isMember) {
             foreach ($usersStorys as $us) {
                 if(!$us['is_all']) {
                     ?>
-                    <tr data-id="<?=$us['id'];?>">
+                    <tr data-id="<?php echo htmlspecialchars(json_encode($us), ENT_QUOTES, 'UTF-8'); ?>">
                         <th scope="row" class="text-center">
                             <div class="popover-markup">
                                  <a class="trigger">US#<?=$us['number'];?></a>

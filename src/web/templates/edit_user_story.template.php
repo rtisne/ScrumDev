@@ -43,7 +43,7 @@
                 <div  class="form-group">
                     <label for="detail" class="control-label">Etat</label>
                     <div class="checkbox">
-                        <label><input type="checkbox" id="update_form_user_story_state" name="state">Elle a été réalisé</label>
+                        <label><input type="checkbox" id="update_form_user_story_state" name="state">Elle a été réalisée</label>
                     </div>
                 </div>
 

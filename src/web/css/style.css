@@ -126,3 +126,7 @@ a:hover{
 .panel-equal {
     height: 100%;
 }
+
+.open-default{
+    display: block;
+}

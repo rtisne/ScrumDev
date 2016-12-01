@@ -3,7 +3,6 @@ include_once('config.php');
 include_once('projectInfos.php');
 include_once('sprintInfos.php');
 
-
 if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "create") && $isMember){
     createTask();
 
@@ -23,6 +22,11 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["
 
 if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "stories_change_states") && $isMember){
     update_task_state();
+}
+
+
+if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "updateUSState") && $isMember){
+    update_us_state();
 }
 
 
@@ -53,7 +57,7 @@ function updateTask(){
     extract($_POST);
     if (!empty($title) &&
         !empty($detail)) {
-        $safe_values = array("title" => $title , "description"=>$detail, "state"=>0, "id_us"=>intval(getAllID(intval($_GET['id_sprint']))['id']));
+        $safe_values = array("title" => $title , "description"=>$detail);
         if(!empty($develop)){
             $safe_values["implementer"] = $develop;
         }
@@ -150,7 +154,7 @@ function add_task_dependency($values) {
 function update_task_state(){
     $task_id = $_POST["id"];
     if(!can_move($task_id)){
-        return perform_query("UPDATE task SET state=0 WHERE id=$task_id");
+        return perform_query("UPDATE task SET state=0, commit=null WHERE id=$task_id");
     }
     $state = $_POST["state"];
     $user_story = $_POST["user_story_id"];
@@ -163,12 +167,28 @@ function update_task_state(){
 
 
     if(user_story_has_done($user_story)){
-        perform_query("UPDATE user_story SET state=1 WHERE id=$user_story");
-
+       // perform_query("UPDATE user_story SET state=1 WHERE id=$user_story");
+        echo json_encode(array('idUS' => $user_story));
+        exit(1);
     }else{
-        perform_query("UPDATE user_story SET state=0 WHERE id=$user_story");
-
+        perform_query("UPDATE user_story SET state=0, commit=null WHERE id=$user_story");
     }
+}
+
+function update_us_state(){
+    extract($_POST);
+    $newCommit = null;
+    if(!empty($commit)){
+        $newCommit = $commit;
+    }
+    $newState = 1;
+    if(empty($state)) {
+        $newState = 0;
+        $newCommit = null;
+    }
+    if($newState == 1)
+        return perform_query("UPDATE user_story SET state=1, commit='".$newCommit."'  WHERE id=$user_story");
+
 }
 
 function user_story_has_done($user_story_id){

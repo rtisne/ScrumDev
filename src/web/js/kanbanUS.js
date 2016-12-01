@@ -28,7 +28,8 @@ function addUS(){
 }
 
 function removeUS(){
-    var idUS = $(this).data('id');
+    var us = $(this).data('id');
+    var idUS = us.id;
     var idSprint = $('h2').data('id');
     var row = $(this).closest('tr');
     $.getJSON(get_absolute_path().concat('/ajax/removeUSToSprint.php'), {
