@@ -11,6 +11,8 @@ $( function() {
             $.extend($task_data, {submit: 'stories_change_states', state: $us_state, user_story_id: $story_id});
 
             send_state_change_request($task_data);
+
+            $(this).sortable('cancel');
         }
     }).disableSelection();
 
@@ -21,6 +23,7 @@ $( function() {
             data: $task_data,
             dataType: "json",
             success: function(data){
+
                 var idUSDone = data;
                 if(typeof idUSDone.idUS !== 'undefined')
                 {

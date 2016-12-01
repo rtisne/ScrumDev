@@ -58,7 +58,7 @@ function get_actual_sprint($id_project, $date){
 
 function get_nb_US($id_sprint){
 
-  $sql_query = "SELECT COUNT(*) as num  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint";
+  $sql_query = "SELECT COUNT(*) as num  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint AND user_story.is_all<>1";
   $res = fetch_first($sql_query);
   return intval($res["num"]);
 

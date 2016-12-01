@@ -69,7 +69,7 @@ function get_number_sprint($id_project){
 
 function get_nb_US($id_sprint){
 
-  $sql_query = "SELECT COUNT(*) as num  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint";
+  $sql_query = "SELECT COUNT(*) as num  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint AND user_story.is_all<>1";
   $res = fetch_first($sql_query);
   return intval($res["num"]);
 
@@ -77,7 +77,7 @@ function get_nb_US($id_sprint){
 
 function get_nb_US_down($id_sprint){
 
-  $sql_query = "SELECT COUNT(*) as num  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint AND user_story.state = 1";
+  $sql_query = "SELECT COUNT(*) as num  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story WHERE user_story_in_sprint.sprint=$id_sprint AND user_story.state = 1  AND user_story.is_all<>1";
   $res = fetch_first($sql_query);
   return intval($res["num"]);
 }
