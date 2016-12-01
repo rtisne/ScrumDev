@@ -12,32 +12,36 @@
 			<div class="panel-heading"><h3 class="panel-title">Sprint Actuel</h3></div>
 
 			<div class="panel-body">
-
-				<div class="row sprint_item">
-					<div class="col-md-4 desc_sprint">
-						<div class="sprint_title"><a href="<?= get_base_url() . "kanban.php?id_project=" . intval($_GET['id_project']) . "&id_sprint=" . $sprint['id'];?>"><?= $sprint['title']; ?></a></div>
-						<div><?= print_US_progression_sprint($sprint['id']); ?></div>
-					</div>
-					<div class="col-md-5 col-md-offset-3">
-						<div class="row">
-							<div class="col-md-3">
-								Début:
+				<?php if($sprint == null): ?>
+					<p style="text-align:center;">Aucun sprint actuel</p>
+				<?php else: ?>
+					<div class="row sprint_item">
+						<div class="col-md-4 desc_sprint">
+							<div class="sprint_title"><a href="<?= get_base_url() . "kanban.php?id_project=" . intval($_GET['id_project']) . "&id_sprint=" . $sprint['id'];?>"><?= $sprint['title']; ?></a></div>
+							<div><?= print_US_progression_sprint($sprint['id']); ?></div>
+						</div>
+						<div class="col-md-5 col-md-offset-3">
+							<div class="row">
+								<div class="col-md-3">
+									Début:
+								</div>
+								<div class="col-md-9 text-right">
+									<?= $sprint['date_start']; ?>
+								</div>
 							</div>
-							<div class="col-md-9 text-right">
-								<?= $sprint['date_start']; ?>
+							<div class="row">
+								<div class="col-md-3">
+									Fin:
+								</div>
+								<div class="col-md-9 text-right">
+									<?= $sprint['date_end']; ?>
+								</div>
+
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-3">
-								Fin:
-							</div>
-							<div class="col-md-9 text-right">
-								<?= $sprint['date_end']; ?>
-							</div>
-
-						</div>
 					</div>
-				</div>
+				<?php endif; ?>
+
 			</div>
 		</div>
 	</div>

@@ -200,7 +200,6 @@ function create_tab_res_real($id_project)
 	$tmp = get_res_real($id_project);
 
 	foreach ($tmp as $r) {
-
    		$res_real[$r["first_sprint"]] = 0;
 
 	}
@@ -210,7 +209,7 @@ function create_tab_res_real($id_project)
    	$res_real[$r["first_sprint"]] += $r["cost"];
 
 	}
-
+    var_dump($res_real);
 	$tmp = $res_real[0];
 
 	foreach ($res_real as $k => $v) {
@@ -223,6 +222,7 @@ function create_tab_res_real($id_project)
     		$tmp = $res_real[$k];*/
 		}
 	}
+	var_dump($res_real);
 	return $res_real;
 }
 
