@@ -5,7 +5,7 @@ foreach ($projects as $projet) {
     <a href="<?= $projet['link']; ?>" class="panel_link">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><?= $projet['title']; ?> <?= ($projet['isEditable'])?"<span class=\"pull-right glyphicon glyphicon-wrench\">":""; ?> </span></h3>
+                <h3 class="panel-title"><?= $projet['title']; ?> <?= ($projet['isEditable'])?"<span class=\"pull-right glyphicon glyphicon-wrench\">":"<a href=\"unlinkToProject.php?idProject=".$projet['id']."\"><span class=\"pull-right glyphicon glyphicon-remove\"></span></a>"; ?></h3>
 
             </div>
             <div class="panel-body">

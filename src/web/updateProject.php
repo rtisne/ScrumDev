@@ -6,8 +6,12 @@ if(!$isCreator){
     header("Location: " . get_base_url() . "index.php");
 }
 
-if(isset($_POST['submit']) && $isCreator){
+if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "update") && $isCreator){
     updateProject();
+
+}
+if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']) && ($_POST["submit"] == "delete") && $isCreator){
+    deleteProject();
 }
 
 function updateProject() {
@@ -46,6 +50,12 @@ function remove_members(){
     $arr = perform_query($sql_query);
 }
 
+function deleteProject(){
+    $idProject = intval($_GET['id_project']);
+    perform_query("DELETE td.*, t.*, usis.*, us.*, s.*, mr.*, p.* FROM project p LEFT JOIN member_relations mr ON p.id = mr.project LEFT JOIN sprint s ON p.id = s.id_project LEFT JOIN user_story_in_sprint usis ON s.id = usis.user_story LEFT JOIN user_story us ON p.id = us.id_project LEFT JOIN task t ON us.id = t.id_us LEFT JOIN task_dependency td ON t.id = td.task WHERE p.id = $idProject");
+    header("Location: " . get_base_url() . "index.php");
+}
+
 $project_members_request = getProjectMembers(intval($_GET['id_project']));
 $project_members = array();
 while($row = $project_members_request->fetch_array()){
@@ -58,7 +68,7 @@ $project_owner = array("id" => $_SESSION['id'], "first_name" => $_SESSION['first
 
 $tab = "config";
 include('templates/projectHeader.template.php');
-include('templates/createProject.template.php');
+include('templates/updateProject.template.php');
 include('templates/footer.template.php');
 
 ?>

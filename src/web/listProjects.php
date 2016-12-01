@@ -19,14 +19,13 @@ function ListProject() {
    	$res_f = [];
    	$i = 0;
    foreach ($res as $r) {
-
-    	if( $r[6] == $id_user)
+    	if( $r['creator'] == $id_user)
     	{
-    		$res_f[$i] = array("link" => "homeProject.php?id_project=".$r[0],"title" => $r[1],'isEditable' => true ,"description" => $r[2]);
+    		$res_f[$i] = array("link" => "homeProject.php?id_project=".$r['id'],"title" => $r['title'],'isEditable' => true ,"description" => $r['description'], "id" =>$r['id']);
     	}
     	else
     	{
-   			$res_f[$i] = array("link" => "homeProject.php?id_project=".$r[0],"title" => $r[1],'isEditable' => false ,"description" => $r[2]);
+   			$res_f[$i] = array("link" => "homeProject.php?id_project=".$r['id'],"title" => $r['title'],'isEditable' => false ,"description" => $r['description'], "id" =>$r['id']);
    		}
 
    		$i = $i +1;
@@ -36,7 +35,7 @@ function ListProject() {
 
 
 function get_all_project($id){
-    $sql_query = "SELECT * FROM project JOIN member_relations ON project.id = member_relations.project
+    $sql_query = "SELECT project.id, project.title, project.description, project.creator FROM project JOIN member_relations ON project.id = member_relations.project
     				JOIN user ON member_relations.member = user.id WHERE user.id=$id ORDER BY project.title ASC";
     $arr = perform_query($sql_query);
 	$rows = [];
@@ -45,7 +44,7 @@ function get_all_project($id){
     	$rows[] = $row;
 	}
 
-    $sql_query = "SELECT * FROM project WHERE creator=$id ORDER BY project.title ASC";
+    $sql_query = "SELECT project.id, project.title, project.description, project.creator FROM project WHERE creator=$id ORDER BY project.title ASC";
     $arr = perform_query($sql_query);
 
     while($row = mysqli_fetch_array($arr))

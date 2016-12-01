@@ -25,9 +25,7 @@ function createSprint() {
         $us_id = add_user_story_in_db($safe_values);
         $safe_values = array("user_story" => intval($us_id) , "sprint"=>intval($sprint_id));
         add_user_story_to_sprint_in_db($safe_values);
-
-        $kanbanUrl = get_base_url() . "kanban.php?id_project=" . intval($_GET[GET_ID_PROJECT]) . "&id_sprint=" . $sprint_id;
-        header("Location: " . $kanbanUrl);
+        header("Refresh:0");
     }
 }
 
