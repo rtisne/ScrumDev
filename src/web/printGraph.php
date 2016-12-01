@@ -10,8 +10,14 @@ $res_attendu =  create_tab_res_attendu($id_project);
 $res_real = create_tab_res_real($id_project);
 
 
-
 //Création du tableau Label + mise en forme du tableau attendu
+$nb_sprint =  get_number_sprint($id_project);
+		
+for ($i = 0; $i <= $nb_sprint['num']; $i++) 
+		{
+	    	$res_attendu_final[$i] = 0;	
+		}
+
 $i = 1;
 foreach ($res_attendu as $k => $v) {
 
@@ -27,8 +33,17 @@ foreach ($res_attendu as $k => $v) {
 		}
 }
 
-$i = 1;
+
 // Mise en forme du tableau real
+
+$nb_sprint =  get_number_sprint($id_project);	
+		
+for ($i = 0; $i <= $nb_sprint['num']; $i++) 
+		{
+	    	$res_real_final[$i] = 0;
+		}
+
+$i = 1;
 foreach ($res_real as $k => $v) {
 
 		$res_real_final[0] = $res_real[0];
@@ -43,8 +58,6 @@ foreach ($res_real as $k => $v) {
 
 
 
-
-// Setup the graph
 $graph = new Graph(500,450);
 $graph->SetScale("textlin");
 
@@ -105,12 +118,14 @@ function get_total_effort_sprint($id_sprint){
   return intval($res["effort"]);
 }
 
+
 function get_total_effort_project($id_project){
 
-  $sql_query = "SELECT SUM(user_story.cost) as effort  FROM user_story JOIN user_story_in_sprint ON user_story.id = user_story_in_sprint.user_story JOIN sprint on user_story_in_sprint.sprint = sprint.id WHERE sprint.id_project=$id_project";
+  $sql_query = "SELECT SUM(user_story.cost) as effort  FROM user_story WHERE user_story.id_project=$id_project";
   $res = fetch_first($sql_query);
   return intval($res["effort"]);
 }
+
 
 
 function get_res_attendu($id_project)
@@ -144,8 +159,9 @@ WHERE id_project=$id_project AND number<>-1 AND state=1";
 
 function create_tab_res_attendu($id_project)
 {
+	
 	$res_attendu[0] = get_total_effort_project($id_project);
-
+	
 	$tmp = get_res_attendu($id_project);
 
   	
@@ -166,9 +182,10 @@ function create_tab_res_attendu($id_project)
 	foreach ($res_attendu as $k => $v) {
 		if ($k > 0)
 		{
-    	
-    		$res_attendu[$k] = $tmp - $res_attendu[$k];
-    		$tmp = $res_attendu[$k];
+    		$tmp = $tmp - $res_attendu[$k];
+    		$res_attendu[$k] = $tmp;
+    		/*$res_attendu[$k] = $tmp - $res_attendu[$k];
+    		$tmp = $res_attendu[$k];*/
 		}
 	}
 
@@ -177,8 +194,9 @@ function create_tab_res_attendu($id_project)
 
 function create_tab_res_real($id_project)
 {
+	
 	$res_real[0] = get_total_effort_project($id_project);
-
+	
 	$tmp = get_res_real($id_project);
 
 	foreach ($tmp as $r) {
@@ -198,9 +216,11 @@ function create_tab_res_real($id_project)
 	foreach ($res_real as $k => $v) {
 		if ($k > 0)
 		{
-    	
-    		$res_real[$k] = $tmp - $res_real[$k];
-    		$tmp = $res_real[$k];
+    		$tmp = $tmp - $res_real[$k];
+    		$res_real[$k] = $tmp;
+
+    		/*$res_real[$k] = $tmp - $res_real[$k];
+    		$tmp = $res_real[$k];*/
 		}
 	}
 	return $res_real;
