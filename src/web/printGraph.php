@@ -106,6 +106,11 @@ function get_number_sprint($id_project){
   return fetch_first($sql_query);
 }
 
+function get_sprint_with_id($id_project){
+	$sql_query = "SELECT id FROM sprint WHERE sprint.id_project=$id_project";
+	return fetch_all($sql_query);
+}
+
 function get_name_sprint($id_sprint){
   $sql_query = "SELECT title FROM sprint WHERE sprint.id=$id_sprint";
   return fetch_first($sql_query);
@@ -162,19 +167,18 @@ function create_tab_res_attendu($id_project)
 	
 	$res_attendu[0] = get_total_effort_project($id_project);
 	
-	$tmp = get_res_attendu($id_project);
+	$tmp = get_sprint_with_id($id_project);
 
-  	
   	foreach ($tmp as $r) {
 
-   		$res_attendu[$r["first_sprint"]] = 0;
+   		$res_attendu[$r["id"]] = 0;
 
 	}
 
+	$tmp = get_res_attendu($id_project);
+
   	foreach ($tmp as $r) {
    		$res_attendu[$r["first_sprint"]] += $r["cost"];
-
-
 	}
 
 	$tmp = $res_attendu[0];
@@ -188,7 +192,6 @@ function create_tab_res_attendu($id_project)
     		$tmp = $res_attendu[$k];*/
 		}
 	}
-
 	return $res_attendu;
 }
 
@@ -197,19 +200,22 @@ function create_tab_res_real($id_project)
 	
 	$res_real[0] = get_total_effort_project($id_project);
 	
-	$tmp = get_res_real($id_project);
+	$tmp = get_sprint_with_id($id_project);
 
 	foreach ($tmp as $r) {
-   		$res_real[$r["first_sprint"]] = 0;
+
+   		$res_real[$r["id"]] = 0;
 
 	}
+
+	$tmp = get_res_real($id_project);
 
   	foreach ($tmp as $r) {
 
    	$res_real[$r["first_sprint"]] += $r["cost"];
 
 	}
-    var_dump($res_real);
+	
 	$tmp = $res_real[0];
 
 	foreach ($res_real as $k => $v) {
@@ -222,7 +228,7 @@ function create_tab_res_real($id_project)
     		$tmp = $res_real[$k];*/
 		}
 	}
-	var_dump($res_real);
+
 	return $res_real;
 }
 
