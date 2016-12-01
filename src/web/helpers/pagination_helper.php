@@ -1,7 +1,7 @@
 <?php
 define("DEFAULT_PAGINATION", "page");
-define("DEFAULT_RANGE",5);
-define("DEFAULT_PAGE_LIMIT", 5);
+define("DEFAULT_RANGE",10);
+define("DEFAULT_PAGE_LIMIT", 10);
 
 $page_count_global = $start_page_global =  $end_page_global = $previous_global = $next_global = $current_global = null;
 $pages_in_range_global = array();
