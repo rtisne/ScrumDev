@@ -82,8 +82,22 @@
 		<div class="panel panel-default panel-equal">
 			<div class="panel-heading"><h3 class="panel-title">BurnDown Chart</h3></div>
 			<div class="panel-body">
-				<img src="printGraph.php?idProject=<?=$_GET['id_project'];?>">
+				<?php
+
+ if($nb_sprint["num"] <= 1)
+	{
+		echo "<p> Vous n'avez qu'un seul sprint, affichage du graphique impossible </p>";
+	}
+else
+{
+	echo "<img src=\"printGraph.php?idProject=".$_GET['id_project'].">";
+}
+?>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+
+

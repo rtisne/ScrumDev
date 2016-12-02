@@ -10,7 +10,7 @@ $sprint = get_actual_sprint($_GET['id_project'],$date_actual);
 $project_creator = get_creator_project($_GET[GET_ID_PROJECT]);
 $product_owner = get_PO_project($_GET[GET_ID_PROJECT]);
 $list_member = ListMember();
-
+$nb_sprint = get_number_sprint($_GET[GET_ID_PROJECT]);
 
 
 
@@ -75,6 +75,11 @@ function get_nb_US_down($id_sprint){
 function print_US_progression_sprint($id_sprint)
 {
   return get_nb_US_down($id_sprint)."/".get_nb_US($id_sprint)." US finies";
+}
+
+function get_number_sprint($id_project){
+  $sql_query = "SELECT COUNT(*) as num FROM sprint WHERE sprint.id_project=$id_project ";
+  return fetch_first($sql_query);
 }
 
 ?>
