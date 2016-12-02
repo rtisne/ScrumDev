@@ -24,15 +24,15 @@ $( function() {
             dataType: "json",
             success: function(data){
 
-                var idUSDone = data;
-                if(typeof idUSDone.idUS !== 'undefined')
-                {
-                    console.log(idUSDone.idUS);
+                if(typeof data.idUS !== 'undefined'){
                     $("#update_form_user_story_state").prop('checked', false);
                     $("#update_form_user_story_commit").attr( "disabled", true );
                     $("#update_form_user_story_commit").val('');
-                    $(".user_story_selected").val(idUSDone.idUS);
+                    $(".user_story_selected").val(data.idUS);
                     $('#commit_popup').modal();
+                }
+                if(typeof  data.error !== 'undefined'){
+                    location.reload();
                 }
             }
         });

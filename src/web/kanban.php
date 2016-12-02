@@ -153,12 +153,16 @@ function add_task_dependency($values) {
 
 function update_task_state(){
     $task_id = $_POST["id"];
-    if(!can_move($task_id)){
-        return perform_query("UPDATE task SET state=0, commit=null WHERE id=$task_id");
-    }
+
     $state = $_POST["state"];
     $user_story = $_POST["user_story_id"];
     $valid_state = ["TODO","DOING","TESTING","DONE"];
+
+    if(!can_move($task_id) && array_search($state,$valid_state)!=0){
+        perform_query("UPDATE task SET state=0, commit=null WHERE id=$task_id");
+        echo json_encode(array('error' => 'dependance'));
+        exit(1);
+    }
 
     if(!empty($state)  && in_array($state,$valid_state)){
         $safe_values = ["state" => array_search($state,$valid_state) , "id_us" => $user_story]; // assume that $valid_state does not contains duplicate items
