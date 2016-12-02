@@ -73,6 +73,7 @@ $graph->img->SetAntiAliasing();
 $graph->yaxis->HideZeroLabel();
 $graph->yaxis->HideLine(false);
 $graph->yaxis->HideTicks(false,false);
+$graph->yaxis->scale->SetAutoMin(0);
 
 $graph->xgrid->Show();
 $graph->xgrid->SetLineStyle("solid");
@@ -95,7 +96,6 @@ $p2->SetLegend('résultat reel');
 
 
 $graph->legend->SetFrameWeight(1);
-
 // Output line
 $graph->Stroke();
 
@@ -168,7 +168,7 @@ function create_tab_res_attendu($id_project)
 	$res_attendu[0] = get_total_effort_project($id_project);
 	
 	$tmp = get_sprint_with_id($id_project);
-
+	//var_dump($tmp);
   	foreach ($tmp as $r) {
 
    		$res_attendu[$r["id"]] = 0;
@@ -177,7 +177,9 @@ function create_tab_res_attendu($id_project)
 
 	$tmp = get_res_attendu($id_project);
   	foreach ($tmp as $r) {
+  		if($r["first_sprint"] != null){
    		$res_attendu[$r["first_sprint"]] += $r["cost"];
+   	}
 	}
 
 	$tmp = $res_attendu[0];
@@ -200,7 +202,7 @@ function create_tab_res_real($id_project)
 	$res_real[0] = get_total_effort_project($id_project);
 	
 	$tmp = get_sprint_with_id($id_project);
-
+	//var_dump($tmp);
 	foreach ($tmp as $r) {
 
    		$res_real[$r["id"]] = 0;
@@ -208,10 +210,12 @@ function create_tab_res_real($id_project)
 	}
 
 	$tmp = get_res_real($id_project);
-
+	//var_dump($tmp);
   	foreach ($tmp as $r) {
-
-   	$res_real[$r["first_sprint"]] += $r["cost"];
+  		if($r["first_sprint"] != null){
+  			$res_real[$r["first_sprint"]] += $r["cost"];
+  		}
+   	
 
 	}
 	
