@@ -176,7 +176,6 @@ function create_tab_res_attendu($id_project)
 	}
 
 	$tmp = get_res_attendu($id_project);
-
   	foreach ($tmp as $r) {
    		$res_attendu[$r["first_sprint"]] += $r["cost"];
 	}
